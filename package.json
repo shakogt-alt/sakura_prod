@@ -1,0 +1,7 @@
+{
+  "name": "sakura-podology-center",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sakura Podology Center website + admin API (Vercel serverless functions)",
+  "type": "commonjs"
+}
