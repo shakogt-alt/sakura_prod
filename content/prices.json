@@ -1,0 +1,132 @@
+[
+  {
+    "id": "diagnostics",
+    "fullWidth": true,
+    "icon": "<path d=\"M21 11.5a8.5 8.5 0 11-4-7.2L21 3l-1.2 4.3c.8 1.2 1.2 2.6 1.2 4.2z\"/>",
+    "ru": {"title": "Диагностика", "includes": []},
+    "en": {"title": "Consultation & Diagnosis", "includes": []},
+    "ka": {"title": "დიაგნოსტიკა", "includes": []},
+    "items": [
+      {"amount": "50 ₾", "ru": "Первичная консультация и диагностика", "en": "Initial consultation & diagnosis", "ka": "პირველადი კონსულტაცია და დიაგნოსტიკა"}
+    ]
+  },
+  {
+    "id": "medical-pedicure",
+    "fullWidth": false,
+    "icon": "<path d=\"M4 18c3-8 5-12 8-14 3 2 5 6 8 14\"/><path d=\"M4 18h16\"/>",
+    "ru": {"title": "Медицинский педикюр", "includes": ["✔ Комплексная обработка стоп и ногтей", "✔ Решение медицинских проблем стоп", "✔ Работа сертифицированного подолога"]},
+    "en": {"title": "Medical Pedicure", "includes": ["✔ Complete foot and nail treatment", "✔ Solving medical foot problems", "✔ Performed by a certified podologist"]},
+    "ka": {"title": "სამედიცინო პედიკური", "includes": []},
+    "items": [
+      {"amount": "100 ₾", "ru": "Медицинский педикюр", "en": "Medical pedicure", "ka": "სამედიცინო პედიკური"},
+      {"amount": "160 ₾", "ru": "+ обработка 1 грибкового ногтя", "en": "+ treatment of 1 fungal nail", "ka": "+ 1 სოკოვანი ფრჩხილის დამუშავება"},
+      {"amount": "180 ₾", "ru": "+ обработка 2 грибковых ногтей", "en": "+ treatment of 2 fungal nails", "ka": "+ 2 სოკოვანი ფრჩხილის დამუშავება"},
+      {"amount": "190 ₾", "ru": "+ обработка 3–5 грибковых ногтей", "en": "+ treatment of 3–5 fungal nails", "ka": "+ 3–5 სოკოვანი ფრჩხილის დამუშავება"},
+      {"amount": "200 ₾", "ru": "+ обработка 6–10 грибковых ногтей", "en": "+ treatment of 6–10 fungal nails", "ka": "+ 6–10 სოკოვანი ფრჩხილის დამუშავება"}
+    ]
+  },
+  {
+    "id": "aesthetic-pedicure",
+    "fullWidth": false,
+    "icon": "<path d=\"M12 2l2.6 5.9L21 9l-4.7 4.2L17.5 20 12 16.6 6.5 20l1.2-6.8L3 9l6.4-1.1L12 2z\"/>",
+    "ru": {"title": "Эстетический педикюр", "includes": []},
+    "en": {"title": "Aesthetic Pedicure", "includes": []},
+    "ka": {"title": "ესთეტიკური პედიკური", "includes": []},
+    "items": [
+      {"amount": "80 ₾", "ru": "Эстетический педикюр", "en": "Aesthetic pedicure", "ka": "ესთეტიკური პედიკური"},
+      {"amount": "110 ₾", "ru": "+ покрытие гель-лаком", "en": "+ gel polish", "ka": "+ გელ-ლაქი"},
+      {"amount": "60 ₾", "ru": "Обработка ногтей стоп", "en": "Toenail treatment", "ka": "ფეხის ფრჩხილების დამუშავება"},
+      {"amount": "90 ₾", "ru": "Обработка ногтей стоп + гель-лак", "en": "Toenail treatment + gel polish", "ka": "ფეხის ფრჩხილების დამუშავება + გელ-ლაქი"}
+    ]
+  },
+  {
+    "id": "deformed-nails",
+    "fullWidth": false,
+    "icon": "<circle cx=\"10\" cy=\"10\" r=\"6\"/><path d=\"M20 20l-5.5-5.5\"/>",
+    "ru": {"title": "Обработка деформированных ногтей", "includes": ["онихомикоз • онихолизис • подногтевая гематома"]},
+    "en": {"title": "Treatment of Deformed Nails", "includes": ["onychomycosis • onycholysis • subungual hematoma"]},
+    "ka": {"title": "დეფორმირებული ფრჩხილების დამუშავება", "includes": ["ონიქომიკოზი • ონიქოლიზისი • სუბუნგუალური ჰემატომა"]},
+    "items": [
+      {"amount": "80 ₾", "ru": "Обработка 1 ногтя", "en": "Treatment of 1 nail", "ka": "1 ფრჩხილის დამუშავება"},
+      {"amount": "120 ₾", "ru": "Обработка 2 ногтей", "en": "Treatment of 2 nails", "ka": "2 ფრჩხილის დამუშავება"},
+      {"amount": "140 ₾", "ru": "Обработка 3–5 ногтей", "en": "Treatment of 3–5 nails", "ka": "3–5 ფრჩხილის დამუშავება"},
+      {"amount": "160 ₾", "ru": "Обработка 6–10 ногтей", "en": "Treatment of 6–10 nails", "ka": "6–10 ფრჩხილის დამუშავება"}
+    ]
+  },
+  {
+    "id": "medical-manicure",
+    "fullWidth": false,
+    "icon": "<path d=\"M7 21V9a5 5 0 0110 0v12M9 13h6\"/>",
+    "ru": {"title": "Медицинский маникюр", "includes": ["грибковые и деформированные ногти"]},
+    "en": {"title": "Medical Manicure", "includes": ["fungal & deformed nails"]},
+    "ka": {"title": "სამედიცინო მანიკური", "includes": ["სოკოვანი და დეფორმირებული ფრჩხილები"]},
+    "items": [
+      {"amount": "30 ₾", "ru": "Обработка 1 ногтя", "en": "Treatment of 1 nail", "ka": "1 ფრჩხილის დამუშავება"},
+      {"amount": "40 ₾", "ru": "Обработка 2 ногтей", "en": "Treatment of 2 nails", "ka": "2 ფრჩხილის დამუშავება"},
+      {"amount": "80 ₾", "ru": "Обработка 3–5 ногтей", "en": "Treatment of 3–5 nails", "ka": "3–5 ფრჩხილის დამუშავება"},
+      {"amount": "100 ₾", "ru": "Обработка 6–10 ногтей", "en": "Treatment of 6–10 nails", "ka": "6–10 ფრჩხილის დამუშავება"},
+      {"amount": "60 ₾", "ru": "Обработка ногтей при онихолизисе", "en": "Onycholysis nail treatment", "ka": "ფრჩხილების დამუშავება ონიქოლიზისის დროს"}
+    ]
+  },
+  {
+    "id": "ingrown-treatment",
+    "fullWidth": false,
+    "icon": "<path d=\"M9 21c0-4 1-7 3-9m3 9c0-5-1-9-4-12M6 9c2-3 5-4 6-4s4 1 6 4\"/>",
+    "ru": {"title": "Лечение вросшего ногтя", "includes": []},
+    "en": {"title": "Ingrown Toenail Treatment", "includes": []},
+    "ka": {"title": "ჩაზრდილი ფრჩხილის მკურნალობა", "includes": []},
+    "items": [
+      {"amount": "80–100 ₾", "ru": "Коррекция одного ногтя", "en": "Correction of one ingrown toenail", "ka": "ერთი ჩაზრდილი ფრჩხილის კორექცია"},
+      {"amount": "120–140 ₾", "ru": "Коррекция двух ногтей", "en": "Correction of two ingrown toenails", "ka": "ორი ჩაზრდილი ფრჩხილის კორექცია"},
+      {"amount": "30 ₾", "ru": "Тампонада", "en": "Nail packing (tamponade)", "ka": "ტამპონადა"}
+    ]
+  },
+  {
+    "id": "orthonyxia",
+    "fullWidth": false,
+    "icon": "<rect x=\"4\" y=\"10\" width=\"16\" height=\"10\" rx=\"2\"/><path d=\"M8 10V7a4 4 0 018 0v3\"/>",
+    "ru": {"title": "Ортониксия", "includes": ["безоперационная коррекция вросших и деформированных ногтей"]},
+    "en": {"title": "Orthonyxia", "includes": ["non-surgical correction of ingrown & deformed nails"]},
+    "ka": {"title": "ორთონიქსია", "includes": ["ჩაზრდილი და დეფორმირებული ფრჩხილების არაქირურგიული კორექცია"]},
+    "items": [
+      {"amount": "80 ₾", "ru": "Протезирование ногтя", "en": "Nail prosthetics", "ka": "ფრჩხილის პროთეზირება"},
+      {"amount": "40 ₾", "ru": "Протезирование L-Segment", "en": "L-Segment nail prosthetics", "ka": "L-Segment-ის პროთეზირება"},
+      {"amount": "30 ₾", "ru": "Силиконовое тампонирование", "en": "Silicone packing", "ka": "სილიკონის ტამპონირება"},
+      {"amount": "30 ₾", "ru": "Протезирование акригелем", "en": "Nail reconstruction with acrygel", "ka": "აკრიგელით პროთეზირება"},
+      {"amount": "20 ₾", "ru": "Тейпирование", "en": "Taping", "ka": "ტეიპირება"},
+      {"amount": "200 ₾", "ru": "Скоба Фрезера", "en": "Fraser brace", "ka": "ფრეიზერის სკობა"},
+      {"amount": "80 ₾", "ru": "Коррекция скобы Фрезера", "en": "Fraser brace adjustment", "ka": "ფრეიზერის სკობის კორექცია"},
+      {"amount": "100 ₾", "ru": "Титановая нить", "en": "Titanium thread system", "ka": "ტიტანის ძაფი"},
+      {"amount": "200 ₾", "ru": "Скоба 3TO", "en": "3TO brace system", "ka": "3TO-ს სკობა"}
+    ]
+  },
+  {
+    "id": "foot-care",
+    "fullWidth": false,
+    "icon": "<path d=\"M8 3c-2 3-2 7-1 10 1 3 0 5-2 6 3 1.5 7 1 9-2 1.5-2 1-5 3-6 2-1 3-3 2-5-1-2-4-2-5 0-1-2-3-4-6-3z\"/>",
+    "ru": {"title": "Уход за стопами", "includes": []},
+    "en": {"title": "Foot Care", "includes": []},
+    "ka": {"title": "ტერფების მოვლა", "includes": []},
+    "items": [
+      {"amount": "70 ₾", "ru": "Лечение гиперкератоза стоп", "en": "Hyperkeratosis treatment", "ka": "ჰიპერკერატოზის მკურნალობა"},
+      {"amount": "30 ₾", "ru": "Удаление мозоли (1 шт.)", "en": "Corn removal (1 lesion)", "ka": "კოჟრის მოცილება (1 ც.)"}
+    ]
+  },
+  {
+    "id": "manicure",
+    "fullWidth": false,
+    "icon": "<path d=\"M21 11.5a8.5 8.5 0 11-4-7.2L21 3l-1.2 4.3c.8 1.2 1.2 2.6 1.2 4.2z\"/>",
+    "ru": {"title": "Маникюр", "includes": []},
+    "en": {"title": "Manicure", "includes": []},
+    "ka": {"title": "მანიკური", "includes": []},
+    "items": [
+      {"amount": "40 ₾", "ru": "Маникюр", "en": "Manicure", "ka": "მანიკური"},
+      {"amount": "60 ₾", "ru": "Маникюр + гель-лак", "en": "Manicure + gel polish", "ka": "მანიკური + გელ-ლაქი"},
+      {"amount": "70 ₾", "ru": "Покрытие гель-лаком + френч", "en": "French gel polish", "ka": "გელ-ლაქი + ფრენჩი"},
+      {"amount": "10 ₾", "ru": "Снятие гель-лака", "en": "Gel polish removal", "ka": "გელ-ლაქის მოხსნა"},
+      {"amount": "20 ₾", "ru": "Снятие искусственного покрытия", "en": "Artificial nail removal", "ka": "ხელოვნური საფარის მოხსნა"},
+      {"amount": "10 ₾", "ru": "Ремонт ногтя", "en": "Nail repair", "ka": "ფრჩხილის რესტავრაცია"},
+      {"amount": "30 ₾", "ru": "Укрепление ногтей", "en": "Nail strengthening", "ka": "ფრჩხილების გამაგრება"}
+    ]
+  }
+]
