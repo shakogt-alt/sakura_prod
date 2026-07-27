@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Sakura — Админ-панель</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.snow.min.css" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fdf7f6; --surface:#ffffff; --surface-2:#fff1f2;
+    --text:#34262c; --text-soft:#7a6670;
+    --pink-100:#fbe4e8; --pink-500:#e0839c; --pink-600:#cf6685; --pink-700:#b04c6b;
+    --sage:#93a68a; --sage-dark:#6c8064;
+    --line:#f0dde1;
+    --shadow: 0 20px 45px -25px rgba(176,76,107,0.35);
+    --radius:20px;
+    --serif:'Georgia',serif;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.5;}
+  h1,h2,h3{font-family:var(--serif);}
+  button{font-family:inherit;}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:12px;font-weight:700;font-size:14.5px;cursor:pointer;border:none;white-space:nowrap;}
+  .btn-primary{background:linear-gradient(135deg,var(--pink-600),var(--pink-700));color:#fff;box-shadow:var(--shadow);}
+  .btn-primary:disabled{opacity:.55;cursor:default;box-shadow:none;}
+  .btn-ghost{background:var(--surface-2);color:var(--text);}
+  .btn-danger{background:#fde3e2;color:#a83a37;}
+  .btn-sm{padding:8px 14px;font-size:13px;border-radius:10px;}
+  .btn-block{width:100%;}
+
+  .field{margin-bottom:16px;}
+  .field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px;color:var(--text-soft);}
+  .field-hint{font-size:12px;color:var(--text-soft);margin-top:4px;}
+  input[type=text],input[type=email],input[type=password],textarea{
+    width:100%;padding:11px 14px;border:1.5px solid var(--line);border-radius:12px;
+    font-size:14.5px;font-family:inherit;color:var(--text);background:#fff;
+  }
+  input:focus,textarea:focus{outline:none;border-color:var(--pink-500);}
+  textarea{resize:vertical;min-height:70px;}
+  .checkbox-row{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;}
+  .checkbox-row input{width:auto;}
+
+  .error-msg,.success-msg{padding:10px 14px;border-radius:10px;font-size:13.5px;margin-bottom:16px;display:none;}
+  .error-msg{background:#fde3e2;color:#a83a37;}
+  .error-msg.show{display:block;}
+
+  /* Login */
+  .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;}
+  .login-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:40px;max-width:380px;width:100%;}
+  .login-card h1{font-size:23px;margin:0 0 6px;}
+  .login-card p.sub{color:var(--text-soft);font-size:14px;margin:0 0 24px;}
+
+  /* App shell */
+  .app{display:none;min-height:100vh;}
+  .app.show{display:block;}
+  .topbar{background:#fff;border-bottom:1px solid var(--line);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;}
+  .topbar h1{font-size:18px;margin:0;}
+  .tabs{display:flex;gap:6px;padding:16px 24px 0;max-width:960px;margin:0 auto;}
+  .tab-btn{padding:10px 18px;border-radius:12px 12px 0 0;border:none;background:transparent;color:var(--text-soft);font-weight:700;font-size:14px;cursor:pointer;}
+  .tab-btn.active{background:#fff;color:var(--text);}
+  .tab-panel{display:none;max-width:960px;margin:0 auto;padding:24px;background:#fff;min-height:60vh;}
+  .tab-panel.active{display:block;}
+
+  .list-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:20px;flex-wrap:wrap;}
+  .list-head h2{margin:0;font-size:19px;}
+  .list-head .hint{margin:4px 0 0;font-size:12.5px;color:var(--text-soft);}
+  .item-card{border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;gap:14px;align-items:center;margin-bottom:10px;}
+  .item-card img{width:52px;height:52px;border-radius:12px;object-fit:cover;flex:none;background:var(--surface-2);}
+  .item-card img.round{border-radius:50%;}
+  .item-card .meta{flex:1;min-width:0;}
+  .item-card .meta h3{margin:0 0 3px;font-size:15px;}
+  .item-card .meta p{margin:0;font-size:12.5px;color:var(--text-soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .item-card .actions{display:flex;gap:8px;flex:none;}
+  .empty-hint{color:var(--text-soft);font-size:14px;padding:20px 0;}
+
+  /* Modal */
+  .modal-backdrop{position:fixed;inset:0;background:rgba(52,38,44,.45);display:none;align-items:flex-start;justify-content:center;padding:30px 16px;overflow-y:auto;z-index:100;}
+  .modal-backdrop.open{display:flex;}
+  .modal{background:#fff;border-radius:var(--radius);max-width:720px;width:100%;padding:26px;margin-bottom:30px;}
+  .modal h2{margin:0 0 18px;font-size:20px;}
+
+  .lang-tabs{display:flex;gap:4px;margin-bottom:18px;border-bottom:1px solid var(--line);}
+  .lang-tab-btn{padding:9px 16px;border:none;background:transparent;font-weight:700;font-size:13px;color:var(--text-soft);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;}
+  .lang-tab-btn.active{color:var(--pink-700);border-color:var(--pink-600);}
+  .lang-panel{display:none;}
+  .lang-panel.active{display:block;}
+
+  .array-field .row{display:flex;gap:8px;margin-bottom:8px;}
+  .array-field .row input{flex:1;}
+  .array-field-add{margin-top:2px;}
+
+  .price-item-row{border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:10px;}
+  .price-item-row .grid-amount{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;margin-bottom:8px;}
+  .price-item-row .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+
+  .photo-upload{display:flex;align-items:center;gap:14px;margin-bottom:18px;}
+  .photo-upload img{width:64px;height:64px;border-radius:14px;object-fit:cover;background:var(--surface-2);flex:none;display:none;}
+  .photo-upload img.round{border-radius:50%;}
+  .photo-upload .status{font-size:12.5px;color:var(--text-soft);margin-top:4px;}
+
+  .modal-actions{display:flex;justify-content:space-between;align-items:center;margin-top:22px;padding-top:18px;border-top:1px solid var(--line);gap:10px;flex-wrap:wrap;}
+  .modal-actions .right{display:flex;gap:10px;}
+
+  #quill-wrap-ru .ql-editor,#quill-wrap-en .ql-editor,#quill-wrap-ka .ql-editor{min-height:180px;font-size:14.5px;}
+
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--text);color:#fff;padding:12px 20px;border-radius:12px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:200;box-shadow:var(--shadow);max-width:90vw;}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+  @media (max-width:640px){
+    .tabs,.tab-panel{padding-left:14px;padding-right:14px;}
+    .price-item-row .grid3{grid-template-columns:1fr;}
+    .modal{padding:18px;}
+  }
+</style>
+</head>
+<body>
+
+  <div class="login-wrap" id="login-screen">
+    <div class="login-card">
+      <h1>Sakura</h1>
+      <p class="sub">Админ-панель сайта</p>
+      <div class="error-msg" id="login-error"></div>
+      <form id="login-form">
+        <div class="field">
+          <label>Email</label>
+          <input type="email" id="login-email" required autocomplete="username">
+        </div>
+        <div class="field">
+          <label>Пароль</label>
+          <input type="password" id="login-password" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" id="login-submit">Войти</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="app" id="app">
+    <div class="topbar">
+      <h1>Sakura — Админ-панель</h1>
+      <button class="btn btn-ghost btn-sm" id="logout-btn">Выйти</button>
+    </div>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="team">Команда</button>
+      <button class="tab-btn" data-tab="blog">Блог</button>
+      <button class="tab-btn" data-tab="prices">Цены</button>
+    </div>
+
+    <div class="tab-panel active" id="panel-team">
+      <div class="list-head">
+        <div>
+          <h2>Сотрудники</h2>
+          <p class="hint">Изменения появляются на сайте через 15–30 секунд после сохранения.</p>
+        </div>
+        <button class="btn btn-primary btn-sm" id="team-add-btn">+ Добавить сотрудника</button>
+      </div>
+      <div id="team-list"></div>
+    </div>
+
+    <div class="tab-panel" id="panel-blog">
+      <div class="list-head">
+        <div>
+          <h2>Статьи блога</h2>
+          <p class="hint">Изменения появляются на сайте через 15–30 секунд после сохранения.</p>
+        </div>
+        <button class="btn btn-primary btn-sm" id="blog-add-btn">+ Добавить статью</button>
+      </div>
+      <div id="blog-list"></div>
+    </div>
+
+    <div class="tab-panel" id="panel-prices">
+      <div class="list-head">
+        <div>
+          <h2>Категории цен</h2>
+          <p class="hint">Изменения появляются на сайте через 15–30 секунд после сохранения.</p>
+        </div>
+        <button class="btn btn-primary btn-sm" id="prices-add-btn">+ Добавить категорию</button>
+      </div>
+      <div id="prices-list"></div>
+    </div>
+  </div>
+
+  <!-- ================= TEAM MODAL ================= -->
+  <div class="modal-backdrop" id="team-modal-backdrop">
+    <div class="modal">
+      <h2 id="team-modal-title">Добавить сотрудника</h2>
+      <div class="error-msg" id="team-error"></div>
+
+      <div class="photo-upload">
+        <img id="team-photo-preview" class="round" alt="">
+        <div>
+          <input type="file" id="team-photo-input" accept="image/jpeg,image/png,image/webp">
+          <div class="status" id="team-photo-status"></div>
+        </div>
+      </div>
+
+      <div class="lang-tabs" data-lang-tabs="team">
+        <button class="lang-tab-btn active" data-lang="ru">RU</button>
+        <button class="lang-tab-btn" data-lang="en">EN</button>
+        <button class="lang-tab-btn" data-lang="ka">KA</button>
+      </div>
+
+      <div id="team-lang-ru" class="lang-panel active">
+        <div class="field"><label>Имя и фамилия</label><input type="text" id="team-ru-name"></div>
+        <div class="field"><label>Короткое описание (на карточке)</label><input type="text" id="team-ru-cardTagline" placeholder="Например: Подолог • медицинский педикюр"></div>
+        <div class="field"><label>Описание (в карточке сотрудника)</label><input type="text" id="team-ru-modalTagline"></div>
+        <div class="field"><label>Вступление</label><textarea id="team-ru-intro"></textarea></div>
+        <div class="field"><label>Опыт и образование</label><textarea id="team-ru-background"></textarea></div>
+        <div class="field">
+          <label>Специализируется на (список)</label>
+          <div class="array-field" id="team-ru-specializes"></div>
+          <button type="button" class="btn btn-ghost btn-sm array-field-add" data-add-array="team-ru-specializes" data-placeholder="Например: медицинском педикюре">+ Добавить пункт</button>
+        </div>
+        <div class="field"><label>Заключение</label><textarea id="team-ru-closing"></textarea></div>
+      </div>
+      <div id="team-lang-en" class="lang-panel">
+        <div class="field"><label>Name</label><input type="text" id="team-en-name"></div>
+        <div class="field"><label>Short description (on card)</label><input type="text" id="team-en-cardTagline"></div>
+        <div class="field"><label>Description (in member card)</label><input type="text" id="team-en-modalTagline"></div>
+        <div class="field"><label>Intro</label><textarea id="team-en-intro"></textarea></div>
+        <div class="field"><label>Background</label><textarea id="team-en-background"></textarea></div>
+        <div class="field">
+          <label>Specializes in (list)</label>
+          <div class="array-field" id="team-en-specializes"></div>
+          <button type="button" class="btn btn-ghost btn-sm array-field-add" data-add-array="team-en-specializes" data-placeholder="e.g. medical pedicure">+ Add item</button>
+        </div>
+        <div class="field"><label>Closing</label><textarea id="team-en-closing"></textarea></div>
+      </div>
+      <div id="team-lang-ka" class="lang-panel">
+        <div class="field"><label>სახელი და გვარი</label><input type="text" id="team-ka-name"></div>
+        <div class="field"><label>მოკლე აღწერა (ბარათზე)</label><input type="text" id="team-ka-cardTagline"></div>
+        <div class="field"><label>აღწერა (თანამშრომლის ბარათში)</label><input type="text" id="team-ka-modalTagline"></div>
+        <div class="field"><label>შესავალი</label><textarea id="team-ka-intro"></textarea></div>
+        <div class="field"><label>გამოცდილება და განათლება</label><textarea id="team-ka-background"></textarea></div>
+        <div class="field">
+          <label>სპეციალიზდება (სია)</label>
+          <div class="array-field" id="team-ka-specializes"></div>
+          <button type="button" class="btn btn-ghost btn-sm array-field-add" data-add-array="team-ka-specializes" data-placeholder="მაგ: სამედიცინო პედიკურში">+ დამატება</button>
+        </div>
+        <div class="field"><label>დასკვნა</label><textarea id="team-ka-closing"></textarea></div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-danger btn-sm" id="team-delete-btn" style="display:none;">Удалить</button>
+        <div class="right">
+          <button class="btn btn-ghost" id="team-cancel-btn">Отмена</button>
+          <button class="btn btn-primary" id="team-save-btn">Сохранить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= BLOG MODAL ================= -->
+  <div class="modal-backdrop" id="blog-modal-backdrop">
+    <div class="modal">
+      <h2 id="blog-modal-title">Добавить статью</h2>
+      <div class="error-msg" id="blog-error"></div>
+
+      <div class="photo-upload">
+        <img id="blog-image-preview" alt="">
+        <div>
+          <input type="file" id="blog-image-input" accept="image/jpeg,image/png,image/webp">
+          <div class="status" id="blog-image-status">Обложка статьи</div>
+        </div>
+      </div>
+
+      <div class="lang-tabs" data-lang-tabs="blog">
+        <button class="lang-tab-btn active" data-lang="ru">RU</button>
+        <button class="lang-tab-btn" data-lang="en">EN</button>
+        <button class="lang-tab-btn" data-lang="ka">KA</button>
+      </div>
+
+      <div id="blog-lang-ru" class="lang-panel active">
+        <div class="field"><label>Рубрика</label><input type="text" id="blog-ru-eyebrow" value="Блог"></div>
+        <div class="field"><label>Заголовок статьи</label><input type="text" id="blog-ru-title"></div>
+        <div class="field"><label>Заголовок на карточке</label><input type="text" id="blog-ru-cardTitle">
+          <p class="field-hint">Может отличаться от заголовка статьи — это то, что видно на превью в блоге.</p>
+        </div>
+        <div class="field"><label>Подзаголовок</label><input type="text" id="blog-ru-sub"></div>
+        <div class="field"><label>Метка на карточке</label><input type="text" id="blog-ru-cardBadge" value="Новая статья"></div>
+        <div class="field"><label>Краткое описание на карточке</label><textarea id="blog-ru-cardExcerpt"></textarea></div>
+        <div class="field"><label>Текст ссылки «читать»</label><input type="text" id="blog-ru-readLabel" value="Читать статью →"></div>
+        <div class="field"><label>Alt-текст изображения</label><input type="text" id="blog-ru-alt"></div>
+        <div class="field"><label>Текст статьи</label><div id="quill-wrap-ru"><div id="blog-ru-body-editor"></div></div></div>
+      </div>
+      <div id="blog-lang-en" class="lang-panel">
+        <div class="field"><label>Eyebrow</label><input type="text" id="blog-en-eyebrow" value="Blog"></div>
+        <div class="field"><label>Article title</label><input type="text" id="blog-en-title"></div>
+        <div class="field"><label>Card title</label><input type="text" id="blog-en-cardTitle"></div>
+        <div class="field"><label>Subtitle</label><input type="text" id="blog-en-sub"></div>
+        <div class="field"><label>Card badge</label><input type="text" id="blog-en-cardBadge" value="New article"></div>
+        <div class="field"><label>Card excerpt</label><textarea id="blog-en-cardExcerpt"></textarea></div>
+        <div class="field"><label>"Read" link text</label><input type="text" id="blog-en-readLabel" value="Read the article →"></div>
+        <div class="field"><label>Image alt text</label><input type="text" id="blog-en-alt"></div>
+        <div class="field"><label>Article body</label><div id="quill-wrap-en"><div id="blog-en-body-editor"></div></div></div>
+      </div>
+      <div id="blog-lang-ka" class="lang-panel">
+        <div class="field"><label>რუბრიკა</label><input type="text" id="blog-ka-eyebrow" value="ბლოგი"></div>
+        <div class="field"><label>სტატიის სათაური</label><input type="text" id="blog-ka-title"></div>
+        <div class="field"><label>სათაური ბარათზე</label><input type="text" id="blog-ka-cardTitle"></div>
+        <div class="field"><label>ქვესათაური</label><input type="text" id="blog-ka-sub"></div>
+        <div class="field"><label>ნიშანი ბარათზე</label><input type="text" id="blog-ka-cardBadge" value="ახალი სტატია"></div>
+        <div class="field"><label>მოკლე აღწერა ბარათზე</label><textarea id="blog-ka-cardExcerpt"></textarea></div>
+        <div class="field"><label>ბმულის ტექსტი «წაკითხვა»</label><input type="text" id="blog-ka-readLabel" value="სტატიის წაკითხვა →"></div>
+        <div class="field"><label>სურათის alt-ტექსტი</label><input type="text" id="blog-ka-alt"></div>
+        <div class="field"><label>სტატიის ტექსტი</label><div id="quill-wrap-ka"><div id="blog-ka-body-editor"></div></div></div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-danger btn-sm" id="blog-delete-btn" style="display:none;">Удалить</button>
+        <div class="right">
+          <button class="btn btn-ghost" id="blog-cancel-btn">Отмена</button>
+          <button class="btn btn-primary" id="blog-save-btn">Сохранить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PRICES MODAL ================= -->
+  <div class="modal-backdrop" id="prices-modal-backdrop">
+    <div class="modal">
+      <h2 id="prices-modal-title">Добавить категорию</h2>
+      <div class="error-msg" id="prices-error"></div>
+
+      <div class="field checkbox-row">
+        <input type="checkbox" id="prices-fullWidth">
+        <label for="prices-fullWidth" style="margin:0;">На всю ширину (обычно только для «Диагностики»)</label>
+      </div>
+      <div class="field">
+        <label>Иконка (SVG-код)</label>
+        <textarea id="prices-icon" style="min-height:50px;font-family:monospace;font-size:12.5px;" placeholder="&lt;path d=&quot;...&quot;/&gt;"></textarea>
+        <p class="field-hint">Технический код иконки. Если не уверены — оставьте как есть при редактировании или скопируйте у похожей категории.</p>
+      </div>
+
+      <div class="lang-tabs" data-lang-tabs="prices">
+        <button class="lang-tab-btn active" data-lang="ru">RU</button>
+        <button class="lang-tab-btn" data-lang="en">EN</button>
+        <button class="lang-tab-btn" data-lang="ka">KA</button>
+      </div>
+
+      <div id="prices-lang-ru" class="lang-panel active">
+        <div class="field"><label>Название категории</label><input type="text" id="prices-ru-title"></div>
+        <div class="field">
+          <label>Дополнительные пункты (необязательно)</label>
+          <div class="array-field" id="prices-ru-includes"></div>
+          <button type="button" class="btn btn-ghost btn-sm array-field-add" data-add-array="prices-ru-includes" data-placeholder="Например: ✔ Работа сертифицированного подолога">+ Добавить пункт</button>
+        </div>
+      </div>
+      <div id="prices-lang-en" class="lang-panel">
+        <div class="field"><label>Category title</label><input type="text" id="prices-en-title"></div>
+        <div class="field">
+          <label>Extra bullet points (optional)</label>
+          <div class="array-field" id="prices-en-includes"></div>
+          <button type="button" class="btn btn-ghost btn-sm array-field-add" data-add-array="prices-en-includes" data-placeholder="e.g. ✔ Performed by a certified podologist">+ Add item</button>
+        </div>
+      </div>
+      <div id="prices-lang-ka" class="lang-panel">
+        <div class="field"><label>კატეგორიის სახელი</label><input type="text" id="prices-ka-title"></div>
+        <div class="field">
+          <label>დამატებითი პუნქტები (არასავალდებულო)</label>
+          <div class="array-field" id="prices-ka-includes"></div>
+          <button type="button" class="btn btn-ghost btn-sm array-field-add" data-add-array="prices-ka-includes" data-placeholder="მაგ: ✔ სერტიფიცირებული პოდოლოგი">+ დამატება</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Позиции прайса</label>
+        <div id="prices-items"></div>
+        <button type="button" class="btn btn-ghost btn-sm array-field-add" id="prices-item-add-btn">+ Добавить позицию</button>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-danger btn-sm" id="prices-delete-btn" style="display:none;">Удалить</button>
+        <div class="right">
+          <button class="btn btn-ghost" id="prices-cancel-btn">Отмена</button>
+          <button class="btn btn-primary" id="prices-save-btn">Сохранить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.min.js"></script>
+  <script>
+  // ============================================================
+  // Sakura admin panel. Talks to /api/session, /api/login,
+  // /api/logout, /api/admin/{team,blog,prices,upload-image}.
+  // Reads content/*.json directly (public files) for the list views.
+  // ============================================================
+
+  function escapeHtml(s){
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+  function escapeAttr(s){ return escapeHtml(s); }
+
+  function apiFetch(url, options){
+    options = options || {};
+    options.credentials = 'same-origin';
+    options.headers = Object.assign({ 'Content-Type': 'application/json' }, options.headers || {});
+    return fetch(url, options);
+  }
+
+  function showToast(msg){
+    var el = document.getElementById('toast');
+    el.textContent = msg;
+    el.classList.add('show');
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(function(){ el.classList.remove('show'); }, 4500);
+  }
+
+  // ---------------- generic array-field (specializes / includes) ----------------
+  function renderArrayField(containerEl, values, placeholder){
+    containerEl.innerHTML = '';
+    (values || []).forEach(function(v){ addArrayRow(containerEl, v, placeholder); });
+  }
+  function addArrayRow(containerEl, value, placeholder){
+    var row = document.createElement('div');
+    row.className = 'row';
+    var input = document.createElement('input');
+    input.type = 'text';
+    input.value = value || '';
+    input.placeholder = placeholder || '';
+    var removeBtn = document.createElement('button');
+    removeBtn.type = 'button';
+    removeBtn.className = 'btn btn-ghost btn-sm';
+    removeBtn.textContent = '×';
+    removeBtn.addEventListener('click', function(){ row.remove(); });
+    row.appendChild(input);
+    row.appendChild(removeBtn);
+    containerEl.appendChild(row);
+  }
+  function collectArrayField(containerEl){
+    return Array.prototype.slice.call(containerEl.querySelectorAll('input'))
+      .map(function(inp){ return inp.value.trim(); })
+      .filter(function(v){ return v.length > 0; });
+  }
+  document.addEventListener('click', function(e){
+    var btn = e.target.closest('[data-add-array]');
+    if (!btn) return;
+    var container = document.getElementById(btn.getAttribute('data-add-array'));
+    addArrayRow(container, '', btn.getAttribute('data-placeholder'));
+  });
+
+  // ---------------- price item rows ----------------
+  function renderPriceItems(containerEl, items){
+    containerEl.innerHTML = '';
+    (items || []).forEach(function(item){ addPriceItemRow(containerEl, item); });
+  }
+  function addPriceItemRow(containerEl, item){
+    item = item || { amount:'', ru:'', en:'', ka:'' };
+    var row = document.createElement('div');
+    row.className = 'price-item-row';
+
+    var amountWrap = document.createElement('div');
+    amountWrap.className = 'grid-amount';
+    var amountInput = document.createElement('input');
+    amountInput.type = 'text'; amountInput.className = 'pi-amount';
+    amountInput.placeholder = 'Цена, например 100 ₾'; amountInput.value = item.amount || '';
+    var removeBtn = document.createElement('button');
+    removeBtn.type = 'button'; removeBtn.className = 'btn btn-ghost btn-sm';
+    removeBtn.textContent = '× Удалить позицию';
+    removeBtn.addEventListener('click', function(){ row.remove(); });
+    amountWrap.appendChild(amountInput);
+    amountWrap.appendChild(removeBtn);
+
+    var grid3 = document.createElement('div');
+    grid3.className = 'grid3';
+    var ruInput = document.createElement('input'); ruInput.type='text'; ruInput.className='pi-ru'; ruInput.placeholder='Название (RU)'; ruInput.value = item.ru || '';
+    var enInput = document.createElement('input'); enInput.type='text'; enInput.className='pi-en'; enInput.placeholder='Название (EN)'; enInput.value = item.en || '';
+    var kaInput = document.createElement('input'); kaInput.type='text'; kaInput.className='pi-ka'; kaInput.placeholder='Название (KA)'; kaInput.value = item.ka || '';
+    grid3.appendChild(ruInput); grid3.appendChild(enInput); grid3.appendChild(kaInput);
+
+    row.appendChild(amountWrap);
+    row.appendChild(grid3);
+    containerEl.appendChild(row);
+  }
+  function collectPriceItems(containerEl){
+    return Array.prototype.slice.call(containerEl.querySelectorAll('.price-item-row'))
+      .map(function(row){
+        return {
+          amount: row.querySelector('.pi-amount').value.trim(),
+          ru: row.querySelector('.pi-ru').value.trim(),
+          en: row.querySelector('.pi-en').value.trim(),
+          ka: row.querySelector('.pi-ka').value.trim()
+        };
+      })
+      .filter(function(it){ return it.amount || it.ru || it.en || it.ka; });
+  }
+  document.getElementById('prices-item-add-btn').addEventListener('click', function(){
+    addPriceItemRow(document.getElementById('prices-items'), null);
+  });
+
+  // ---------------- lang tabs inside modals ----------------
+  function switchLangTab(scope, lang){
+    document.querySelectorAll('[data-lang-tabs="' + scope + '"] .lang-tab-btn').forEach(function(btn){
+      btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+    });
+    ['ru','en','ka'].forEach(function(l){
+      var panel = document.getElementById(scope + '-lang-' + l);
+      if (panel) panel.classList.toggle('active', l === lang);
+    });
+  }
+  document.querySelectorAll('.lang-tabs').forEach(function(tabs){
+    var scope = tabs.getAttribute('data-lang-tabs');
+    tabs.querySelectorAll('.lang-tab-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){ switchLangTab(scope, btn.getAttribute('data-lang')); });
+    });
+  });
+
+  // ---------------- dashboard tabs ----------------
+  document.querySelectorAll('.tab-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.toggle('active', b === btn); });
+      var tab = btn.getAttribute('data-tab');
+      document.querySelectorAll('.tab-panel').forEach(function(p){
+        p.classList.toggle('active', p.id === 'panel-' + tab);
+      });
+    });
+  });
+
+  // ---------------- auth ----------------
+  function showLogin(){
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('app').classList.remove('show');
+  }
+  function showApp(){
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').classList.add('show');
+  }
+
+  async function checkSession(){
+    try{
+      var res = await apiFetch('/api/session');
+      var data = await res.json();
+      if (data.authenticated){ showApp(); loadAllContent(); }
+      else showLogin();
+    }catch(e){ showLogin(); }
+  }
+
+  document.getElementById('login-form').addEventListener('submit', async function(e){
+    e.preventDefault();
+    var email = document.getElementById('login-email').value;
+    var password = document.getElementById('login-password').value;
+    var errEl = document.getElementById('login-error');
+    errEl.classList.remove('show');
+    var btn = document.getElementById('login-submit');
+    btn.disabled = true; btn.textContent = 'Входим...';
+    try{
+      var res = await apiFetch('/api/login', { method:'POST', body: JSON.stringify({ email:email, password:password }) });
+      var data = await res.json();
+      if (res.ok && data.ok){ showApp(); loadAllContent(); }
+      else { errEl.textContent = data.error || 'Не удалось войти'; errEl.classList.add('show'); }
+    }catch(err){
+      errEl.textContent = 'Ошибка сети. Попробуйте ещё раз.';
+      errEl.classList.add('show');
+    }finally{
+      btn.disabled = false; btn.textContent = 'Войти';
+    }
+  });
+
+  document.getElementById('logout-btn').addEventListener('click', async function(){
+    try{ await apiFetch('/api/logout', { method:'POST' }); }catch(e){}
+    showLogin();
+  });
+
+  // ---------------- content state ----------------
+  var state = { team: [], blog: [], prices: [], editing: { type:null, id:null } };
+  var teamPhotoState = { path: '' };
+  var blogImageState = { path: '' };
+
+  async function loadAllContent(){
+    try{
+      var results = await Promise.all([
+        fetch('/content/team.json').then(function(r){ return r.json(); }),
+        fetch('/content/blog.json').then(function(r){ return r.json(); }),
+        fetch('/content/prices.json').then(function(r){ return r.json(); })
+      ]);
+      state.team = results[0]; state.blog = results[1]; state.prices = results[2];
+      renderTeamList(); renderBlogList(); renderPricesList();
+    }catch(e){ console.error('Failed to load content', e); }
+  }
+
+  // ================= TEAM =================
+  function renderTeamList(){
+    var el = document.getElementById('team-list');
+    if (!state.team.length){ el.innerHTML = '<p class="empty-hint">Пока никого нет.</p>'; return; }
+    el.innerHTML = state.team.map(function(m){
+      return '<div class="item-card">' +
+        '<img class="round" src="/' + escapeAttr(m.photo) + '" alt="">' +
+        '<div class="meta"><h3>' + escapeHtml(m.ru.name) + '</h3><p>' + escapeHtml(m.ru.cardTagline) + '</p></div>' +
+        '<div class="actions">' +
+          '<button class="btn btn-ghost btn-sm" data-edit="' + escapeAttr(m.id) + '">Изменить</button>' +
+          '<button class="btn btn-danger btn-sm" data-del="' + escapeAttr(m.id) + '">Удалить</button>' +
+        '</div></div>';
+    }).join('');
+    el.querySelectorAll('[data-edit]').forEach(function(b){ b.addEventListener('click', function(){ openTeamModal(b.getAttribute('data-edit')); }); });
+    el.querySelectorAll('[data-del]').forEach(function(b){ b.addEventListener('click', function(){ deleteTeam(b.getAttribute('data-del')); }); });
+  }
+
+  function openTeamModal(id){
+    state.editing = { type:'team', id: id || null };
+    var member = id ? state.team.find(function(m){ return m.id === id; }) : null;
+    document.getElementById('team-modal-title').textContent = member ? 'Изменить сотрудника' : 'Добавить сотрудника';
+    document.getElementById('team-delete-btn').style.display = member ? 'inline-flex' : 'none';
+
+    teamPhotoState.path = member ? member.photo : '';
+    var preview = document.getElementById('team-photo-preview');
+    if (teamPhotoState.path){ preview.src = '/' + teamPhotoState.path; preview.style.display = ''; }
+    else { preview.style.display = 'none'; preview.src = ''; }
+    document.getElementById('team-photo-status').textContent = '';
+    document.getElementById('team-photo-input').value = '';
+
+    ['ru','en','ka'].forEach(function(lang){
+      var d = (member && member[lang]) || {};
+      document.getElementById('team-' + lang + '-name').value = d.name || '';
+      document.getElementById('team-' + lang + '-cardTagline').value = d.cardTagline || '';
+      document.getElementById('team-' + lang + '-modalTagline').value = d.modalTagline || '';
+      document.getElementById('team-' + lang + '-intro').value = d.intro || '';
+      document.getElementById('team-' + lang + '-background').value = d.background || '';
+      document.getElementById('team-' + lang + '-closing').value = d.closing || '';
+      renderArrayField(document.getElementById('team-' + lang + '-specializes'), d.specializes || [], 'Пункт списка');
+    });
+
+    switchLangTab('team', 'ru');
+    document.getElementById('team-error').classList.remove('show');
+    document.getElementById('team-modal-backdrop').classList.add('open');
+  }
+  function closeTeamModal(){ document.getElementById('team-modal-backdrop').classList.remove('open'); }
+  document.getElementById('team-cancel-btn').addEventListener('click', closeTeamModal);
+  document.getElementById('team-add-btn').addEventListener('click', function(){ openTeamModal(null); });
+
+  document.getElementById('team-photo-input').addEventListener('change', function(e){
+    var file = e.target.files[0];
+    if (!file) return;
+    var statusEl = document.getElementById('team-photo-status');
+    var reader = new FileReader();
+    reader.onload = async function(){
+      var base64 = String(reader.result).split(',')[1];
+      var preview = document.getElementById('team-photo-preview');
+      preview.src = reader.result; preview.style.display = '';
+      statusEl.textContent = 'Загружаем...';
+      try{
+        var res = await apiFetch('/api/admin/upload-image', { method:'POST', body: JSON.stringify({ filename:file.name, dataBase64:base64 }) });
+        var data = await res.json();
+        if (!res.ok){ statusEl.textContent = 'Ошибка: ' + (data.error || 'не удалось загрузить'); return; }
+        teamPhotoState.path = data.path;
+        statusEl.textContent = 'Фото загружено ✓';
+      }catch(err){ statusEl.textContent = 'Ошибка сети при загрузке фото'; }
+    };
+    reader.readAsDataURL(file);
+  });
+
+  function collectTeamPayload(){
+    var payload = { photo: teamPhotoState.path };
+    ['ru','en','ka'].forEach(function(lang){
+      payload[lang] = {
+        name: document.getElementById('team-' + lang + '-name').value.trim(),
+        cardTagline: document.getElementById('team-' + lang + '-cardTagline').value.trim(),
+        modalTagline: document.getElementById('team-' + lang + '-modalTagline').value.trim(),
+        intro: document.getElementById('team-' + lang + '-intro').value.trim(),
+        background: document.getElementById('team-' + lang + '-background').value.trim(),
+        specializes: collectArrayField(document.getElementById('team-' + lang + '-specializes')),
+        closing: document.getElementById('team-' + lang + '-closing').value.trim()
+      };
+    });
+    return payload;
+  }
+
+  document.getElementById('team-save-btn').addEventListener('click', async function(){
+    var payload = collectTeamPayload();
+    var errEl = document.getElementById('team-error');
+    errEl.classList.remove('show');
+    if (!payload.photo){ errEl.textContent = 'Загрузите фото сотрудника'; errEl.classList.add('show'); return; }
+    var btn = this; btn.disabled = true; btn.textContent = 'Сохраняем...';
+    try{
+      var isEdit = !!state.editing.id;
+      if (isEdit) payload.id = state.editing.id;
+      var res = await apiFetch('/api/admin/team', { method: isEdit ? 'PUT' : 'POST', body: JSON.stringify(payload) });
+      var data = await res.json();
+      if (!res.ok){
+        errEl.textContent = (data.problems && data.problems.length) ? data.problems.join('; ') : (data.error || 'Не удалось сохранить');
+        errEl.classList.add('show');
+        return;
+      }
+      if (isEdit){
+        var idx = state.team.findIndex(function(m){ return m.id === state.editing.id; });
+        state.team[idx] = Object.assign({ id: state.editing.id }, payload);
+      } else {
+        state.team.push(Object.assign({ id: data.id }, payload));
+      }
+      renderTeamList(); closeTeamModal();
+      showToast('Сохранено! Изменения появятся на сайте через 15–30 секунд.');
+    }catch(e){ errEl.textContent = 'Ошибка сети. Попробуйте ещё раз.'; errEl.classList.add('show'); }
+    finally{ btn.disabled = false; btn.textContent = 'Сохранить'; }
+  });
+
+  document.getElementById('team-delete-btn').addEventListener('click', function(){ deleteTeam(state.editing.id, true); });
+
+  async function deleteTeam(id, fromModal){
+    if (!confirm('Удалить этого сотрудника? Действие необратимо.')) return;
+    try{
+      var res = await apiFetch('/api/admin/team', { method:'DELETE', body: JSON.stringify({ id:id }) });
+      var data = await res.json();
+      if (!res.ok){ alert(data.error || 'Не удалось удалить'); return; }
+      state.team = state.team.filter(function(m){ return m.id !== id; });
+      renderTeamList();
+      if (fromModal) closeTeamModal();
+      showToast('Удалено. Изменения появятся на сайте через 15–30 секунд.');
+    }catch(e){ alert('Ошибка сети. Попробуйте ещё раз.'); }
+  }
+
+  // ================= BLOG =================
+  var quillEditors = {};
+  function initQuillEditors(){
+    ['ru','en','ka'].forEach(function(lang){
+      quillEditors[lang] = new Quill('#blog-' + lang + '-body-editor', {
+        theme:'snow',
+        modules:{ toolbar: [[{ header:[4,5,false] }], ['bold'], [{ list:'bullet' }]] }
+      });
+    });
+  }
+
+  function renderBlogList(){
+    var el = document.getElementById('blog-list');
+    if (!state.blog.length){ el.innerHTML = '<p class="empty-hint">Пока нет статей.</p>'; return; }
+    el.innerHTML = state.blog.map(function(p){
+      return '<div class="item-card">' +
+        '<img src="/' + escapeAttr(p.image) + '" alt="">' +
+        '<div class="meta"><h3>' + escapeHtml(p.ru.cardTitle) + '</h3><p>' + escapeHtml(p.ru.cardExcerpt) + '</p></div>' +
+        '<div class="actions">' +
+          '<button class="btn btn-ghost btn-sm" data-edit="' + escapeAttr(p.id) + '">Изменить</button>' +
+          '<button class="btn btn-danger btn-sm" data-del="' + escapeAttr(p.id) + '">Удалить</button>' +
+        '</div></div>';
+    }).join('');
+    el.querySelectorAll('[data-edit]').forEach(function(b){ b.addEventListener('click', function(){ openBlogModal(b.getAttribute('data-edit')); }); });
+    el.querySelectorAll('[data-del]').forEach(function(b){ b.addEventListener('click', function(){ deleteBlog(b.getAttribute('data-del')); }); });
+  }
+
+  function openBlogModal(id){
+    state.editing = { type:'blog', id: id || null };
+    var post = id ? state.blog.find(function(p){ return p.id === id; }) : null;
+    document.getElementById('blog-modal-title').textContent = post ? 'Изменить статью' : 'Добавить статью';
+    document.getElementById('blog-delete-btn').style.display = post ? 'inline-flex' : 'none';
+
+    blogImageState.path = post ? post.image : '';
+    var preview = document.getElementById('blog-image-preview');
+    if (blogImageState.path){ preview.src = '/' + blogImageState.path; preview.style.display = ''; }
+    else { preview.style.display = 'none'; preview.src = ''; }
+    document.getElementById('blog-image-status').textContent = 'Обложка статьи';
+    document.getElementById('blog-image-input').value = '';
+
+    ['ru','en','ka'].forEach(function(lang){
+      var d = (post && post[lang]) || {};
+      document.getElementById('blog-' + lang + '-eyebrow').value = d.eyebrow || (lang==='ru'?'Блог':lang==='en'?'Blog':'ბლოგი');
+      document.getElementById('blog-' + lang + '-title').value = d.title || '';
+      document.getElementById('blog-' + lang + '-cardTitle').value = d.cardTitle || '';
+      document.getElementById('blog-' + lang + '-sub').value = d.sub || '';
+      document.getElementById('blog-' + lang + '-cardBadge').value = d.cardBadge || '';
+      document.getElementById('blog-' + lang + '-cardExcerpt').value = d.cardExcerpt || '';
+      document.getElementById('blog-' + lang + '-readLabel').value = d.readLabel || '';
+      document.getElementById('blog-' + lang + '-alt').value = (post && post.alt && post.alt[lang]) || '';
+      quillEditors[lang].setText('');
+      quillEditors[lang].clipboard.dangerouslyPasteHTML(d.body || '');
+    });
+
+    switchLangTab('blog', 'ru');
+    document.getElementById('blog-error').classList.remove('show');
+    document.getElementById('blog-modal-backdrop').classList.add('open');
+  }
+  function closeBlogModal(){ document.getElementById('blog-modal-backdrop').classList.remove('open'); }
+  document.getElementById('blog-cancel-btn').addEventListener('click', closeBlogModal);
+  document.getElementById('blog-add-btn').addEventListener('click', function(){ openBlogModal(null); });
+
+  document.getElementById('blog-image-input').addEventListener('change', function(e){
+    var file = e.target.files[0];
+    if (!file) return;
+    var statusEl = document.getElementById('blog-image-status');
+    var reader = new FileReader();
+    reader.onload = async function(){
+      var base64 = String(reader.result).split(',')[1];
+      var preview = document.getElementById('blog-image-preview');
+      preview.src = reader.result; preview.style.display = '';
+      statusEl.textContent = 'Загружаем...';
+      try{
+        var res = await apiFetch('/api/admin/upload-image', { method:'POST', body: JSON.stringify({ filename:file.name, dataBase64:base64 }) });
+        var data = await res.json();
+        if (!res.ok){ statusEl.textContent = 'Ошибка: ' + (data.error || 'не удалось загрузить'); return; }
+        blogImageState.path = data.path;
+        statusEl.textContent = 'Изображение загружено ✓';
+      }catch(err){ statusEl.textContent = 'Ошибка сети при загрузке изображения'; }
+    };
+    reader.readAsDataURL(file);
+  });
+
+  function collectBlogPayload(){
+    var payload = { image: blogImageState.path, alt: {} };
+    ['ru','en','ka'].forEach(function(lang){
+      payload.alt[lang] = document.getElementById('blog-' + lang + '-alt').value.trim();
+      var bodyText = quillEditors[lang].getText().trim();
+      payload[lang] = {
+        eyebrow: document.getElementById('blog-' + lang + '-eyebrow').value.trim(),
+        title: document.getElementById('blog-' + lang + '-title').value.trim(),
+        cardTitle: document.getElementById('blog-' + lang + '-cardTitle').value.trim(),
+        sub: document.getElementById('blog-' + lang + '-sub').value.trim(),
+        cardBadge: document.getElementById('blog-' + lang + '-cardBadge').value.trim(),
+        cardExcerpt: document.getElementById('blog-' + lang + '-cardExcerpt').value.trim(),
+        readLabel: document.getElementById('blog-' + lang + '-readLabel').value.trim(),
+        body: bodyText ? quillEditors[lang].root.innerHTML : ''
+      };
+    });
+    return payload;
+  }
+
+  document.getElementById('blog-save-btn').addEventListener('click', async function(){
+    var payload = collectBlogPayload();
+    var errEl = document.getElementById('blog-error');
+    errEl.classList.remove('show');
+    if (!payload.image){ errEl.textContent = 'Загрузите обложку статьи'; errEl.classList.add('show'); return; }
+    var btn = this; btn.disabled = true; btn.textContent = 'Сохраняем...';
+    try{
+      var isEdit = !!state.editing.id;
+      if (isEdit) payload.id = state.editing.id;
+      var res = await apiFetch('/api/admin/blog', { method: isEdit ? 'PUT' : 'POST', body: JSON.stringify(payload) });
+      var data = await res.json();
+      if (!res.ok){
+        errEl.textContent = (data.problems && data.problems.length) ? data.problems.join('; ') : (data.error || 'Не удалось сохранить');
+        errEl.classList.add('show');
+        return;
+      }
+      if (isEdit){
+        var idx = state.blog.findIndex(function(p){ return p.id === state.editing.id; });
+        state.blog[idx] = Object.assign({ id: state.editing.id }, payload);
+      } else {
+        state.blog.push(Object.assign({ id: data.id }, payload));
+      }
+      renderBlogList(); closeBlogModal();
+      showToast('Сохранено! Изменения появятся на сайте через 15–30 секунд.');
+    }catch(e){ errEl.textContent = 'Ошибка сети. Попробуйте ещё раз.'; errEl.classList.add('show'); }
+    finally{ btn.disabled = false; btn.textContent = 'Сохранить'; }
+  });
+
+  document.getElementById('blog-delete-btn').addEventListener('click', function(){ deleteBlog(state.editing.id, true); });
+
+  async function deleteBlog(id, fromModal){
+    if (!confirm('Удалить эту статью? Действие необратимо.')) return;
+    try{
+      var res = await apiFetch('/api/admin/blog', { method:'DELETE', body: JSON.stringify({ id:id }) });
+      var data = await res.json();
+      if (!res.ok){ alert(data.error || 'Не удалось удалить'); return; }
+      state.blog = state.blog.filter(function(p){ return p.id !== id; });
+      renderBlogList();
+      if (fromModal) closeBlogModal();
+      showToast('Удалено. Изменения появятся на сайте через 15–30 секунд.');
+    }catch(e){ alert('Ошибка сети. Попробуйте ещё раз.'); }
+  }
+
+  // ================= PRICES =================
+  function renderPricesList(){
+    var el = document.getElementById('prices-list');
+    if (!state.prices.length){ el.innerHTML = '<p class="empty-hint">Пока нет категорий.</p>'; return; }
+    el.innerHTML = state.prices.map(function(c){
+      return '<div class="item-card">' +
+        '<div class="meta"><h3>' + escapeHtml(c.ru.title) + '</h3><p>' + (c.items ? c.items.length : 0) + ' позиций</p></div>' +
+        '<div class="actions">' +
+          '<button class="btn btn-ghost btn-sm" data-edit="' + escapeAttr(c.id) + '">Изменить</button>' +
+          '<button class="btn btn-danger btn-sm" data-del="' + escapeAttr(c.id) + '">Удалить</button>' +
+        '</div></div>';
+    }).join('');
+    el.querySelectorAll('[data-edit]').forEach(function(b){ b.addEventListener('click', function(){ openPricesModal(b.getAttribute('data-edit')); }); });
+    el.querySelectorAll('[data-del]').forEach(function(b){ b.addEventListener('click', function(){ deletePrices(b.getAttribute('data-del')); }); });
+  }
+
+  function openPricesModal(id){
+    state.editing = { type:'prices', id: id || null };
+    var cat = id ? state.prices.find(function(c){ return c.id === id; }) : null;
+    document.getElementById('prices-modal-title').textContent = cat ? 'Изменить категорию' : 'Добавить категорию';
+    document.getElementById('prices-delete-btn').style.display = cat ? 'inline-flex' : 'none';
+
+    document.getElementById('prices-fullWidth').checked = !!(cat && cat.fullWidth);
+    document.getElementById('prices-icon').value = (cat && cat.icon) || '<path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/>';
+
+    ['ru','en','ka'].forEach(function(lang){
+      var d = (cat && cat[lang]) || {};
+      document.getElementById('prices-' + lang + '-title').value = d.title || '';
+      renderArrayField(document.getElementById('prices-' + lang + '-includes'), d.includes || [], 'Пункт списка');
+    });
+    renderPriceItems(document.getElementById('prices-items'), cat ? cat.items : []);
+
+    switchLangTab('prices', 'ru');
+    document.getElementById('prices-error').classList.remove('show');
+    document.getElementById('prices-modal-backdrop').classList.add('open');
+  }
+  function closePricesModal(){ document.getElementById('prices-modal-backdrop').classList.remove('open'); }
+  document.getElementById('prices-cancel-btn').addEventListener('click', closePricesModal);
+  document.getElementById('prices-add-btn').addEventListener('click', function(){ openPricesModal(null); });
+
+  function collectPricesPayload(){
+    var payload = {
+      fullWidth: document.getElementById('prices-fullWidth').checked,
+      icon: document.getElementById('prices-icon').value.trim(),
+      items: collectPriceItems(document.getElementById('prices-items'))
+    };
+    ['ru','en','ka'].forEach(function(lang){
+      payload[lang] = {
+        title: document.getElementById('prices-' + lang + '-title').value.trim(),
+        includes: collectArrayField(document.getElementById('prices-' + lang + '-includes'))
+      };
+    });
+    return payload;
+  }
+
+  document.getElementById('prices-save-btn').addEventListener('click', async function(){
+    var payload = collectPricesPayload();
+    var errEl = document.getElementById('prices-error');
+    errEl.classList.remove('show');
+    var btn = this; btn.disabled = true; btn.textContent = 'Сохраняем...';
+    try{
+      var isEdit = !!state.editing.id;
+      if (isEdit) payload.id = state.editing.id;
+      var res = await apiFetch('/api/admin/prices', { method: isEdit ? 'PUT' : 'POST', body: JSON.stringify(payload) });
+      var data = await res.json();
+      if (!res.ok){
+        errEl.textContent = (data.problems && data.problems.length) ? data.problems.join('; ') : (data.error || 'Не удалось сохранить');
+        errEl.classList.add('show');
+        return;
+      }
+      if (isEdit){
+        var idx = state.prices.findIndex(function(c){ return c.id === state.editing.id; });
+        state.prices[idx] = Object.assign({ id: state.editing.id }, payload);
+      } else {
+        state.prices.push(Object.assign({ id: data.id }, payload));
+      }
+      renderPricesList(); closePricesModal();
+      showToast('Сохранено! Изменения появятся на сайте через 15–30 секунд.');
+    }catch(e){ errEl.textContent = 'Ошибка сети. Попробуйте ещё раз.'; errEl.classList.add('show'); }
+    finally{ btn.disabled = false; btn.textContent = 'Сохранить'; }
+  });
+
+  document.getElementById('prices-delete-btn').addEventListener('click', function(){ deletePrices(state.editing.id, true); });
+
+  async function deletePrices(id, fromModal){
+    if (!confirm('Удалить эту категорию цен? Действие необратимо.')) return;
+    try{
+      var res = await apiFetch('/api/admin/prices', { method:'DELETE', body: JSON.stringify({ id:id }) });
+      var data = await res.json();
+      if (!res.ok){ alert(data.error || 'Не удалось удалить'); return; }
+      state.prices = state.prices.filter(function(c){ return c.id !== id; });
+      renderPricesList();
+      if (fromModal) closePricesModal();
+      showToast('Удалено. Изменения появятся на сайте через 15–30 секунд.');
+    }catch(e){ alert('Ошибка сети. Попробуйте ещё раз.'); }
+  }
+
+  // ---------------- boot ----------------
+  initQuillEditors();
+  checkSession();
+  </script>
+</body>
+</html>
