@@ -16,6 +16,15 @@ function isStringArray(v) {
   return Array.isArray(v) && v.every(function (item) { return typeof item === 'string'; });
 }
 
+// price category `icon` (raw SVG) and blog post `body` (Quill HTML) are
+// both rendered unescaped on the public site by design - that's what lets
+// <path> show up as an actual icon and headings/bold/lists show up as real
+// formatting instead of literal tag text. Neither legitimately needs
+// script/style/event-handler markup, so block the constructs that could
+// turn a compromised admin session into script execution for every site
+// visitor (stored XSS served off the public pages).
+var DANGEROUS_MARKUP_PATTERN = /<\s*(script|iframe|style|foreignObject|embed|object)\b|on[a-zA-Z]+\s*=|javascript\s*:/i;
+
 function validateTeamLang(lang, obj, problems) {
   var prefix = lang + '.';
   if (!obj || typeof obj !== 'object') {
@@ -55,7 +64,11 @@ function validateBlogLang(lang, obj, problems) {
   if (!isNonEmptyString(obj.cardBadge)) problems.push(prefix + 'cardBadge is required');
   if (!isNonEmptyString(obj.cardExcerpt)) problems.push(prefix + 'cardExcerpt is required');
   if (!isNonEmptyString(obj.readLabel)) problems.push(prefix + 'readLabel is required');
-  if (!isNonEmptyString(obj.body)) problems.push(prefix + 'body is required');
+  if (!isNonEmptyString(obj.body)) {
+    problems.push(prefix + 'body is required');
+  } else if (DANGEROUS_MARKUP_PATTERN.test(obj.body)) {
+    problems.push(prefix + 'body contains disallowed markup (script/style/event handlers are not permitted)');
+  }
 }
 
 function validateBlogPost(payload) {
@@ -105,6 +118,8 @@ function validatePriceCategory(payload) {
   }
   if (!isString(payload.icon) || payload.icon.trim().length === 0) {
     problems.push('icon is required (raw SVG <path>/<circle>/... markup string)');
+  } else if (DANGEROUS_MARKUP_PATTERN.test(payload.icon)) {
+    problems.push('icon contains disallowed markup (script/style/event handlers are not permitted)');
   }
   ['ru', 'en', 'ka'].forEach(function (lang) {
     validatePriceLang(lang, payload[lang], problems);
