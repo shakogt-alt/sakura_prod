@@ -8,8 +8,16 @@
       "modalTagline": "Подолог • специалист по медицинскому педикюру и коррекционным системам",
       "intro": "Лейла — один из самых опытных специалистов центра: более 7 лет она посвятила ногтевому сервису и подологии, помогая пациентам избавляться даже от сложных проблем со стопами.",
       "background": "Фармацевтическое образование позволяет Лейле уделять особое внимание вопросам здоровья, безопасности и комплексному подходу к работе со стопой и ногтями. Она начала путь с обучения маникюру и педикюру в Sakura Podology Education Center, а затем прошла специализированное обучение и дополнительные курсы повышения квалификации у ведущих специалистов отрасли.",
-      "specializes": ["медицинском педикюре", "коррекции вросших ногтей", "установке корректирующих систем", "обработке мозолей, натоптышей и трещин", "работе с деформациями ногтевых пластин", "эстетическом восстановлении ногтей", "профилактике заболеваний кожи и ногтей стоп"],
-      "closing": "Деликатный подход и стремление найти оптимальное решение в каждом случае — то, за что пациенты особенно ценят Лейлу."
+      "specializes": [
+        "медицинском педикюре",
+        "коррекции вросших ногтей",
+        "установке корректирующих систем",
+        "обработке мозолей, натоптышей и трещин",
+        "работе с деформациями ногтевых пластин",
+        "эстетическом восстановлении ногтей",
+        "профилактике заболеваний кожи и ногтей стоп"
+      ],
+      "closing": "Деликатный подход и стремление найти оптимальное решение в каждом случае то, за что пациенты особенно ценят Лейлу."
     },
     "en": {
       "name": "Leila Kurbanova",
@@ -17,7 +25,15 @@
       "modalTagline": "Podologist • Medical Pedicure and Correction Systems Specialist",
       "intro": "Leila is one of the center's most experienced specialists: over 7 years dedicated to nail care and podology, helping patients overcome even complex foot problems.",
       "background": "Her pharmaceutical background allows Leila to pay special attention to health, safety, and a comprehensive approach to foot and nail care. She began with manicure and pedicure training at the Sakura Podology Education Center, then pursued specialized podology training and advanced courses with leading industry experts.",
-      "specializes": ["medical pedicure", "ingrown nail correction", "correction system installation", "treatment of corns, calluses and cracks", "nail plate deformity correction", "aesthetic nail restoration", "prevention of skin and nail conditions"],
+      "specializes": [
+        "medical pedicure",
+        "ingrown nail correction",
+        "correction system installation",
+        "treatment of corns, calluses and cracks",
+        "nail plate deformity correction",
+        "aesthetic nail restoration",
+        "prevention of skin and nail conditions"
+      ],
       "closing": "A delicate approach and a drive to find the best solution for every case — that's what patients value most in Leila."
     },
     "ka": {
@@ -26,7 +42,15 @@
       "modalTagline": "პოდოლოგი • სამედიცინო პედიკურისა და საკორექციო სისტემების სპეციალისტი",
       "intro": "ლეილა ცენტრის ერთ-ერთი ყველაზე გამოცდილი სპეციალისტია: 7 წელზე მეტია ფრჩხილების სერვისსა და პოდოლოგიას ეთმობა, პაციენტებს რთულ პრობლემებთანაც კი ეხმარება.",
       "background": "ფარმაცევტული განათლება ლეილას საშუალებას აძლევს განსაკუთრებული ყურადღება დაუთმოს ჯანმრთელობას, უსაფრთხოებასა და ტერფებთან და ფრჩხილებთან კომპლექსურ მუშაობას. მან გზა Sakura Podology Education Center-ში მანიკურისა და პედიკურის სწავლებით დაიწყო, შემდეგ კი გაიარა სპეციალიზებული სწავლება და კვალიფიკაციის ასამაღლებელი კურსები დარგის წამყვან ექსპერტებთან.",
-      "specializes": ["სამედიცინო პედიკურში", "ჩაზრდილი ფრჩხილის კორექციაში", "საკორექციო სისტემების დამონტაჟებაში", "მოზოლებისა და ბზარების დამუშავებაში", "ფრჩხილის ფირფიტის დეფორმაციებთან მუშაობაში", "ფრჩხილების ესთეტიკურ აღდგენაში", "ტერფის კანისა და ფრჩხილების დაავადებების პრევენციაში"],
+      "specializes": [
+        "სამედიცინო პედიკურში",
+        "ჩაზრდილი ფრჩხილის კორექციაში",
+        "საკორექციო სისტემების დამონტაჟებაში",
+        "მოზოლებისა და ბზარების დამუშავებაში",
+        "ფრჩხილის ფირფიტის დეფორმაციებთან მუშაობაში",
+        "ფრჩხილების ესთეტიკურ აღდგენაში",
+        "ტერფის კანისა და ფრჩხილების დაავადებების პრევენციაში"
+      ],
       "closing": "ფაქიზი მიდგომა და თითოეული შემთხვევისთვის საუკეთესო გადაწყვეტის ძიება — სწორედ ეს აფასებინებთ პაციენტებს ლეილას."
     }
   },
@@ -39,7 +63,15 @@
       "modalTagline": "Подолог • специалист по медицинскому педикюру и коррекции вросших ногтей",
       "intro": "Мариам — специалист, который постоянно расширяет профессиональные горизонты: за несколько лет она освоила сразу несколько направлений ухода за ногтями и стопами и продолжает учиться у лучших мастеров отрасли.",
       "background": "Путь в индустрии красоты Мариам начала в 2019 году с обучения в Paris Nail (комбинированный и аппаратный маникюр, дизайн ногтей), а в 2022 году продолжила развитие в учебном центре Sakramel, освоив комбинированный маникюр, аппаратный маникюр, скоростной маникюр, технику идеального френча, работу с заболеваниями ногтей и кожи, базовый педикюр и работу с онихолизисом. Стремление к профессиональному росту привело Мариам в подологию: в 2024 году в Sakura Podology Education Center она прошла обучение по коррекции вросших ногтей и установке титановой нити, а в 2026 году освоила современные методы обработки вирусных бородавок.",
-      "specializes": ["медицинском педикюре", "обработке мозолей, натоптышей и гиперкератоза", "коррекции вросших ногтей", "установке титановой нити", "работе с онихолизисом", "обработке вирусных бородавок", "профилактическом уходе за стопой и ногтями"],
+      "specializes": [
+        "медицинском педикюре",
+        "обработке мозолей, натоптышей и гиперкератоза",
+        "коррекции вросших ногтей",
+        "установке титановой нити",
+        "работе с онихолизисом",
+        "обработке вирусных бородавок",
+        "профилактическом уходе за стопой и ногтями"
+      ],
       "closing": "Пациенты ценят Мариам за внимательность, аккуратность, деликатный подход и стремление находить эффективное решение для каждого случая."
     },
     "en": {
@@ -48,7 +80,15 @@
       "modalTagline": "Podologist • Medical Pedicure and Ingrown Nail Correction Specialist",
       "intro": "Mariam is a specialist who never stops growing professionally: in just a few years she's mastered several areas of nail and foot care and continues learning from the industry's best.",
       "background": "Mariam began her beauty industry journey in 2019 with training at Paris Nail (combination and machine manicure, nail design), and in 2022 continued her development at the Sakramel training center, mastering combination manicure, machine manicure with gel polish, speed manicure, the perfect French technique, nail and skin conditions, basic pedicure, and onycholysis treatment. Her drive for professional growth led Mariam to podology: in 2024, at the Sakura Podology Education Center, she trained in ingrown nail correction and titanium wire installation, and in 2026 mastered modern techniques for treating viral warts.",
-      "specializes": ["medical pedicure", "corn, callus and hyperkeratosis treatment", "ingrown nail correction", "titanium wire installation", "onycholysis treatment", "viral wart treatment", "preventive foot and nail care"],
+      "specializes": [
+        "medical pedicure",
+        "corn, callus and hyperkeratosis treatment",
+        "ingrown nail correction",
+        "titanium wire installation",
+        "onycholysis treatment",
+        "viral wart treatment",
+        "preventive foot and nail care"
+      ],
       "closing": "Attentiveness, precision, and a drive to find an effective solution for every case — that's what patients value most in Mariam."
     },
     "ka": {
@@ -57,7 +97,15 @@
       "modalTagline": "პოდოლოგი • სამედიცინო პედიკურისა და ჩაზრდილი ფრჩხილის კორექციის სპეციალისტი",
       "intro": "მარიამი სპეციალისტია, რომელიც მუდმივად ავითარებს პროფესიულ ჰორიზონტს: რამდენიმე წელში მან ფრჩხილებისა და ტერფის მოვლის რამდენიმე მიმართულება აითვისა და აგრძელებს სწავლას დარგის საუკეთესო ოსტატებთან.",
       "background": "სილამაზის ინდუსტრიაში გზა მარიამმა 2019 წელს დაიწყო, Paris Nail-ში სწავლებით (კომბინირებული და აპარატული მანიკური, ფრჩხილების დიზაინი), ხოლო 2022 წელს განაგრძო განვითარება სასწავლო ცენტრ Sakramel-ში, სადაც აითვისა კომბინირებული მანიკური, აპარატული მანიკური გელ-ლაქით, სასწრაფო მანიკური, იდეალური ფრანგული მანიკურის ტექნიკა, ფრჩხილებისა და კანის დაავადებები, საბაზისო პედიკური და ონიქოლიზისთან მუშაობა. პროფესიული ზრდის სურვილმა მარიამი პოდოლოგიაში მიიყვანა: 2024 წელს Sakura Podology Education Center-ში აითვისა ჩაზრდილი ფრჩხილის კორექცია და ტიტანის მავთულის დამონტაჟება, ხოლო 2026 წელს — ვირუსული მეჭეჭების დამუშავების თანამედროვე მეთოდები.",
-      "specializes": ["სამედიცინო პედიკურში", "მოზოლებისა და ჰიპერკერატოზის დამუშავებაში", "ჩაზრდილი ფრჩხილის კორექციაში", "ტიტანის მავთულის დამონტაჟებაში", "ონიქოლიზისთან მუშაობაში", "ვირუსული მეჭეჭების დამუშავებაში", "ტერფისა და ფრჩხილების პროფილაქტიკურ მოვლაში"],
+      "specializes": [
+        "სამედიცინო პედიკურში",
+        "მოზოლებისა და ჰიპერკერატოზის დამუშავებაში",
+        "ჩაზრდილი ფრჩხილის კორექციაში",
+        "ტიტანის მავთულის დამონტაჟებაში",
+        "ონიქოლიზისთან მუშაობაში",
+        "ვირუსული მეჭეჭების დამუშავებაში",
+        "ტერფისა და ფრჩხილების პროფილაქტიკურ მოვლაში"
+      ],
       "closing": "ყურადღება, სიზუსტე და თითოეული შემთხვევისთვის ეფექტური გადაწყვეტის ძიება — სწორედ ამას აფასებენ პაციენტები მარიამში."
     }
   },
@@ -70,7 +118,13 @@
       "modalTagline": "Подолог • специалист по медицинскому педикюру",
       "intro": "Инга — специалист с более чем 15-летним опытом в индустрии красоты, чьи руки и внимательный взгляд доверяют сотни постоянных пациентов.",
       "background": "Свой профессиональный путь Инга начала как специалист по маникюру и педикюру, а затем продолжила развитие в направлении подологии, получив профильное образование и квалификацию подолога.",
-      "specializes": ["медицинском педикюре", "обработке проблемных и деформированных ногтей", "работе с мозолями, натоптышами и гиперкератозом", "профилактическом уходе за стопой", "поддержании здоровья кожи и ногтей стоп"],
+      "specializes": [
+        "медицинском педикюре",
+        "обработке проблемных и деформированных ногтей",
+        "работе с мозолями, натоптышами и гиперкератозом",
+        "профилактическом уходе за стопой",
+        "поддержании здоровья кожи и ногтей стоп"
+      ],
       "closing": "Главная цель Инги — помочь каждому пациенту сохранить здоровье стоп, вернуть комфорт движения и предотвратить проблемы в будущем."
     },
     "en": {
@@ -79,7 +133,13 @@
       "modalTagline": "Podologist • Medical Pedicure Specialist",
       "intro": "Inga is a specialist with more than 15 years in the beauty industry, whose skilled hands and attentive eye hundreds of regular patients trust.",
       "background": "Inga began her career as a manicure and pedicure specialist, then continued her development in podology, earning specialized education and qualification as a podologist.",
-      "specializes": ["medical pedicure", "treatment of problem and deformed nails", "corn, callus and hyperkeratosis treatment", "preventive foot care", "maintaining skin and nail health"],
+      "specializes": [
+        "medical pedicure",
+        "treatment of problem and deformed nails",
+        "corn, callus and hyperkeratosis treatment",
+        "preventive foot care",
+        "maintaining skin and nail health"
+      ],
       "closing": "Inga's main goal is to help every patient maintain healthy feet, restore comfort of movement, and prevent future problems."
     },
     "ka": {
@@ -88,7 +148,13 @@
       "modalTagline": "პოდოლოგი • სამედიცინო პედიკურის სპეციალისტი",
       "intro": "ინგა სილამაზის ინდუსტრიაში 15 წელზე მეტი გამოცდილების მქონე სპეციალისტია, რომლის ხელსა და ყურადღებას ასობით მუდმივი პაციენტი ენდობა.",
       "background": "თავისი გზა ინგამ მანიკურისა და პედიკურის სპეციალისტად დაიწყო, შემდეგ კი განაგრძო განვითარება პოდოლოგიაში, სადაც მიიღო პროფილური განათლება და პოდოლოგის კვალიფიკაცია.",
-      "specializes": ["სამედიცინო პედიკურში", "პრობლემური და დეფორმირებული ფრჩხილების დამუშავებაში", "მოზოლებთან და ჰიპერკერატოზთან მუშაობაში", "ტერფის პროფილაქტიკურ მოვლაში", "ტერფის კანისა და ფრჩხილების ჯანმრთელობის შენარჩუნებაში"],
+      "specializes": [
+        "სამედიცინო პედიკურში",
+        "პრობლემური და დეფორმირებული ფრჩხილების დამუშავებაში",
+        "მოზოლებთან და ჰიპერკერატოზთან მუშაობაში",
+        "ტერფის პროფილაქტიკურ მოვლაში",
+        "ტერფის კანისა და ფრჩხილების ჯანმრთელობის შენარჩუნებაში"
+      ],
       "closing": "ინგას მთავარი მიზანია, დაეხმაროს პაციენტს ტერფების ჯანმრთელობის შენარჩუნებაში, მოძრაობის კომფორტის დაბრუნებასა და მომავალი პრობლემების პრევენციაში."
     }
   },
@@ -101,7 +167,13 @@
       "modalTagline": "Подолог • специалист по медицинскому педикюру",
       "intro": "Анастасия — специалист, для которого забота о здоровье стоп стала осознанным выбором и настоящим призванием. Её отличают внимательность к деталям и по-настоящему бережный подход к каждому пациенту.",
       "background": "Анастасия имеет высшее экономическое образование (Минский институт управления, специальность «Бухгалтерский учёт, анализ и аудит»), однако стремление работать с людьми и помогать им привело её в подологию. В декабре 2025 года она прошла обучение в Sakura Podology Education Center, где освоила современные методы работы с проблемами стоп и ногтей, и присоединилась к команде Sakura Podology Center.",
-      "specializes": ["медицинском педикюре", "обработке проблемных и деформированных ногтей", "работе с мозолями и натоптышами", "уходе за стопой при гиперкератозе", "профилактике заболеваний кожи и ногтей стоп"],
+      "specializes": [
+        "медицинском педикюре",
+        "обработке проблемных и деформированных ногтей",
+        "работе с мозолями и натоптышами",
+        "уходе за стопой при гиперкератозе",
+        "профилактике заболеваний кожи и ногтей стоп"
+      ],
       "closing": "Пациенты отмечают внимательность, аккуратность и индивидуальный подход Анастасии к каждому случаю — с ней легко доверить заботу о своих стопах."
     },
     "en": {
@@ -110,7 +182,13 @@
       "modalTagline": "Podologist • Medical Pedicure Specialist",
       "intro": "For Anastasia, caring for foot health became a conscious choice and a true calling. She's known for her attention to detail and a genuinely gentle approach to every patient.",
       "background": "Anastasia holds a degree in economics (Minsk Institute of Management, Accounting, Analysis and Audit), but her drive to work with people and help them led her to podology. In December 2025 she completed training at the Sakura Podology Education Center, mastering modern methods for treating foot and nail conditions, and joined the Sakura Podology Center team.",
-      "specializes": ["medical pedicure", "treatment of problem and deformed nails", "corn and callus removal", "foot care for hyperkeratosis", "prevention of skin and nail conditions"],
+      "specializes": [
+        "medical pedicure",
+        "treatment of problem and deformed nails",
+        "corn and callus removal",
+        "foot care for hyperkeratosis",
+        "prevention of skin and nail conditions"
+      ],
       "closing": "Patients value Anastasia's attentiveness, precision, and individual approach to every case — with her, it's easy to trust the care of your feet."
     },
     "ka": {
@@ -119,7 +197,13 @@
       "modalTagline": "პოდოლოგი • სამედიცინო პედიკურის სპეციალისტი",
       "intro": "ანასტასიასთვის ტერფების ჯანმრთელობაზე ზრუნვა შეგნებული არჩევანი და ნამდვილი მოწოდებაა. მას გამოარჩევს დეტალებისადმი ყურადღება და თითოეული პაციენტისადმი ნამდვილად ფრთხილი მიდგომა.",
       "background": "ანასტასიას აქვს უმაღლესი ეკონომიკური განათლება (მინსკის მართვის ინსტიტუტი, სპეციალობა «ბუღალტრული აღრიცხვა, ანალიზი და აუდიტი»), თუმცა ადამიანებთან მუშაობისა და დახმარების სურვილმა იგი პოდოლოგიაში მიიყვანა. 2025 წლის დეკემბერში მან გაიარა სწავლება Sakura Podology Education Center-ში, სადაც აითვისა ტერფებისა და ფრჩხილების პრობლემებთან მუშაობის თანამედროვე მეთოდები და შემოუერთდა Sakura Podology Center-ის გუნდს.",
-      "specializes": ["სამედიცინო პედიკურში", "პრობლემური და დეფორმირებული ფრჩხილების დამუშავებაში", "მოზოლებთან მუშაობაში", "ტერფის მოვლაში ჰიპერკერატოზის დროს", "ტერფის კანისა და ფრჩხილების დაავადებების პრევენციაში"],
+      "specializes": [
+        "სამედიცინო პედიკურში",
+        "პრობლემური და დეფორმირებული ფრჩხილების დამუშავებაში",
+        "მოზოლებთან მუშაობაში",
+        "ტერფის მოვლაში ჰიპერკერატოზის დროს",
+        "ტერფის კანისა და ფრჩხილების დაავადებების პრევენციაში"
+      ],
       "closing": "პაციენტები აფასებენ ანასტასიას ყურადღებას, სიზუსტესა და ინდივიდუალურ მიდგომას თითოეული შემთხვევისადმი — მასთან ტერფების მოვლის მინდობა ადვილია."
     }
   },
@@ -132,7 +216,13 @@
       "modalTagline": "Подолог • специалист по медицинскому педикюру",
       "intro": "Светлана — специалист с богатым жизненным опытом и искренним интересом к тому, чтобы каждый пациент чувствовал заботу и комфорт.",
       "background": "Профессиональный путь Светлана начала в 1991 году с факультета экономики и менеджмента в университете Кутаиси. В 2018 году она выбрала направление эстетического ухода за ногтями и стопой, а в 2023 году начала специализированное обучение и специализацию в области здоровья стоп и ногтей.",
-      "specializes": ["медицинском педикюре", "обработке проблемных и деформированных ногтей", "уходе за возрастной стопой", "обработке мозолей, натоптышей и гиперкератоза", "профилактическом уходе за кожей и ногтями стоп"],
+      "specializes": [
+        "медицинском педикюре",
+        "обработке проблемных и деформированных ногтей",
+        "уходе за возрастной стопой",
+        "обработке мозолей, натоптышей и гиперкератоза",
+        "профилактическом уходе за кожей и ногтями стоп"
+      ],
       "closing": "Пациенты ценят Светлану за внимательность, аккуратность, спокойный подход и искреннюю заботу о комфорте каждого посетителя."
     },
     "en": {
@@ -141,7 +231,13 @@
       "modalTagline": "Podologist • Medical Pedicure Specialist",
       "intro": "Svetlana is a specialist with rich life experience and a sincere interest in making every patient feel cared for and comfortable.",
       "background": "Svetlana began her professional path in 1991 at the Faculty of Economics and Management in Kutaisi. In 2018 she chose the field of aesthetic nail and foot care, and in 2023 began specialized training and qualification in foot and nail health.",
-      "specializes": ["medical pedicure", "treatment of problem and deformed nails", "care for aging feet", "treatment of corns, calluses and hyperkeratosis", "preventive skin and nail care"],
+      "specializes": [
+        "medical pedicure",
+        "treatment of problem and deformed nails",
+        "care for aging feet",
+        "treatment of corns, calluses and hyperkeratosis",
+        "preventive skin and nail care"
+      ],
       "closing": "Patients value Svetlana's attentiveness, precision, calm manner, and sincere care for every visitor's comfort."
     },
     "ka": {
@@ -150,7 +246,13 @@
       "modalTagline": "პოდოლოგი • სამედიცინო პედიკურის სპეციალისტი",
       "intro": "სვეტლანა მდიდარი ცხოვრებისეული გამოცდილებისა და თითოეული პაციენტის კომფორტზე გულწრფელი ზრუნვის მქონე სპეციალისტია.",
       "background": "პროფესიული გზა სვეტლანამ 1991 წელს, ქუთაისის უნივერსიტეტის ეკონომიკისა და მენეჯმენტის ფაკულტეტზე დაიწყო. 2018 წელს მან აირჩია ფრჩხილებისა და ტერფის ესთეტიკური მოვლის მიმართულება, ხოლო 2023 წელს დაიწყო სპეციალიზებული სწავლება პოდოლოგიაში.",
-      "specializes": ["სამედიცინო პედიკურში", "პრობლემური და დეფორმირებული ფრჩხილების დამუშავებაში", "ასაკოვანი ტერფის მოვლაში", "მოზოლებისა და ჰიპერკერატოზის დამუშავებაში", "ტერფის კანისა და ფრჩხილების პროფილაქტიკურ მოვლაში"],
+      "specializes": [
+        "სამედიცინო პედიკურში",
+        "პრობლემური და დეფორმირებული ფრჩხილების დამუშავებაში",
+        "ასაკოვანი ტერფის მოვლაში",
+        "მოზოლებისა და ჰიპერკერატოზის დამუშავებაში",
+        "ტერფის კანისა და ფრჩხილების პროფილაქტიკურ მოვლაში"
+      ],
       "closing": "პაციენტები აფასებენ სვეტლანას ყურადღებას, სიზუსტეს, მშვიდ მიდგომასა და თითოეული სტუმრის კომფორტზე გულწრფელ ზრუნვას."
     }
   }
