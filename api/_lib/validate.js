@@ -282,4 +282,43 @@ function validateExcludedIps(payload) {
   return problems;
 }
 
-module.exports = { validateTeamMember, validateBlogPost, validatePriceCategory, validateReview, validateServiceCard, validateAdvantageCard, validateAbout, validateSite, validateExcludedIps };
+// Gallery: sections (e.g. "Наши сертификаты") each hold a trilingual
+// title and a list of photos; each photo is an image plus a trilingual
+// description. Descriptions are rendered escaped as plain text (like a
+// review), so no dangerous-markup denylist is needed here.
+function validateGallerySectionLang(lang, obj, problems) {
+  var prefix = lang + '.';
+  if (!obj || typeof obj !== 'object') {
+    problems.push(prefix + ' is required');
+    return;
+  }
+  if (!isNonEmptyString(obj.title)) problems.push(prefix + 'title is required');
+}
+
+function validateGallerySection(payload) {
+  var problems = [];
+  ['ru', 'en', 'ka'].forEach(function (lang) {
+    validateGallerySectionLang(lang, payload[lang], problems);
+  });
+  return problems;
+}
+
+function validateGalleryPhotoLang(lang, obj, problems) {
+  var prefix = lang + '.';
+  if (!obj || typeof obj !== 'object') {
+    problems.push(prefix + ' is required');
+    return;
+  }
+  if (!isNonEmptyString(obj.description)) problems.push(prefix + 'description is required');
+}
+
+function validateGalleryPhoto(payload) {
+  var problems = [];
+  if (!isNonEmptyString(payload.image)) problems.push('image is required (e.g. images/xxx.jpg)');
+  ['ru', 'en', 'ka'].forEach(function (lang) {
+    validateGalleryPhotoLang(lang, payload[lang], problems);
+  });
+  return problems;
+}
+
+module.exports = { validateTeamMember, validateBlogPost, validatePriceCategory, validateReview, validateServiceCard, validateAdvantageCard, validateAbout, validateSite, validateExcludedIps, validateGallerySection, validateGalleryPhoto };

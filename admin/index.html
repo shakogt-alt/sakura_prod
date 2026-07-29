@@ -78,6 +78,20 @@
   .item-card .actions{display:flex;gap:8px;flex:none;}
   .empty-hint{color:var(--text-soft);font-size:14px;padding:20px 0;}
 
+  /* Gallery tab */
+  .gallery-section-card{border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin-bottom:14px;}
+  .gallery-section-head{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:12px;flex-wrap:wrap;}
+  .gallery-section-head h3{margin:0;font-size:16px;}
+  .gallery-section-card .actions{display:flex;gap:8px;flex:none;}
+  .gallery-photo-grid{display:flex;flex-wrap:wrap;gap:10px;}
+  .gallery-photo-thumb{position:relative;width:84px;height:84px;border-radius:10px;overflow:hidden;flex:none;background:var(--surface-2);}
+  .gallery-photo-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+  .gallery-photo-edit,.gallery-photo-del{position:absolute;top:3px;width:20px;height:20px;border-radius:50%;border:none;background:rgba(0,0,0,.55);color:#fff;font-size:12px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;}
+  .gallery-photo-edit{right:27px;}
+  .gallery-photo-del{right:3px;}
+  .gallery-photo-add-tile{width:84px;height:84px;border-radius:10px;border:1.5px dashed var(--line);background:none;color:var(--text-soft);font-size:11px;cursor:pointer;flex:none;display:flex;align-items:center;justify-content:center;text-align:center;padding:4px;}
+  .gallery-photo-add-tile:hover{border-color:var(--pink-300);color:var(--pink-700);}
+
   /* Modal */
   .modal-backdrop{position:fixed;inset:0;background:rgba(52,38,44,.45);display:none;align-items:flex-start;justify-content:center;padding:30px 16px;overflow-y:auto;z-index:100;}
   .modal-backdrop.open{display:flex;}
@@ -154,6 +168,7 @@
       <button class="tab-btn" data-tab="advantages">Преимущества</button>
       <button class="tab-btn" data-tab="about">О нас</button>
       <button class="tab-btn" data-tab="site">Контакты и фото</button>
+      <button class="tab-btn" data-tab="gallery">Галерея</button>
       <button class="tab-btn" data-tab="visits">Посещения</button>
     </div>
 
@@ -338,6 +353,18 @@
       </div>
     </div>
 
+    <div class="tab-panel" id="panel-gallery">
+      <div class="list-head">
+        <div>
+          <h2>Галерея</h2>
+          <p class="hint">Разделы галереи (например, «Наши сертификаты», «До и после лечения»). В каждом разделе — фото с коротким описанием на трёх языках. Изменения появляются на сайте через 15–30 секунд после сохранения.</p>
+        </div>
+        <button class="btn btn-primary" id="gallery-add-section-btn">+ Добавить раздел</button>
+      </div>
+      <div class="error-msg" id="gallery-error"></div>
+      <div id="gallery-sections-list"></div>
+    </div>
+
     <div class="tab-panel" id="panel-visits">
       <div class="list-head">
         <div>
@@ -361,6 +388,54 @@
       <div class="modal-actions">
         <div class="right">
           <button class="btn btn-primary" id="visits-save-btn">Сохранить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= GALLERY SECTION MODAL ================= -->
+  <div class="modal-backdrop" id="gallery-section-modal-backdrop">
+    <div class="modal">
+      <h2 id="gallery-section-modal-title">Добавить раздел</h2>
+      <div class="error-msg" id="gallery-section-error"></div>
+
+      <div class="field"><label>Название раздела (RU)</label><input type="text" id="galsection-ru-title" placeholder="Например: Наши сертификаты"></div>
+      <div class="field"><label>Section title (EN)</label><input type="text" id="galsection-en-title" placeholder="e.g. Our certificates"></div>
+      <div class="field"><label>განყოფილების სახელი (KA)</label><input type="text" id="galsection-ka-title" placeholder="მაგ: ჩვენი სერტიფიკატები"></div>
+
+      <div class="modal-actions">
+        <button class="btn btn-danger btn-sm" id="gallery-section-delete-btn" style="display:none;">Удалить раздел</button>
+        <div class="right">
+          <button class="btn btn-ghost" id="gallery-section-cancel-btn">Отмена</button>
+          <button class="btn btn-primary" id="gallery-section-save-btn">Сохранить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= GALLERY PHOTO MODAL ================= -->
+  <div class="modal-backdrop" id="gallery-photo-modal-backdrop">
+    <div class="modal">
+      <h2 id="gallery-photo-modal-title">Добавить фото</h2>
+      <div class="error-msg" id="gallery-photo-error"></div>
+
+      <div class="photo-upload">
+        <img id="gallery-photo-preview" alt="">
+        <div>
+          <input type="file" id="gallery-photo-input" accept="image/jpeg,image/png,image/webp">
+          <div class="status" id="gallery-photo-status"></div>
+        </div>
+      </div>
+
+      <div class="field"><label>Описание (RU)</label><textarea id="galphoto-ru-description"></textarea></div>
+      <div class="field"><label>Description (EN)</label><textarea id="galphoto-en-description"></textarea></div>
+      <div class="field"><label>აღწერა (KA)</label><textarea id="galphoto-ka-description"></textarea></div>
+
+      <div class="modal-actions">
+        <button class="btn btn-danger btn-sm" id="gallery-photo-delete-btn" style="display:none;">Удалить фото</button>
+        <div class="right">
+          <button class="btn btn-ghost" id="gallery-photo-cancel-btn">Отмена</button>
+          <button class="btn btn-primary" id="gallery-photo-save-btn">Сохранить</button>
         </div>
       </div>
     </div>
@@ -878,7 +953,7 @@
   });
 
   // ---------------- content state ----------------
-  var state = { team: [], blog: [], prices: [], reviews: [], services: [], advantages: [], about: null, site: null, visits: null, editing: { type:null, id:null } };
+  var state = { team: [], blog: [], prices: [], reviews: [], services: [], advantages: [], about: null, site: null, visits: null, gallery: [], editing: { type:null, id:null } };
   var teamPhotoState = { path: '' };
   var blogImageState = { path: '' };
 
@@ -892,10 +967,11 @@
         fetch('/content/services.json').then(function(r){ return r.json(); }),
         fetch('/content/advantages.json').then(function(r){ return r.json(); }),
         fetch('/content/about.json').then(function(r){ return r.json(); }),
-        fetch('/content/site.json').then(function(r){ return r.json(); })
+        fetch('/content/site.json').then(function(r){ return r.json(); }),
+        fetch('/content/gallery.json').then(function(r){ return r.json(); })
       ]);
-      state.team = results[0]; state.blog = results[1]; state.prices = results[2]; state.reviews = results[3]; state.services = results[4]; state.advantages = results[5]; state.about = results[6]; state.site = results[7];
-      renderTeamList(); renderBlogList(); renderPricesList(); renderReviewsList(); renderServicesList(); renderAdvantagesList(); renderAboutForm(); renderSiteForm();
+      state.team = results[0]; state.blog = results[1]; state.prices = results[2]; state.reviews = results[3]; state.services = results[4]; state.advantages = results[5]; state.about = results[6]; state.site = results[7]; state.gallery = results[8];
+      renderTeamList(); renderBlogList(); renderPricesList(); renderReviewsList(); renderServicesList(); renderAdvantagesList(); renderAboutForm(); renderSiteForm(); renderGalleryList();
     }catch(e){ console.error('Failed to load content', e); }
   }
 
@@ -1774,6 +1850,213 @@
     }catch(e){ errEl.textContent = 'Ошибка сети. Попробуйте ещё раз.'; errEl.classList.add('show'); }
     finally{ btn.disabled = false; btn.textContent = 'Сохранить'; }
   });
+
+  // ================= GALLERY =================
+  // Two-level content: sections (trilingual title) each holding a list
+  // of photos (image + trilingual description). Both go through
+  // /api/gallery, dispatched by a body.type field ('section'|'photo') -
+  // see api/gallery.js.
+  var galleryPhotoState = { path: '' };
+
+  function renderGalleryList(){
+    var el = document.getElementById('gallery-sections-list');
+    if (!state.gallery.length){ el.innerHTML = '<p class="empty-hint">Пока нет разделов.</p>'; return; }
+    el.innerHTML = state.gallery.map(function(section){
+      var photosHtml = (section.photos || []).map(function(photo){
+        return '<div class="gallery-photo-thumb">' +
+          '<img src="/' + escapeAttr(photo.image) + '" alt="">' +
+          '<button type="button" class="gallery-photo-edit" data-edit-photo="' + escapeAttr(photo.id) + '" data-section="' + escapeAttr(section.id) + '" title="Изменить">✎</button>' +
+          '<button type="button" class="gallery-photo-del" data-del-photo="' + escapeAttr(photo.id) + '" data-section="' + escapeAttr(section.id) + '" title="Удалить">×</button>' +
+        '</div>';
+      }).join('');
+      return '<div class="gallery-section-card">' +
+        '<div class="gallery-section-head">' +
+          '<h3>' + escapeHtml(section.ru.title) + '</h3>' +
+          '<div class="actions">' +
+            '<button class="btn btn-ghost btn-sm" data-edit-section="' + escapeAttr(section.id) + '">Изменить название</button>' +
+            '<button class="btn btn-danger btn-sm" data-del-section="' + escapeAttr(section.id) + '">Удалить раздел</button>' +
+          '</div>' +
+        '</div>' +
+        '<div class="gallery-photo-grid">' +
+          photosHtml +
+          '<button type="button" class="gallery-photo-add-tile" data-add-photo="' + escapeAttr(section.id) + '">+ Добавить фото</button>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+    el.querySelectorAll('[data-edit-section]').forEach(function(b){ b.addEventListener('click', function(){ openGallerySectionModal(b.getAttribute('data-edit-section')); }); });
+    el.querySelectorAll('[data-del-section]').forEach(function(b){ b.addEventListener('click', function(){ deleteGallerySection(b.getAttribute('data-del-section')); }); });
+    el.querySelectorAll('[data-add-photo]').forEach(function(b){ b.addEventListener('click', function(){ openGalleryPhotoModal(b.getAttribute('data-add-photo'), null); }); });
+    el.querySelectorAll('[data-edit-photo]').forEach(function(b){ b.addEventListener('click', function(){ openGalleryPhotoModal(b.getAttribute('data-section'), b.getAttribute('data-edit-photo')); }); });
+    el.querySelectorAll('[data-del-photo]').forEach(function(b){ b.addEventListener('click', function(){ deleteGalleryPhoto(b.getAttribute('data-section'), b.getAttribute('data-del-photo')); }); });
+  }
+
+  // ---- section modal ----
+  function openGallerySectionModal(id){
+    state.editing = { type:'gallery-section', id: id || null };
+    var section = id ? state.gallery.find(function(s){ return s.id === id; }) : null;
+    document.getElementById('gallery-section-modal-title').textContent = section ? 'Изменить раздел' : 'Добавить раздел';
+    document.getElementById('gallery-section-delete-btn').style.display = section ? 'inline-flex' : 'none';
+    ['ru','en','ka'].forEach(function(lang){
+      document.getElementById('galsection-' + lang + '-title').value = (section && section[lang] && section[lang].title) || '';
+    });
+    document.getElementById('gallery-section-error').classList.remove('show');
+    document.getElementById('gallery-section-modal-backdrop').classList.add('open');
+  }
+  function closeGallerySectionModal(){ document.getElementById('gallery-section-modal-backdrop').classList.remove('open'); }
+  document.getElementById('gallery-section-cancel-btn').addEventListener('click', closeGallerySectionModal);
+  document.getElementById('gallery-add-section-btn').addEventListener('click', function(){ openGallerySectionModal(null); });
+
+  function collectGallerySectionPayload(){
+    var payload = { type: 'section' };
+    ['ru','en','ka'].forEach(function(lang){
+      payload[lang] = { title: document.getElementById('galsection-' + lang + '-title').value.trim() };
+    });
+    return payload;
+  }
+
+  document.getElementById('gallery-section-save-btn').addEventListener('click', async function(){
+    var payload = collectGallerySectionPayload();
+    var errEl = document.getElementById('gallery-section-error');
+    errEl.classList.remove('show');
+    var btn = this; btn.disabled = true; btn.textContent = 'Сохраняем...';
+    try{
+      var isEdit = !!state.editing.id;
+      if (isEdit) payload.id = state.editing.id;
+      var res = await apiFetch('/api/gallery', { method: isEdit ? 'PUT' : 'POST', body: JSON.stringify(payload) });
+      var data = await res.json();
+      if (!res.ok){
+        errEl.textContent = (data.problems && data.problems.length) ? data.problems.join('; ') : (data.error || 'Не удалось сохранить');
+        errEl.classList.add('show');
+        return;
+      }
+      if (isEdit){
+        var idx = state.gallery.findIndex(function(s){ return s.id === state.editing.id; });
+        state.gallery[idx] = Object.assign({}, state.gallery[idx], { ru: payload.ru, en: payload.en, ka: payload.ka });
+      } else {
+        state.gallery.push({ id: data.id, ru: payload.ru, en: payload.en, ka: payload.ka, photos: [] });
+      }
+      renderGalleryList(); closeGallerySectionModal();
+      showToast('Сохранено! Изменения появятся на сайте через 15–30 секунд.');
+    }catch(e){ errEl.textContent = 'Ошибка сети. Попробуйте ещё раз.'; errEl.classList.add('show'); }
+    finally{ btn.disabled = false; btn.textContent = 'Сохранить'; }
+  });
+
+  document.getElementById('gallery-section-delete-btn').addEventListener('click', function(){ deleteGallerySection(state.editing.id, true); });
+
+  async function deleteGallerySection(id, fromModal){
+    if (!confirm('Удалить раздел и все фото в нём? Действие необратимо.')) return;
+    try{
+      var res = await apiFetch('/api/gallery', { method:'DELETE', body: JSON.stringify({ type:'section', id:id }) });
+      var data = await res.json();
+      if (!res.ok){ alert(data.error || 'Не удалось удалить'); return; }
+      state.gallery = state.gallery.filter(function(s){ return s.id !== id; });
+      renderGalleryList();
+      if (fromModal) closeGallerySectionModal();
+      showToast('Удалено. Изменения появятся на сайте через 15–30 секунд.');
+    }catch(e){ alert('Ошибка сети. Попробуйте ещё раз.'); }
+  }
+
+  // ---- photo modal ----
+  function openGalleryPhotoModal(sectionId, photoId){
+    state.editing = { type:'gallery-photo', id: photoId || null, sectionId: sectionId };
+    var section = state.gallery.find(function(s){ return s.id === sectionId; });
+    var photo = (photoId && section) ? section.photos.find(function(p){ return p.id === photoId; }) : null;
+    document.getElementById('gallery-photo-modal-title').textContent = photo ? 'Изменить фото' : 'Добавить фото';
+    document.getElementById('gallery-photo-delete-btn').style.display = photo ? 'inline-flex' : 'none';
+
+    galleryPhotoState.path = photo ? photo.image : '';
+    var preview = document.getElementById('gallery-photo-preview');
+    if (galleryPhotoState.path){ preview.src = '/' + galleryPhotoState.path; preview.style.display = ''; }
+    else { preview.style.display = 'none'; preview.src = ''; }
+    document.getElementById('gallery-photo-status').textContent = '';
+    document.getElementById('gallery-photo-input').value = '';
+
+    ['ru','en','ka'].forEach(function(lang){
+      document.getElementById('galphoto-' + lang + '-description').value = (photo && photo[lang] && photo[lang].description) || '';
+    });
+
+    document.getElementById('gallery-photo-error').classList.remove('show');
+    document.getElementById('gallery-photo-modal-backdrop').classList.add('open');
+  }
+  function closeGalleryPhotoModal(){ document.getElementById('gallery-photo-modal-backdrop').classList.remove('open'); }
+  document.getElementById('gallery-photo-cancel-btn').addEventListener('click', closeGalleryPhotoModal);
+
+  document.getElementById('gallery-photo-input').addEventListener('change', function(e){
+    var file = e.target.files[0];
+    if (!file) return;
+    var statusEl = document.getElementById('gallery-photo-status');
+    var reader = new FileReader();
+    reader.onload = async function(){
+      var base64 = String(reader.result).split(',')[1];
+      var preview = document.getElementById('gallery-photo-preview');
+      preview.src = reader.result; preview.style.display = '';
+      statusEl.textContent = 'Загружаем...';
+      try{
+        var res = await apiFetch('/api/admin/upload-image', { method:'POST', body: JSON.stringify({ filename:file.name, dataBase64:base64 }) });
+        var data = await res.json();
+        if (!res.ok){ statusEl.textContent = 'Ошибка: ' + (data.error || 'не удалось загрузить'); return; }
+        galleryPhotoState.path = data.path;
+        statusEl.textContent = 'Фото загружено ✓';
+      }catch(err){ statusEl.textContent = 'Ошибка сети при загрузке фото'; }
+    };
+    reader.readAsDataURL(file);
+  });
+
+  function collectGalleryPhotoPayload(){
+    var payload = { type: 'photo', sectionId: state.editing.sectionId, image: galleryPhotoState.path };
+    ['ru','en','ka'].forEach(function(lang){
+      payload[lang] = { description: document.getElementById('galphoto-' + lang + '-description').value.trim() };
+    });
+    return payload;
+  }
+
+  document.getElementById('gallery-photo-save-btn').addEventListener('click', async function(){
+    var payload = collectGalleryPhotoPayload();
+    var errEl = document.getElementById('gallery-photo-error');
+    errEl.classList.remove('show');
+    if (!payload.image){ errEl.textContent = 'Загрузите фото'; errEl.classList.add('show'); return; }
+    var btn = this; btn.disabled = true; btn.textContent = 'Сохраняем...';
+    try{
+      var isEdit = !!state.editing.id;
+      if (isEdit) payload.id = state.editing.id;
+      var res = await apiFetch('/api/gallery', { method: isEdit ? 'PUT' : 'POST', body: JSON.stringify(payload) });
+      var data = await res.json();
+      if (!res.ok){
+        errEl.textContent = (data.problems && data.problems.length) ? data.problems.join('; ') : (data.error || 'Не удалось сохранить');
+        errEl.classList.add('show');
+        return;
+      }
+      var section = state.gallery.find(function(s){ return s.id === payload.sectionId; });
+      if (section){
+        if (!Array.isArray(section.photos)) section.photos = [];
+        if (isEdit){
+          var idx = section.photos.findIndex(function(p){ return p.id === state.editing.id; });
+          section.photos[idx] = { id: state.editing.id, image: payload.image, ru: payload.ru, en: payload.en, ka: payload.ka };
+        } else {
+          section.photos.push({ id: data.id, image: payload.image, ru: payload.ru, en: payload.en, ka: payload.ka });
+        }
+      }
+      renderGalleryList(); closeGalleryPhotoModal();
+      showToast('Сохранено! Изменения появятся на сайте через 15–30 секунд.');
+    }catch(e){ errEl.textContent = 'Ошибка сети. Попробуйте ещё раз.'; errEl.classList.add('show'); }
+    finally{ btn.disabled = false; btn.textContent = 'Сохранить'; }
+  });
+
+  document.getElementById('gallery-photo-delete-btn').addEventListener('click', function(){ deleteGalleryPhoto(state.editing.sectionId, state.editing.id, true); });
+
+  async function deleteGalleryPhoto(sectionId, photoId, fromModal){
+    if (!confirm('Удалить это фото? Действие необратимо.')) return;
+    try{
+      var res = await apiFetch('/api/gallery', { method:'DELETE', body: JSON.stringify({ type:'photo', sectionId:sectionId, id:photoId }) });
+      var data = await res.json();
+      if (!res.ok){ alert(data.error || 'Не удалось удалить'); return; }
+      var section = state.gallery.find(function(s){ return s.id === sectionId; });
+      if (section) section.photos = (section.photos || []).filter(function(p){ return p.id !== photoId; });
+      renderGalleryList();
+      if (fromModal) closeGalleryPhotoModal();
+      showToast('Удалено. Изменения появятся на сайте через 15–30 секунд.');
+    }catch(e){ alert('Ошибка сети. Попробуйте ещё раз.'); }
+  }
 
   // ---------------- boot ----------------
   initQuillEditors();

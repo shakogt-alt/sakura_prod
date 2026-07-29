@@ -1,0 +1,16 @@
+[
+  {
+    "id": "gallerysection-cert001",
+    "ru": { "title": "Наши сертификаты" },
+    "en": { "title": "Our certificates" },
+    "ka": { "title": "ჩვენი სერტიფიკატები" },
+    "photos": []
+  },
+  {
+    "id": "gallerysection-befaft001",
+    "ru": { "title": "До и после лечения" },
+    "en": { "title": "Before and after treatment" },
+    "ka": { "title": "მკურნალობამდე და მკურნალობის შემდეგ" },
+    "photos": []
+  }
+]

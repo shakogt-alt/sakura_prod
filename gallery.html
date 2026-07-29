@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Галерея — Sakura Podology Center</title>
+<meta name="description" content="Галерея Sakura Podology Center: сертификаты и результаты до и после лечения.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌸%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+Georgian:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fdf7f6;
+    --surface:#ffffff;
+    --surface-2:#fff1f2;
+    --text:#34262c;
+    --text-soft:#7a6670;
+    --pink-100:#fbe4e8;
+    --pink-200:#f6d2da;
+    --pink-300:#f0b7c5;
+    --pink-500:#e0839c;
+    --pink-600:#cf6685;
+    --pink-700:#b04c6b;
+    --sage:#93a68a;
+    --sage-dark:#6c8064;
+    --line:#f0dde1;
+    --shadow: 0 20px 45px -25px rgba(176,76,107,0.35);
+    --radius:22px;
+    --serif:'Playfair Display','Noto Sans Georgian',serif;
+    --sans:'Manrope','Noto Sans Georgian',sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:var(--sans);
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;margin:0;padding:0;}
+  h1,h2,h3,h4{font-family:var(--serif);margin:0 0 .5em;font-weight:600;letter-spacing:.01em;}
+  p{margin:0 0 1em;color:var(--text-soft);}
+  .site{display:none;}
+  .site.active{display:block;}
+  .container{max-width:1180px;margin:0 auto;padding:0 24px;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--pink-700);margin-bottom:14px;
+  }
+  .eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--pink-500);display:inline-block;}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:15px 28px;border-radius:100px;font-weight:700;font-size:15px;
+    border:1.5px solid transparent;cursor:pointer;transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{background:linear-gradient(135deg,var(--pink-600),var(--pink-700));color:#fff;box-shadow:var(--shadow);}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 22px 40px -18px rgba(176,76,107,.55);}
+  .btn-ghost{background:var(--surface);color:var(--pink-700);border-color:var(--pink-200);}
+  .btn-ghost:hover{background:var(--pink-100);}
+  .btn-outline-invert{background:transparent;color:#fff;border-color:rgba(255,255,255,.6);}
+  .btn-outline-invert:hover{background:rgba(255,255,255,.15);}
+
+  /* language switcher */
+  .lang-switch{
+    position:fixed;top:10px;right:10px;z-index:200;
+    display:flex;flex-direction:column;gap:3px;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);
+    border:1px solid var(--pink-200);border-radius:14px;padding:5px;box-shadow:0 8px 24px -12px rgba(176,76,107,.4);
+  }
+  .lang-switch button{
+    border:none;background:transparent;padding:6px 11px;border-radius:9px;font-family:var(--sans);
+    font-size:12px;font-weight:800;letter-spacing:.04em;color:var(--text-soft);cursor:pointer;text-align:center;
+  }
+  .lang-switch button.active{background:var(--pink-600);color:#fff;}
+
+  /* header */
+  header.top{
+    position:sticky;top:0;z-index:100;background:rgba(253,247,246,.92);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .utility-bar{
+    background:var(--pink-700);color:#fff;font-size:12.5px;
+  }
+  .utility-bar .container{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-top:8px;padding-bottom:8px;padding-right:64px;flex-wrap:wrap;}
+  .utility-bar a{opacity:.95;}
+  .utility-bar .u-item{display:flex;align-items:center;gap:6px;}
+  nav.main{display:flex;align-items:center;justify-content:space-between;padding:14px 78px 14px 24px;gap:20px;max-width:1180px;margin:0 auto;}
+  .logo{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-weight:700;font-size:22px;color:var(--pink-700);}
+  .logo svg{width:34px;height:34px;flex:none;}
+  .logo-icon{width:42px;height:42px;object-fit:contain;flex:none;}
+  .footer-logo-badge{background:#fff;border-radius:16px;padding:8px 14px;display:inline-block;margin-bottom:16px;line-height:0;}
+  .footer-logo-badge img{height:64px;width:auto;display:block;}
+  .navlinks{display:flex;gap:28px;align-items:center;}
+  .navlinks a{font-weight:600;font-size:14.5px;color:var(--text);opacity:.85;}
+  .navlinks a:hover{opacity:1;color:var(--pink-700);}
+  .nav-cta{display:flex;align-items:center;gap:14px;}
+  .burger{display:none;background:none;border:none;cursor:pointer;padding:6px;}
+  .burger span{display:block;width:24px;height:2px;background:var(--text);margin:5px 0;border-radius:2px;}
+
+  section{padding:88px 0;}
+  .section-head{max-width:640px;margin:0 auto 52px;text-align:center;}
+  .section-head h2{font-size:clamp(26px,3.4vw,38px);}
+  .section-head p{font-size:16px;}
+
+  .post-modal{display:none;position:fixed;inset:0;background:rgba(35,22,26,.6);z-index:300;padding:50px 16px;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+  .post-modal.open{display:block;}
+  .post-modal-card{background:var(--surface);border-radius:var(--radius);max-width:760px;margin:0 auto;padding:44px 40px 50px;position:relative;box-shadow:var(--shadow);}
+  .post-modal-close{position:absolute;top:20px;right:20px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:18px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text);}
+  .post-modal-close:hover{background:var(--pink-100);border-color:var(--pink-300);}
+
+  footer{background:#2c2126;color:#e9dadf;padding:54px 0 26px;}
+  footer .container{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px;}
+  footer .logo{color:#fff;}
+  footer p{color:#c8b3ba;font-size:14px;}
+  footer h5{font-family:var(--sans);font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:#f0c7d1;margin-bottom:16px;}
+  footer ul li{margin-bottom:10px;font-size:14px;color:#d8c4cb;}
+  footer ul li a:hover{color:#fff;}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,.1);margin-top:40px;padding-top:22px;font-size:12.5px;color:#a68e96;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+
+  /* gallery page */
+  .gallery-page-head{padding:60px 0 8px;text-align:center;}
+  .gallery-page-head h1{font-size:clamp(30px,4.4vw,46px);color:var(--pink-700);}
+  .gallery-page-head p{max-width:520px;margin:0 auto;font-size:16px;}
+  .gallery-section-block{padding:44px 0;}
+  .gallery-section-title{text-align:center;font-size:clamp(22px,3vw,28px);margin-bottom:30px;}
+  .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  .gallery-tile{border-radius:16px;overflow:hidden;cursor:pointer;aspect-ratio:1/1;box-shadow:var(--shadow);background:var(--surface);border:1px solid var(--line);transition:transform .25s ease;}
+  .gallery-tile:hover{transform:translateY(-4px);}
+  .gallery-tile img{width:100%;height:100%;object-fit:cover;display:block;}
+  .gallery-empty-hint{text-align:center;color:var(--text-soft);font-size:15px;}
+  .gallery-modal-photo{border-radius:16px;overflow:hidden;margin-bottom:20px;background:var(--surface-2);}
+  .gallery-modal-photo img{width:100%;display:block;}
+  .gallery-modal-desc{font-size:15px;color:var(--text-soft);margin:0;}
+
+  @media (max-width:960px){
+    .navlinks{position:fixed;top:0;right:-100%;height:100vh;width:78%;max-width:320px;background:#fff;flex-direction:column;
+      justify-content:flex-start;padding:90px 30px;gap:22px;transition:right .3s ease;box-shadow:-20px 0 40px rgba(0,0,0,.15);}
+    .navlinks.open{right:0;}
+    .burger{display:block;}
+    .nav-cta .btn span.only-desktop{display:none;}
+    nav.main{padding-right:24px;}
+    .utility-bar .container{padding-right:24px;justify-content:center;}
+    .lang-switch{flex-direction:row;top:auto;bottom:14px;right:14px;}
+    .gallery-grid{grid-template-columns:repeat(3,1fr);}
+  }
+  @media (max-width:640px){
+    section{padding:60px 0;}
+    .utility-bar .container{justify-content:center;text-align:center;}
+    .post-modal{padding:0;}
+    .post-modal-card{max-width:none;min-height:100%;border-radius:0;padding:64px 18px 40px;}
+    .post-modal-close{top:12px;right:12px;width:34px;height:34px;font-size:15px;}
+    .gallery-grid{grid-template-columns:repeat(2,1fr);}
+  }
+</style>
+</head>
+<body>
+
+<div class="lang-switch" role="group" aria-label="Language / Език / ენა">
+  <button data-lang="ru">RU</button>
+  <button data-lang="en">EN</button>
+  <button data-lang="ka" class="active">GE</button>
+</div>
+
+<!-- ============ RUSSIAN ============ -->
+<div class="site" id="site-ru" lang="ru">
+
+  <header class="top">
+    <div class="utility-bar">
+      <div class="container">
+        <div class="u-item">📍 <span data-site-text="address">Тбилиси, Сабуртало, ул. Гагарина, 19/2</span></div>
+        <div class="u-item">🕙 <span data-site-text="hours">Ежедневно, 11:00–19:00</span></div>
+        <div class="u-item">📞 <a href="tel:+995555900108" data-site-href="tel-admin" data-site-text="phoneAdmin">+995 555 900 108</a></div>
+      </div>
+    </div>
+    <nav class="main">
+      <a href="index.html#ru-home" class="logo">
+        <img src="images/logo-icon.png" alt="Sakura Podology Center" class="logo-icon">
+        Sakura
+      </a>
+      <ul class="navlinks" id="navlinks-ru">
+        <li><a href="index.html#ru-services">Услуги</a></li>
+        <li><a href="index.html#ru-about">О нас</a></li>
+        <li><a href="index.html#ru-team">Команда</a></li>
+        <li><a href="index.html#ru-advantages">Преимущества</a></li>
+        <li><a href="index.html#ru-prices">Цены</a></li>
+        <li><a href="index.html#ru-reviews">Отзывы</a></li>
+        <li><a href="index.html#ru-blog">Блог</a></li>
+        <li><a href="gallery.html">Галерея</a></li>
+        <li><a href="index.html#ru-contacts">Контакты</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a class="btn btn-primary" href="tel:+995555900108" data-site-href="tel-admin"><span class="only-desktop">Записаться</span><span class="mobile-only">📞</span></a>
+        <button class="burger" aria-label="Меню" onclick="document.getElementById('navlinks-ru').classList.toggle('open')"><span></span><span></span><span></span></button>
+      </div>
+    </nav>
+  </header>
+
+  <section class="gallery-page-head">
+    <div class="container">
+      <div class="eyebrow">Sakura Podology Center</div>
+      <h1>Галерея</h1>
+      <p>Сертификаты и результаты нашей работы.</p>
+    </div>
+  </section>
+
+  <div data-render-host="gallery"></div>
+  <div data-modals-host="gallery"></div>
+
+  <footer>
+    <div class="container">
+      <div>
+        <div class="footer-logo-badge">
+          <img src="images/logo-full.jpg" alt="Sakura Podology Center">
+        </div>
+        <p>Подологический центр в Тбилиси. Медицинский подход к здоровью и красоте ваших стоп.</p>
+      </div>
+      <div>
+        <h5>Навигация</h5>
+        <ul>
+          <li><a href="index.html#ru-services">Услуги</a></li>
+          <li><a href="index.html#ru-about">О нас</a></li>
+          <li><a href="index.html#ru-team">Команда</a></li>
+          <li><a href="index.html#ru-prices">Цены</a></li>
+          <li><a href="index.html#ru-reviews">Отзывы</a></li>
+          <li><a href="index.html#ru-blog">Блог</a></li>
+          <li><a href="gallery.html">Галерея</a></li>
+          <li><a href="index.html#ru-contacts">Контакты</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Контакты</h5>
+        <ul>
+          <li data-site-text="address">Тбилиси, Сабуртало, ул. Гагарина, 19/2</li>
+          <li><a href="tel:+995555900108" data-site-href="tel-admin" data-site-text="phoneAdmin">+995 555 900 108</a></li>
+          <li data-site-text="hours">Ежедневно, 11:00–19:00</li>
+          <li><a href="https://www.facebook.com/sakura.podology" target="_blank" rel="noopener">Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container foot-bottom">
+      <span>| © 2026 BoldFox Lab. | Тбилиси, Грузия |</span>
+      <span>Информация на сайте носит справочный характер.</span>
+    </div>
+  </footer>
+</div>
+
+<!-- ============ ENGLISH ============ -->
+<div class="site" id="site-en" lang="en">
+
+  <header class="top">
+    <div class="utility-bar">
+      <div class="container">
+        <div class="u-item">📍 <span data-site-text="address">19/2 Gagarina St, Saburtalo, Tbilisi</span></div>
+        <div class="u-item">🕙 <span data-site-text="hours">Daily, 11:00–19:00</span></div>
+        <div class="u-item">📞 <a href="tel:+995555900108" data-site-href="tel-admin" data-site-text="phoneAdmin">+995 555 900 108</a></div>
+      </div>
+    </div>
+    <nav class="main">
+      <a href="index.html#en-home" class="logo">
+        <img src="images/logo-icon.png" alt="Sakura Podology Center" class="logo-icon">
+        Sakura
+      </a>
+      <ul class="navlinks" id="navlinks-en">
+        <li><a href="index.html#en-services">Services</a></li>
+        <li><a href="index.html#en-about">About</a></li>
+        <li><a href="index.html#en-team">Team</a></li>
+        <li><a href="index.html#en-advantages">Why us</a></li>
+        <li><a href="index.html#en-prices">Prices</a></li>
+        <li><a href="index.html#en-reviews">Reviews</a></li>
+        <li><a href="index.html#en-blog">Blog</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="index.html#en-contacts">Contacts</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a class="btn btn-primary" href="tel:+995555900108" data-site-href="tel-admin"><span class="only-desktop">Book now</span><span class="mobile-only">📞</span></a>
+        <button class="burger" aria-label="Menu" onclick="document.getElementById('navlinks-en').classList.toggle('open')"><span></span><span></span><span></span></button>
+      </div>
+    </nav>
+  </header>
+
+  <section class="gallery-page-head">
+    <div class="container">
+      <div class="eyebrow">Sakura Podology Center</div>
+      <h1>Gallery</h1>
+      <p>Certificates and results of our work.</p>
+    </div>
+  </section>
+
+  <div data-render-host="gallery"></div>
+  <div data-modals-host="gallery"></div>
+
+  <footer>
+    <div class="container">
+      <div>
+        <div class="footer-logo-badge">
+          <img src="images/logo-full.jpg" alt="Sakura Podology Center">
+        </div>
+        <p>Podology center in Tbilisi. A medical approach to the health and beauty of your feet.</p>
+      </div>
+      <div>
+        <h5>Navigation</h5>
+        <ul>
+          <li><a href="index.html#en-services">Services</a></li>
+          <li><a href="index.html#en-about">About</a></li>
+          <li><a href="index.html#en-team">Team</a></li>
+          <li><a href="index.html#en-prices">Prices</a></li>
+          <li><a href="index.html#en-reviews">Reviews</a></li>
+          <li><a href="index.html#en-blog">Blog</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="index.html#en-contacts">Contacts</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contacts</h5>
+        <ul>
+          <li data-site-text="address">19/2 Gagarina St, Saburtalo, Tbilisi</li>
+          <li><a href="tel:+995555900108" data-site-href="tel-admin" data-site-text="phoneAdmin">+995 555 900 108</a></li>
+          <li data-site-text="hours">Daily, 11:00–19:00</li>
+          <li><a href="https://www.facebook.com/sakura.podology" target="_blank" rel="noopener">Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container foot-bottom">
+      <span>| © 2026 BoldFox Lab. | Tbilisi, Georgia |</span>
+      <span>Information on this site is for reference only.</span>
+    </div>
+  </footer>
+</div>
+
+<!-- ============ GEORGIAN ============ -->
+<div class="site active" id="site-ka" lang="ka">
+
+  <header class="top">
+    <div class="utility-bar">
+      <div class="container">
+        <div class="u-item">📍 <span data-site-text="address">თბილისი, საბურთალო, გაგარინის ქუჩა 19/2</span></div>
+        <div class="u-item">🕙 <span data-site-text="hours">ყოველდღე, 11:00–19:00</span></div>
+        <div class="u-item">📞 <a href="tel:+995555900108" data-site-href="tel-admin" data-site-text="phoneAdmin">+995 555 900 108</a></div>
+      </div>
+    </div>
+    <nav class="main">
+      <a href="index.html#ka-home" class="logo">
+        <img src="images/logo-icon.png" alt="Sakura Podology Center" class="logo-icon">
+        Sakura
+      </a>
+      <ul class="navlinks" id="navlinks-ka">
+        <li><a href="index.html#ka-services">სერვისები</a></li>
+        <li><a href="index.html#ka-about">ჩვენ შესახებ</a></li>
+        <li><a href="index.html#ka-team">გუნდი</a></li>
+        <li><a href="index.html#ka-advantages">უპირატესობები</a></li>
+        <li><a href="index.html#ka-prices">ფასები</a></li>
+        <li><a href="index.html#ka-reviews">შეფასებები</a></li>
+        <li><a href="index.html#ka-blog">ბლოგი</a></li>
+        <li><a href="gallery.html">გალერეა</a></li>
+        <li><a href="index.html#ka-contacts">კონტაქტი</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a class="btn btn-primary" href="tel:+995555900108" data-site-href="tel-admin"><span class="only-desktop">ჩაწერა</span><span class="mobile-only">📞</span></a>
+        <button class="burger" aria-label="მენიუ" onclick="document.getElementById('navlinks-ka').classList.toggle('open')"><span></span><span></span><span></span></button>
+      </div>
+    </nav>
+  </header>
+
+  <section class="gallery-page-head">
+    <div class="container">
+      <div class="eyebrow">Sakura Podology Center</div>
+      <h1>გალერეა</h1>
+      <p>ჩვენი მუშაობის სერტიფიკატები და შედეგები.</p>
+    </div>
+  </section>
+
+  <div data-render-host="gallery"></div>
+  <div data-modals-host="gallery"></div>
+
+  <footer>
+    <div class="container">
+      <div>
+        <div class="footer-logo-badge">
+          <img src="images/logo-full.jpg" alt="Sakura Podology Center">
+        </div>
+        <p>პოდოლოგიის ცენტრი თბილისში. სამედიცინო მიდგომა თქვენი ტერფების ჯანმრთელობასა და სილამაზეზე.</p>
+      </div>
+      <div>
+        <h5>ნავიგაცია</h5>
+        <ul>
+          <li><a href="index.html#ka-services">სერვისები</a></li>
+          <li><a href="index.html#ka-about">ჩვენ შესახებ</a></li>
+          <li><a href="index.html#ka-team">გუნდი</a></li>
+          <li><a href="index.html#ka-prices">ფასები</a></li>
+          <li><a href="index.html#ka-reviews">შეფასებები</a></li>
+          <li><a href="index.html#ka-blog">ბლოგი</a></li>
+          <li><a href="gallery.html">გალერეა</a></li>
+          <li><a href="index.html#ka-contacts">კონტაქტი</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>კონტაქტი</h5>
+        <ul>
+          <li data-site-text="address">თბილისი, საბურთალო, გაგარინის ქუჩა 19/2</li>
+          <li><a href="tel:+995555900108" data-site-href="tel-admin" data-site-text="phoneAdmin">+995 555 900 108</a></li>
+          <li data-site-text="hours">ყოველდღე, 11:00–19:00</li>
+          <li><a href="https://www.facebook.com/sakura.podology" target="_blank" rel="noopener">Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container foot-bottom">
+      <span>| © 2026 BoldFox Lab. | თბილისი, საქართველო |</span>
+      <span>საიტზე განთავსებული ინფორმაცია სამართლებრივ ხასიათს არ ატარებს.</span>
+    </div>
+  </footer>
+</div>
+
+<script>
+  function escapeHtml(s){
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+  var scrollLockY = 0, isBodyLocked = false;
+  function lockBodyScroll(){
+    if(isBodyLocked) return;
+    isBodyLocked = true;
+    scrollLockY = window.scrollY || window.pageYOffset || 0;
+    document.body.style.position = 'fixed';
+    document.body.style.top = '-' + scrollLockY + 'px';
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+  }
+  function unlockBodyScroll(){
+    if(!isBodyLocked) return;
+    isBodyLocked = false;
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.width = '';
+    window.scrollTo(0, scrollLockY);
+  }
+  function initModals(root){
+    root.querySelectorAll('.post-modal').forEach(function(m){
+      m.addEventListener('click', function(e){ if(e.target === m){ m.classList.remove('open'); } });
+      new MutationObserver(function(){
+        if(document.querySelector('.post-modal.open')){ lockBodyScroll(); } else { unlockBodyScroll(); }
+      }).observe(m, {attributes:true, attributeFilter:['class']});
+    });
+  }
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){
+      document.querySelectorAll('.post-modal.open').forEach(function(m){ m.classList.remove('open'); });
+    }
+  });
+
+  function telHref(phone){ return 'tel:' + String(phone || '').replace(/[^\d+]/g, ''); }
+  function waHref(phone){ return 'https://wa.me/' + String(phone || '').replace(/[^\d]/g, ''); }
+  function renderSite(site){
+    if(!site) return;
+    document.querySelectorAll('[data-site-href="tel-admin"]').forEach(function(el){ el.href = telHref(site.phoneAdmin); });
+    document.querySelectorAll('[data-site-href="wa-admin"]').forEach(function(el){ el.href = waHref(site.phoneAdmin); });
+    document.querySelectorAll('[data-site-text="phoneAdmin"]').forEach(function(el){ el.textContent = site.phoneAdmin; });
+    document.querySelectorAll('[data-site-text="phoneDirector"]').forEach(function(el){ el.textContent = site.phoneDirector; });
+    ['ru','en','ka'].forEach(function(lang){
+      var host = document.getElementById('site-' + lang);
+      if(!host) return;
+      host.querySelectorAll('[data-site-text="address"]').forEach(function(el){ el.textContent = site.address[lang]; });
+      host.querySelectorAll('[data-site-text="hours"]').forEach(function(el){ el.textContent = site.hours[lang]; });
+    });
+  }
+
+  var GALLERY_UI = {
+    ru: { comingSoon: 'Скоро здесь появятся фото.' },
+    en: { comingSoon: 'Photos coming soon.' },
+    ka: { comingSoon: 'ფოტოები მალე დაემატება.' }
+  };
+
+  function galleryTileHtml(lang, photo){
+    var id = lang + '-gal-' + photo.id;
+    var d = photo[lang] || {};
+    return '<div class="gallery-tile" onclick="document.getElementById(\'' + id + '\').classList.add(\'open\')">' +
+      '<img src="' + escapeHtml(photo.image) + '" alt="' + escapeHtml(d.description || '') + '" loading="lazy">' +
+    '</div>';
+  }
+  function galleryModalHtml(lang, photo){
+    var id = lang + '-gal-' + photo.id;
+    var d = photo[lang] || {};
+    return '<div class="post-modal" id="' + id + '">' +
+      '<div class="post-modal-card">' +
+        '<button class="post-modal-close" onclick="document.getElementById(\'' + id + '\').classList.remove(\'open\')">✕</button>' +
+        '<div class="gallery-modal-photo"><img src="' + escapeHtml(photo.image) + '" alt=""></div>' +
+        '<p class="gallery-modal-desc">' + escapeHtml(d.description || '') + '</p>' +
+      '</div>' +
+    '</div>';
+  }
+  function gallerySectionHtml(lang, section){
+    var t = section[lang] || {};
+    var photos = section.photos || [];
+    var body = photos.length
+      ? '<div class="gallery-grid">' + photos.map(function(p){ return galleryTileHtml(lang, p); }).join('') + '</div>'
+      : '<p class="gallery-empty-hint">' + escapeHtml((GALLERY_UI[lang] || GALLERY_UI.ru).comingSoon) + '</p>';
+    return '<section class="gallery-section-block"><div class="container">' +
+      '<h2 class="gallery-section-title">' + escapeHtml(t.title || '') + '</h2>' +
+      body +
+    '</div></section>';
+  }
+  function renderGallery(lang, sections){
+    var site = document.getElementById('site-' + lang);
+    if(!site) return;
+    var grid = site.querySelector('[data-render-host="gallery"]');
+    var modalsHost = site.querySelector('[data-modals-host="gallery"]');
+    if(!grid || !modalsHost) return;
+    if(!sections.length){
+      grid.innerHTML = '<div class="container"><p class="gallery-empty-hint">' + escapeHtml((GALLERY_UI[lang] || GALLERY_UI.ru).comingSoon) + '</p></div>';
+      modalsHost.innerHTML = '';
+      return;
+    }
+    grid.innerHTML = sections.map(function(s){ return gallerySectionHtml(lang, s); }).join('');
+    modalsHost.innerHTML = sections.map(function(s){
+      return (s.photos || []).map(function(p){ return galleryModalHtml(lang, p); }).join('');
+    }).join('');
+    initModals(modalsHost);
+  }
+
+  function setLang(lang){
+    document.querySelectorAll('.site').forEach(function(el){
+      el.classList.toggle('active', el.id === 'site-' + lang);
+    });
+    document.querySelectorAll('.lang-switch button').forEach(function(btn){
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+    document.documentElement.setAttribute('lang', lang);
+    try{ localStorage.setItem('sakura-lang', lang); }catch(e){}
+  }
+  document.querySelectorAll('.lang-switch button').forEach(function(btn){
+    btn.addEventListener('click', function(){ setLang(btn.dataset.lang); window.scrollTo(0,0); });
+  });
+  (function(){
+    var saved;
+    try{ saved = localStorage.getItem('sakura-lang'); }catch(e){}
+    if(saved && ['ru','en','ka'].indexOf(saved) !== -1){ setLang(saved); } else { setLang('ka'); }
+  })();
+
+  document.addEventListener('click', function(e){
+    var link = e.target.closest('.navlinks a');
+    if(link){
+      var nav = link.closest('.navlinks');
+      if(nav) nav.classList.remove('open');
+    }
+  }, true);
+
+  Promise.all([
+    fetch('content/gallery.json').then(function(r){ return r.json(); }),
+    fetch('content/site.json').then(function(r){ return r.json(); })
+  ]).then(function(results){
+    var gallery = results[0], site = results[1];
+    ['ru','en','ka'].forEach(function(lang){
+      renderGallery(lang, gallery);
+    });
+    renderSite(site);
+  }).catch(function(err){
+    console.error('Sakura Gallery: failed to load dynamic content', err);
+  });
+
+  // ---------------- visit counter beacon (same as index.html) ----------------
+  (function trackVisit(){
+    try {
+      var today = new Date().toISOString().slice(0, 10);
+      if (localStorage.getItem('sakura_visit_date') === today) return;
+      localStorage.setItem('sakura_visit_date', today);
+      fetch('/api/visits', { method: 'POST' }).catch(function(){});
+    } catch (e) { /* localStorage unavailable (private mode, etc.) - skip */ }
+  })();
+</script>
+
+</body>
+</html>
