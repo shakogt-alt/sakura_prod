@@ -146,6 +146,7 @@
       <button class="tab-btn active" data-tab="team">Команда</button>
       <button class="tab-btn" data-tab="blog">Блог</button>
       <button class="tab-btn" data-tab="prices">Цены</button>
+      <button class="tab-btn" data-tab="reviews">Отзывы</button>
     </div>
 
     <div class="tab-panel active" id="panel-team">
@@ -179,6 +180,17 @@
         <button class="btn btn-primary btn-sm" id="prices-add-btn">+ Добавить категорию</button>
       </div>
       <div id="prices-list"></div>
+    </div>
+
+    <div class="tab-panel" id="panel-reviews">
+      <div class="list-head">
+        <div>
+          <h2>Отзывы</h2>
+          <p class="hint">Изменения появляются на сайте через 15–30 секунд после сохранения. Показываются на том языке, на котором написаны — переводить не нужно.</p>
+        </div>
+        <button class="btn btn-primary btn-sm" id="reviews-add-btn">+ Добавить отзыв</button>
+      </div>
+      <div id="reviews-list"></div>
     </div>
   </div>
 
@@ -381,6 +393,49 @@
     </div>
   </div>
 
+  <!-- ================= REVIEWS MODAL ================= -->
+  <div class="modal-backdrop" id="reviews-modal-backdrop">
+    <div class="modal">
+      <h2 id="reviews-modal-title">Добавить отзыв</h2>
+      <div class="error-msg" id="reviews-error"></div>
+
+      <div class="field"><label>Имя автора</label><input type="text" id="reviews-author" placeholder="Как подписан отзыв"></div>
+
+      <div class="field">
+        <label>Оценка</label>
+        <select id="reviews-rating">
+          <option value="5">★★★★★ (5)</option>
+          <option value="4">★★★★☆ (4)</option>
+          <option value="3">★★★☆☆ (3)</option>
+          <option value="2">★★☆☆☆ (2)</option>
+          <option value="1">★☆☆☆☆ (1)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Язык отзыва</label>
+        <select id="reviews-lang">
+          <option value="ru">Русский</option>
+          <option value="ka">ქართული</option>
+          <option value="en">English</option>
+        </select>
+        <p class="field-hint">Отзыв показывается как есть, на этом языке, во всех разделах сайта — переводить не нужно.</p>
+      </div>
+
+      <div class="field"><label>Дата (необязательно)</label><input type="text" id="reviews-date" placeholder="Например: Март 2026"></div>
+      <div class="field"><label>Источник (необязательно)</label><input type="text" id="reviews-source" placeholder="Google, Facebook, WhatsApp..."></div>
+      <div class="field"><label>Текст отзыва</label><textarea id="reviews-text" style="min-height:130px;"></textarea></div>
+
+      <div class="modal-actions">
+        <button class="btn btn-danger btn-sm" id="reviews-delete-btn" style="display:none;">Удалить</button>
+        <div class="right">
+          <button class="btn btn-ghost" id="reviews-cancel-btn">Отмена</button>
+          <button class="btn btn-primary" id="reviews-save-btn">Сохранить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="toast" id="toast"></div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.min.js"></script>
@@ -569,7 +624,7 @@
   });
 
   // ---------------- content state ----------------
-  var state = { team: [], blog: [], prices: [], editing: { type:null, id:null } };
+  var state = { team: [], blog: [], prices: [], reviews: [], editing: { type:null, id:null } };
   var teamPhotoState = { path: '' };
   var blogImageState = { path: '' };
 
@@ -578,10 +633,11 @@
       var results = await Promise.all([
         fetch('/content/team.json').then(function(r){ return r.json(); }),
         fetch('/content/blog.json').then(function(r){ return r.json(); }),
-        fetch('/content/prices.json').then(function(r){ return r.json(); })
+        fetch('/content/prices.json').then(function(r){ return r.json(); }),
+        fetch('/content/reviews.json').then(function(r){ return r.json(); })
       ]);
-      state.team = results[0]; state.blog = results[1]; state.prices = results[2];
-      renderTeamList(); renderBlogList(); renderPricesList();
+      state.team = results[0]; state.blog = results[1]; state.prices = results[2]; state.reviews = results[3];
+      renderTeamList(); renderBlogList(); renderPricesList(); renderReviewsList();
     }catch(e){ console.error('Failed to load content', e); }
   }
 
@@ -952,6 +1008,97 @@
       state.prices = state.prices.filter(function(c){ return c.id !== id; });
       renderPricesList();
       if (fromModal) closePricesModal();
+      showToast('Удалено. Изменения появятся на сайте через 15–30 секунд.');
+    }catch(e){ alert('Ошибка сети. Попробуйте ещё раз.'); }
+  }
+
+  // ================= REVIEWS =================
+  function renderReviewsList(){
+    var el = document.getElementById('reviews-list');
+    if (!state.reviews.length){ el.innerHTML = '<p class="empty-hint">Пока нет отзывов.</p>'; return; }
+    el.innerHTML = state.reviews.map(function(r){
+      var stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+      return '<div class="item-card">' +
+        '<div class="meta"><h3>' + escapeHtml(r.author) + ' <span style="color:var(--pink-500);font-weight:400;font-size:13px;">' + stars + '</span></h3><p>' + escapeHtml(r.text) + '</p></div>' +
+        '<div class="actions">' +
+          '<button class="btn btn-ghost btn-sm" data-edit="' + escapeAttr(r.id) + '">Изменить</button>' +
+          '<button class="btn btn-danger btn-sm" data-del="' + escapeAttr(r.id) + '">Удалить</button>' +
+        '</div></div>';
+    }).join('');
+    el.querySelectorAll('[data-edit]').forEach(function(b){ b.addEventListener('click', function(){ openReviewModal(b.getAttribute('data-edit')); }); });
+    el.querySelectorAll('[data-del]').forEach(function(b){ b.addEventListener('click', function(){ deleteReview(b.getAttribute('data-del')); }); });
+  }
+
+  function openReviewModal(id){
+    state.editing = { type:'reviews', id: id || null };
+    var r = id ? state.reviews.find(function(x){ return x.id === id; }) : null;
+    document.getElementById('reviews-modal-title').textContent = r ? 'Изменить отзыв' : 'Добавить отзыв';
+    document.getElementById('reviews-delete-btn').style.display = r ? 'inline-flex' : 'none';
+    document.getElementById('reviews-author').value = r ? r.author : '';
+    document.getElementById('reviews-rating').value = r ? String(r.rating) : '5';
+    document.getElementById('reviews-lang').value = r ? r.lang : 'ru';
+    document.getElementById('reviews-date').value = (r && r.date) || '';
+    document.getElementById('reviews-source').value = (r && r.source) || '';
+    document.getElementById('reviews-text').value = r ? r.text : '';
+    document.getElementById('reviews-error').classList.remove('show');
+    document.getElementById('reviews-modal-backdrop').classList.add('open');
+  }
+  function closeReviewModal(){ document.getElementById('reviews-modal-backdrop').classList.remove('open'); }
+  document.getElementById('reviews-cancel-btn').addEventListener('click', closeReviewModal);
+  document.getElementById('reviews-add-btn').addEventListener('click', function(){ openReviewModal(null); });
+
+  function collectReviewPayload(){
+    var payload = {
+      author: document.getElementById('reviews-author').value.trim(),
+      rating: parseInt(document.getElementById('reviews-rating').value, 10),
+      lang: document.getElementById('reviews-lang').value,
+      text: document.getElementById('reviews-text').value.trim()
+    };
+    var date = document.getElementById('reviews-date').value.trim();
+    var source = document.getElementById('reviews-source').value.trim();
+    if (date) payload.date = date;
+    if (source) payload.source = source;
+    return payload;
+  }
+
+  document.getElementById('reviews-save-btn').addEventListener('click', async function(){
+    var payload = collectReviewPayload();
+    var errEl = document.getElementById('reviews-error');
+    errEl.classList.remove('show');
+    var btn = this; btn.disabled = true; btn.textContent = 'Сохраняем...';
+    try{
+      var isEdit = !!state.editing.id;
+      if (isEdit) payload.id = state.editing.id;
+      var res = await apiFetch('/api/admin/reviews', { method: isEdit ? 'PUT' : 'POST', body: JSON.stringify(payload) });
+      var data = await res.json();
+      if (!res.ok){
+        errEl.textContent = (data.problems && data.problems.length) ? data.problems.join('; ') : (data.error || 'Не удалось сохранить');
+        errEl.classList.add('show');
+        return;
+      }
+      if (isEdit){
+        var idx = state.reviews.findIndex(function(r){ return r.id === state.editing.id; });
+        state.reviews[idx] = Object.assign({ id: state.editing.id }, payload);
+      } else {
+        state.reviews.push(Object.assign({ id: data.id }, payload));
+      }
+      renderReviewsList(); closeReviewModal();
+      showToast('Сохранено! Изменения появятся на сайте через 15–30 секунд.');
+    }catch(e){ errEl.textContent = 'Ошибка сети. Попробуйте ещё раз.'; errEl.classList.add('show'); }
+    finally{ btn.disabled = false; btn.textContent = 'Сохранить'; }
+  });
+
+  document.getElementById('reviews-delete-btn').addEventListener('click', function(){ deleteReview(state.editing.id, true); });
+
+  async function deleteReview(id, fromModal){
+    if (!confirm('Удалить этот отзыв? Действие необратимо.')) return;
+    try{
+      var res = await apiFetch('/api/admin/reviews', { method:'DELETE', body: JSON.stringify({ id:id }) });
+      var data = await res.json();
+      if (!res.ok){ alert(data.error || 'Не удалось удалить'); return; }
+      state.reviews = state.reviews.filter(function(r){ return r.id !== id; });
+      renderReviewsList();
+      if (fromModal) closeReviewModal();
       showToast('Удалено. Изменения появятся на сайте через 15–30 секунд.');
     }catch(e){ alert('Ошибка сети. Попробуйте ещё раз.'); }
   }

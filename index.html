@@ -281,6 +281,19 @@
   .price-row .name{color:var(--text);}
   .price-row .amount{font-weight:800;color:var(--pink-700);white-space:nowrap;font-size:13.5px;}
 
+  /* reviews */
+  .reviews-section.is-empty{display:none;}
+  .grid-reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .review-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px 24px 20px;display:flex;flex-direction:column;gap:12px;transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;}
+  .review-card:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:var(--pink-200);}
+  .review-stars{color:var(--pink-500);font-size:16px;letter-spacing:2px;}
+  .review-text{font-size:14.5px;line-height:1.7;color:var(--text-soft);flex:1;margin:0;}
+  .review-meta{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;padding-top:12px;border-top:1px solid var(--line);}
+  .review-meta-main{display:flex;flex-direction:column;gap:2px;}
+  .review-author{font-weight:700;font-size:13.5px;color:var(--text);}
+  .review-sub{font-size:12px;color:var(--text-soft);}
+  .review-lang{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 5px;border-radius:11px;background:var(--surface-2);color:var(--pink-700);font-size:10.5px;font-weight:800;flex:none;letter-spacing:.02em;}
+
   /* contacts */
   .contacts .container{display:grid;grid-template-columns:1fr 1fr;gap:50px;}
   .contact-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:34px;box-shadow:var(--shadow);}
@@ -313,6 +326,7 @@
     .grid-advantages{grid-template-columns:repeat(2,1fr);}
     .grid-team{grid-template-columns:repeat(3,1fr);}
     .grid-blog{grid-template-columns:repeat(2,1fr);}
+    .grid-reviews{grid-template-columns:repeat(2,1fr);}
     .price-cards{grid-template-columns:repeat(2,1fr);}
     .about .container{grid-template-columns:1fr;}
     .about-visual{position:static;max-width:340px;margin:0 auto 20px;}
@@ -335,6 +349,7 @@
     .grid-advantages{grid-template-columns:1fr;}
     .grid-team{grid-template-columns:repeat(2,1fr);}
     .grid-blog{grid-template-columns:1fr;}
+    .grid-reviews{grid-template-columns:1fr;}
     table.price-table{font-size:13.5px;}
     table.price-table th, table.price-table td{padding:12px 14px;}
     .price-cards{grid-template-columns:1fr;}
@@ -393,6 +408,7 @@
         <li><a href="#ru-team">Команда</a></li>
         <li><a href="#ru-advantages">Преимущества</a></li>
         <li><a href="#ru-prices">Цены</a></li>
+        <li><a href="#ru-reviews">Отзывы</a></li>
         <li><a href="#ru-blog">Блог</a></li>
         <li><a href="#ru-contacts">Контакты</a></li>
       </ul>
@@ -601,11 +617,20 @@
     </div>
   </div>
 
+  <section id="ru-reviews" class="reviews-section">
+    <div class="section-head">
+      <div class="eyebrow">Отзывы</div>
+      <h2>Что говорят наши пациенты</h2>
+      <p>Реальные отзывы тех, кто уже прошёл лечение в Sakura Podology Center.</p>
+    </div>
+    <div class="grid-reviews" data-render-host="reviews"></div>
+  </section>
+
   <section id="ru-blog">
     <div class="section-head">
       <div class="eyebrow">Блог</div>
       <h2>Полезные статьи о здоровье стоп</h2>
-      <p>Скоро мы будем делиться советами подологов, разбором частых проблем и уходом за стопами. Загляните позже!</p>
+      <p>Советы подологов, разбор частых проблем и уход за стопами.</p>
     </div>
     <div class="grid-blog" data-render-host="blog"></div>
   </section>
@@ -664,6 +689,7 @@
           <li><a href="#ru-about">О нас</a></li>
           <li><a href="#ru-team">Команда</a></li>
           <li><a href="#ru-prices">Цены</a></li>
+          <li><a href="#ru-reviews">Отзывы</a></li>
           <li><a href="#ru-blog">Блог</a></li>
           <li><a href="#ru-contacts">Контакты</a></li>
         </ul>
@@ -707,6 +733,7 @@
         <li><a href="#en-team">Team</a></li>
         <li><a href="#en-advantages">Why us</a></li>
         <li><a href="#en-prices">Prices</a></li>
+        <li><a href="#en-reviews">Reviews</a></li>
         <li><a href="#en-blog">Blog</a></li>
         <li><a href="#en-contacts">Contacts</a></li>
       </ul>
@@ -915,11 +942,20 @@
     </div>
   </div>
 
+  <section id="en-reviews" class="reviews-section">
+    <div class="section-head">
+      <div class="eyebrow">Reviews</div>
+      <h2>What our patients say</h2>
+      <p>Real reviews from people who've been treated at Sakura Podology Center.</p>
+    </div>
+    <div class="grid-reviews" data-render-host="reviews"></div>
+  </section>
+
   <section id="en-blog">
     <div class="section-head">
       <div class="eyebrow">Blog</div>
       <h2>Helpful articles on foot health</h2>
-      <p>Soon we'll be sharing podologist tips, common problems explained, and foot care advice. Check back soon!</p>
+      <p>Podologist tips, common problems explained, and foot care advice.</p>
     </div>
     <div class="grid-blog" data-render-host="blog"></div>
   </section>
@@ -978,6 +1014,7 @@
           <li><a href="#en-about">About</a></li>
           <li><a href="#en-team">Team</a></li>
           <li><a href="#en-prices">Prices</a></li>
+          <li><a href="#en-reviews">Reviews</a></li>
           <li><a href="#en-blog">Blog</a></li>
           <li><a href="#en-contacts">Contacts</a></li>
         </ul>
@@ -1021,6 +1058,7 @@
         <li><a href="#ka-team">გუნდი</a></li>
         <li><a href="#ka-advantages">უპირატესობები</a></li>
         <li><a href="#ka-prices">ფასები</a></li>
+        <li><a href="#ka-reviews">შეფასებები</a></li>
         <li><a href="#ka-blog">ბლოგი</a></li>
         <li><a href="#ka-contacts">კონტაქტი</a></li>
       </ul>
@@ -1229,11 +1267,20 @@
     </div>
   </div>
 
+  <section id="ka-reviews" class="reviews-section">
+    <div class="section-head">
+      <div class="eyebrow">შეფასებები</div>
+      <h2>რას ამბობენ ჩვენი პაციენტები</h2>
+      <p>რეალური შეფასებები მათგან, ვინც უკვე გაიარა მკურნალობა Sakura Podology Center-ში.</p>
+    </div>
+    <div class="grid-reviews" data-render-host="reviews"></div>
+  </section>
+
   <section id="ka-blog">
     <div class="section-head">
       <div class="eyebrow">ბლოგი</div>
       <h2>სასარგებლო სტატიები ტერფის ჯანმრთელობაზე</h2>
-      <p>მალე გავიზიარებთ პოდოლოგების რჩევებს, ხშირი პრობლემების განხილვასა და ტერფის მოვლის რჩევებს. ეწვიეთ მოგვიანებით!</p>
+      <p>პოდოლოგების რჩევები, ხშირი პრობლემების განხილვა და ტერფის მოვლის რჩევები.</p>
     </div>
     <div class="grid-blog" data-render-host="blog"></div>
   </section>
@@ -1292,6 +1339,7 @@
           <li><a href="#ka-about">ჩვენ შესახებ</a></li>
           <li><a href="#ka-team">გუნდი</a></li>
           <li><a href="#ka-prices">ფასები</a></li>
+          <li><a href="#ka-reviews">შეფასებები</a></li>
           <li><a href="#ka-blog">ბლოგი</a></li>
           <li><a href="#ka-contacts">კონტაქტი</a></li>
         </ul>
@@ -1549,16 +1597,48 @@
     container.innerHTML = categories.map(function(cat){ return priceCardHtml(lang, cat); }).join('');
   }
 
+  function reviewCardHtml(lang, r){
+    var stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+    var subBits = [];
+    if(r.date){ subBits.push(escapeHtml(r.date)); }
+    if(r.source){ subBits.push(escapeHtml(r.source)); }
+    var subLine = subBits.length ? '<span class="review-sub">' + subBits.join(' · ') + '</span>' : '';
+    var langBadge = r.lang !== lang ? '<span class="review-lang">' + escapeHtml(String(r.lang).toUpperCase()) + '</span>' : '';
+    return '<div class="review-card">' +
+      '<div class="review-stars" aria-hidden="true">' + stars + '</div>' +
+      '<p class="review-text">' + escapeHtml(r.text) + '</p>' +
+      '<div class="review-meta">' +
+        '<div class="review-meta-main"><span class="review-author">' + escapeHtml(r.author) + '</span>' + subLine + '</div>' +
+        langBadge +
+      '</div>' +
+    '</div>';
+  }
+  function renderReviews(lang, reviews){
+    var site = document.getElementById('site-' + lang);
+    if(!site) return;
+    var section = site.querySelector('.reviews-section');
+    var host = site.querySelector('[data-render-host="reviews"]');
+    if(!host) return;
+    if(!reviews || !reviews.length){
+      if(section) section.classList.add('is-empty');
+      return;
+    }
+    if(section) section.classList.remove('is-empty');
+    host.innerHTML = reviews.map(function(r){ return reviewCardHtml(lang, r); }).join('');
+  }
+
   Promise.all([
     fetch('content/team.json').then(function(r){ return r.json(); }),
     fetch('content/blog.json').then(function(r){ return r.json(); }),
-    fetch('content/prices.json').then(function(r){ return r.json(); })
+    fetch('content/prices.json').then(function(r){ return r.json(); }),
+    fetch('content/reviews.json').then(function(r){ return r.json(); })
   ]).then(function(results){
-    var team = results[0], blog = results[1], prices = results[2];
+    var team = results[0], blog = results[1], prices = results[2], reviews = results[3];
     ['ru','en','ka'].forEach(function(lang){
       renderTeam(lang, team);
       renderBlog(lang, blog);
       renderPrices(lang, prices);
+      renderReviews(lang, reviews);
     });
   }).catch(function(err){
     console.error('Sakura: failed to load dynamic content', err);

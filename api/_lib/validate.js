@@ -132,4 +132,22 @@ function validatePriceCategory(payload) {
   return problems;
 }
 
-module.exports = { validateTeamMember, validateBlogPost, validatePriceCategory };
+// Reviews are single-language (shown in whatever language the patient
+// actually wrote them, not translated 3x) - text is rendered escaped as
+// plain text on the public site, so no markup denylist is needed here.
+function validateReview(payload) {
+  var problems = [];
+  if (!isNonEmptyString(payload.author)) problems.push('author is required');
+  if (!Number.isInteger(payload.rating) || payload.rating < 1 || payload.rating > 5) {
+    problems.push('rating must be an integer from 1 to 5');
+  }
+  if (['ru', 'en', 'ka'].indexOf(payload.lang) === -1) {
+    problems.push('lang must be one of: ru, en, ka');
+  }
+  if (!isNonEmptyString(payload.text)) problems.push('text is required');
+  if (payload.date !== undefined && !isString(payload.date)) problems.push('date must be a string when present');
+  if (payload.source !== undefined && !isString(payload.source)) problems.push('source must be a string when present');
+  return problems;
+}
+
+module.exports = { validateTeamMember, validateBlogPost, validatePriceCategory, validateReview };
