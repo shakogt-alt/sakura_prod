@@ -392,9 +392,9 @@
   <header class="top">
     <div class="utility-bar">
       <div class="container">
-        <div class="u-item">📍 Тбилиси, Сабуртало, ул. Гагарина, 19/2</div>
-        <div class="u-item">🕙 Ежедневно 11:00–19:00</div>
-        <div class="u-item">📞 <a href="tel:+995555900108">+995 555 900 108</a></div>
+        <div class="u-item">📍 <span data-site-text="address">Тбилиси, Сабуртало, ул. Гагарина, 19/2</span></div>
+        <div class="u-item">🕙 <span data-site-text="hours">Ежедневно, 11:00–19:00</span></div>
+        <div class="u-item">📞 <a href="tel:+995555900108" data-site-href="tel-admin" data-site-text="phoneAdmin">+995 555 900 108</a></div>
       </div>
     </div>
     <nav class="main">
@@ -413,21 +413,21 @@
         <li><a href="#ru-contacts">Контакты</a></li>
       </ul>
       <div class="nav-cta">
-        <a class="btn btn-primary" href="tel:+995555900108"><span class="only-desktop">Записаться</span><span class="mobile-only">📞</span></a>
+        <a class="btn btn-primary" href="tel:+995555900108" data-site-href="tel-admin"><span class="only-desktop">Записаться</span><span class="mobile-only">📞</span></a>
         <button class="burger" aria-label="Меню" onclick="document.getElementById('navlinks-ru').classList.toggle('open')"><span></span><span></span><span></span></button>
       </div>
     </nav>
   </header>
 
   <section class="hero" id="ru-home">
-    <div class="hero-bg"><img src="images/hero-bg.jpg" alt="Процедура медицинского педикюра в Sakura Podology Center"></div>
+    <div class="hero-bg"><img src="images/hero-bg.jpg" alt="Процедура медицинского педикюра в Sakura Podology Center" data-site-src="heroImage"></div>
     <div class="container">
       <div>
         <div class="eyebrow">Подологический центр в Тбилиси</div>
         <h1>Sakura Podology Center</h1>
         <p class="lead">Профессиональная забота о здоровье стоп: медицинский подход, безупречная стерильность и внимательное отношение к каждому пациенту.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="tel:+995555900108">Записаться на приём</a>
+          <a class="btn btn-primary" href="tel:+995555900108" data-site-href="tel-admin">Записаться на приём</a>
           <a class="btn btn-ghost" href="#ru-services">Наши услуги</a>
         </div>
       </div>
@@ -465,7 +465,7 @@
           <h3>Позвоните для бесплатной консультации ☎</h3>
           <p>Наши специалисты ответят на все вопросы и подберут удобное время визита.</p>
         </div>
-        <a class="btn btn-primary" href="tel:+995555900108">Позвонить</a>
+        <a class="btn btn-primary" href="tel:+995555900108" data-site-href="tel-admin">Позвонить</a>
       </div>
     </div>
   </div>
@@ -475,27 +475,18 @@
       <div class="about-visual">
         <div class="founder-card">
           <div class="founder-photo">
-            <img src="images/kristina-mishina.jpg" alt="Кристина Мишина — основатель Sakura Podology Center" loading="lazy">
+            <img src="images/kristina-mishina.jpg" alt="Кристина Мишина — основатель Sakura Podology Center" loading="lazy" data-about-host="photo">
           </div>
           <div class="founder-meta">
-            <h4>Кристина Мишина</h4>
-            <span>основатель Sakura Podology Center</span>
+            <h4 data-about-host="founderName">Кристина Мишина</h4>
+            <span data-about-host="founderTitle">основатель Sakura Podology Center</span>
           </div>
         </div>
       </div>
       <div class="about-copy">
-        <div class="eyebrow">История центра</div>
-        <h2>История основания Sakura Podology Center</h2>
-        <p>Каждый большой путь начинается с искреннего желания помогать людям.</p>
-        <p>В 2014 году я открыла небольшой эстетический салон Sakura. Тогда моя работа была посвящена красоте — я была мастером маникюра и педикюра, помогая своим клиентам чувствовать себя увереннее, комфортнее и счастливее.</p>
-        <p>Но со временем я всё чаще сталкивалась с тем, что за внешними эстетическими недостатками скрывались настоящие медицинские проблемы. Ко мне приходили люди с болью, вросшими и деформированными ногтями, грибковыми заболеваниями, трещинами, воспалениями и другими патологиями стоп.</p>
-        <p>Я понимала, что обычных косметических процедур недостаточно. Мне хотелось не маскировать проблему, а находить её причину и действительно помогать людям возвращать здоровье.</p>
-        <p>Именно это стремление привело меня в 2017 году в Санкт-Петербург, где я прошла профессиональное обучение по подологии в немецкой школе <strong>MiradaMed</strong>. Это стало поворотным моментом в моей жизни.</p>
-        <p>Во время обучения я поняла, что подология — это не просто отдельное направление. Это медицина, наука и ответственность за здоровье человека. Именно тогда я окончательно решила посвятить себя этой профессии.</p>
-        <p>После возвращения в Грузию мы приняли важное решение — полностью изменить концепцию нашей работы. Так эстетический салон Sakura превратился в <strong>Sakura Podology Center</strong> — специализированный центр здоровья стоп, где главным приоритетом стали безопасность, медицинский подход, современные технологии и индивидуальный подход к каждому пациенту.</p>
-        <p>С тех пор моё профессиональное развитие не прекращается ни на один день. Я регулярно прохожу обучение, повышаю квалификацию, изучаю передовые мировые методики и делюсь своими знаниями с другими специалистами, помогая развивать культуру профессиональной подологии в Грузии.</p>
-        <p>Сегодня Sakura Podology Center — это результат многолетнего труда, постоянного обучения и искренней любви к своему делу. За годы нашей работы тысячи пациентов доверили нам самое ценное — своё здоровье. Для многих из них мы помогли избавиться от боли, избежать хирургического вмешательства и вновь вернуться к полноценной активной жизни.</p>
-        <p><strong>Для меня подология — это гораздо больше, чем профессия. Это дело всей моей жизни, которому я посвящаю себя каждый день.</strong></p>
+        <div class="eyebrow" data-about-host="eyebrow">История центра</div>
+        <h2 data-about-host="heading">История основания Sakura Podology Center</h2>
+        <div data-about-host="body"></div>
       </div>
     </div>
   </section>
@@ -518,7 +509,7 @@
           <h3>Позвоните для бесплатной консультации ☎</h3>
           <p>Расскажем о процедурах и поможем выбрать специалиста под вашу задачу.</p>
         </div>
-        <a class="btn btn-primary" href="tel:+995555900108">Позвонить</a>
+        <a class="btn btn-primary" href="tel:+995555900108" data-site-href="tel-admin">Позвонить</a>
       </div>
     </div>
   </div>
@@ -528,32 +519,7 @@
       <div class="eyebrow">Почему выбирают нас</div>
       <h2>Преимущества Sakura Podology Center</h2>
     </div>
-    <div class="grid-advantages">
-      <div class="adv-card">
-        <div class="adv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg></div>
-        <div><h3>Медицинский подход</h3><p>Специалисты центра обучаются подологии в современных зарубежных школах и регулярно повышают свою квалификацию.</p></div>
-      </div>
-      <div class="adv-card">
-        <div class="adv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg></div>
-        <div><h3>Стерильность и безопасность</h3><p>Многоэтапная обработка инструментов, автоклав и одноразовые расходные материалы.</p></div>
-      </div>
-      <div class="adv-card">
-        <div class="adv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></div>
-        <div><h3>Индивидуальный подход</h3><p>Персональный план ухода для каждого пациента с учётом истории и особенностей стопы.</p></div>
-      </div>
-      <div class="adv-card">
-        <div class="adv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v12H4z"/><path d="M9 20h6M12 16v4"/></svg></div>
-        <div><h3>Современное оборудование</h3><p>Профессиональные аппараты для безопасных и эффективных процедур.</p></div>
-      </div>
-      <div class="adv-card">
-        <div class="adv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg></div>
-        <div><h3>Опыт с 2014 года</h3><p>От эстетического салона до специализированного медицинского центра подологии.</p></div>
-      </div>
-      <div class="adv-card">
-        <div class="adv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-5-7-11a7 7 0 0114 0c0 6-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
-        <div><h3>Удобное расположение</h3><p>Центр находится в Тбилиси, район Сабуртало, ул. Гагарина, 19/2.</p></div>
-      </div>
-    </div>
+    <div class="grid-advantages" data-render-host="advantages"></div>
   </section>
 
   <section class="prices" id="ru-prices">
@@ -576,7 +542,7 @@
           <h3>Позвоните для бесплатной консультации ☎</h3>
           <p>Уточним точную стоимость процедуры и запишем вас на удобное время.</p>
         </div>
-        <a class="btn btn-primary" href="tel:+995555900108">Позвонить</a>
+        <a class="btn btn-primary" href="tel:+995555900108" data-site-href="tel-admin">Позвонить</a>
       </div>
     </div>
   </div>
@@ -609,23 +575,23 @@
         <div class="contact-card">
           <div class="contact-row">
             <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-5-7-11a7 7 0 0114 0c0 6-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
-            <div><h4>Адрес</h4><p>Тбилиси, Сабуртало, ул. Гагарина, 19/2</p></div>
+            <div><h4>Адрес</h4><p data-site-text="address">Тбилиси, Сабуртало, ул. Гагарина, 19/2</p></div>
           </div>
           <div class="contact-row">
             <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
-            <div><h4>Часы работы</h4><p>Ежедневно, 11:00–19:00</p></div>
+            <div><h4>Часы работы</h4><p data-site-text="hours">Ежедневно, 11:00–19:00</p></div>
           </div>
           <div class="contact-row">
             <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.7a2 2 0 01-.5 2.1L8 9.7a16 16 0 006 6l1.2-1.2a2 2 0 012.1-.5c.9.3 1.8.5 2.7.6A2 2 0 0122 16.9z"/></svg></div>
-            <div><h4>Администратор (запись)</h4><p>+995 555 900 108</p></div>
+            <div><h4>Администратор (запись)</h4><p data-site-text="phoneAdmin">+995 555 900 108</p></div>
           </div>
           <div class="contact-row">
             <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.7a2 2 0 01-.5 2.1L8 9.7a16 16 0 006 6l1.2-1.2a2 2 0 012.1-.5c.9.3 1.8.5 2.7.6A2 2 0 0122 16.9z"/></svg></div>
-            <div><h4>Директор</h4><p>+995 593 402 402</p></div>
+            <div><h4>Директор</h4><p data-site-text="phoneDirector">+995 593 402 402</p></div>
           </div>
           <div class="contact-actions">
-            <a class="btn btn-primary" href="tel:+995555900108">Позвонить</a>
-            <a class="btn btn-ghost" href="https://wa.me/995555900108">WhatsApp</a>
+            <a class="btn btn-primary" href="tel:+995555900108" data-site-href="tel-admin">Позвонить</a>
+            <a class="btn btn-ghost" href="https://wa.me/995555900108" data-site-href="wa-admin">WhatsApp</a>
             <a class="btn btn-ghost" href="https://instagram.com/kristin_sakura" target="_blank" rel="noopener">Instagram</a>
             <a class="btn btn-ghost" href="https://www.facebook.com/sakura.podology" target="_blank" rel="noopener">Facebook</a>
           </div>
@@ -661,9 +627,9 @@
       <div>
         <h5>Контакты</h5>
         <ul>
-          <li>Сабуртало, ул. Гагарина, 19/2, Тбилиси</li>
-          <li><a href="tel:+995555900108">+995 555 900 108</a></li>
-          <li>Ежедневно 11:00–19:00</li>
+          <li data-site-text="address">Тбилиси, Сабуртало, ул. Гагарина, 19/2</li>
+          <li><a href="tel:+995555900108" data-site-href="tel-admin" data-site-text="phoneAdmin">+995 555 900 108</a></li>
+          <li data-site-text="hours">Ежедневно, 11:00–19:00</li>
           <li><a href="https://www.facebook.com/sakura.podology" target="_blank" rel="noopener">Facebook</a></li>
         </ul>
       </div>
@@ -681,9 +647,9 @@
   <header class="top">
     <div class="utility-bar">
       <div class="container">
-        <div class="u-item">📍 19/2 Gagarina St, Saburtalo, Tbilisi</div>
-        <div class="u-item">🕙 Daily 11:00–19:00</div>
-        <div class="u-item">📞 <a href="tel:+995555900108">+995 555 900 108</a></div>
+        <div class="u-item">📍 <span data-site-text="address">19/2 Gagarina St, Saburtalo, Tbilisi</span></div>
+        <div class="u-item">🕙 <span data-site-text="hours">Daily, 11:00–19:00</span></div>
+        <div class="u-item">📞 <a href="tel:+995555900108" data-site-href="tel-admin" data-site-text="phoneAdmin">+995 555 900 108</a></div>
       </div>
     </div>
     <nav class="main">
@@ -702,21 +668,21 @@
         <li><a href="#en-contacts">Contacts</a></li>
       </ul>
       <div class="nav-cta">
-        <a class="btn btn-primary" href="tel:+995555900108"><span class="only-desktop">Book now</span><span class="mobile-only">📞</span></a>
+        <a class="btn btn-primary" href="tel:+995555900108" data-site-href="tel-admin"><span class="only-desktop">Book now</span><span class="mobile-only">📞</span></a>
         <button class="burger" aria-label="Menu" onclick="document.getElementById('navlinks-en').classList.toggle('open')"><span></span><span></span><span></span></button>
       </div>
     </nav>
   </header>
 
   <section class="hero" id="en-home">
-    <div class="hero-bg"><img src="images/hero-bg.jpg" alt="Medical pedicure procedure at Sakura Podology Center"></div>
+    <div class="hero-bg"><img src="images/hero-bg.jpg" alt="Medical pedicure procedure at Sakura Podology Center" data-site-src="heroImage"></div>
     <div class="container">
       <div>
         <div class="eyebrow">Podology Center in Tbilisi</div>
         <h1>Sakura Podology Center</h1>
         <p class="lead">Professional foot health care: a medical approach, strict sterility, and personal attention to every patient.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="tel:+995555900108">Book an appointment</a>
+          <a class="btn btn-primary" href="tel:+995555900108" data-site-href="tel-admin">Book an appointment</a>
           <a class="btn btn-ghost" href="#en-services">Our services</a>
         </div>
       </div>
@@ -754,7 +720,7 @@
           <h3>Call for a free consultation ☎</h3>
           <p>Our specialists are ready to answer your questions and find a convenient time for your visit.</p>
         </div>
-        <a class="btn btn-primary" href="tel:+995555900108">Call now</a>
+        <a class="btn btn-primary" href="tel:+995555900108" data-site-href="tel-admin">Call now</a>
       </div>
     </div>
   </div>
@@ -764,27 +730,18 @@
       <div class="about-visual">
         <div class="founder-card">
           <div class="founder-photo">
-            <img src="images/kristina-mishina.jpg" alt="Kristina Mishina — founder of Sakura Podology Center" loading="lazy">
+            <img src="images/kristina-mishina.jpg" alt="Kristina Mishina — founder of Sakura Podology Center" loading="lazy" data-about-host="photo">
           </div>
           <div class="founder-meta">
-            <h4>Kristina Mishina</h4>
-            <span>founder of Sakura Podology Center</span>
+            <h4 data-about-host="founderName">Kristina Mishina</h4>
+            <span data-about-host="founderTitle">founder of Sakura Podology Center</span>
           </div>
         </div>
       </div>
       <div class="about-copy">
-        <div class="eyebrow">Our story</div>
-        <h2>The story behind Sakura Podology Center</h2>
-        <p>Every great path begins with a genuine desire to help people.</p>
-        <p>In 2014, I opened a small beauty salon called Sakura. Back then my work was all about beauty — I was a manicure and pedicure specialist, helping clients feel more confident, comfortable and happy.</p>
-        <p>But over time, I kept noticing that behind cosmetic imperfections were real medical problems. People came to me in pain, with ingrown and deformed nails, fungal infections, cracks, inflammation and other foot conditions.</p>
-        <p>I realized that ordinary cosmetic procedures weren't enough. I wanted to find the cause of the problem, not just mask it, and truly help people restore their health.</p>
-        <p>That drive led me, in 2017, to St. Petersburg, where I completed professional training in podology at the German school <strong>MiradaMed</strong>. It was a turning point in my life.</p>
-        <p>During my training I understood that podology isn't just a niche discipline — it's medicine, science, and a real responsibility for a person's health. That's when I decided to fully dedicate myself to this profession.</p>
-        <p>After returning to Georgia, we made an important decision — to completely rethink our concept. The Sakura beauty salon became <strong>Sakura Podology Center</strong>: a specialized foot-health center where safety, a medical approach, modern technology and an individual approach to every patient became our top priorities.</p>
-        <p>Since then, my professional development has never stopped. I regularly train, improve my qualifications, study advanced methods worldwide, and share my knowledge with other specialists — helping grow a culture of professional podology in Georgia.</p>
-        <p>Today, Sakura Podology Center is the result of years of work, continuous learning and genuine love for what I do. Thousands of patients have trusted us with their most valuable asset — their health. For many of them, we helped relieve pain, avoid surgery, and return to a full, active life.</p>
-        <p><strong>For me, podology is far more than a profession. It's my life's work, and I dedicate myself to it every single day.</strong></p>
+        <div class="eyebrow" data-about-host="eyebrow">Our story</div>
+        <h2 data-about-host="heading">The story behind Sakura Podology Center</h2>
+        <div data-about-host="body"></div>
       </div>
     </div>
   </section>
@@ -807,7 +764,7 @@
           <h3>Call for a free consultation ☎</h3>
           <p>We'll walk you through the procedures and help pick the right specialist.</p>
         </div>
-        <a class="btn btn-primary" href="tel:+995555900108">Call now</a>
+        <a class="btn btn-primary" href="tel:+995555900108" data-site-href="tel-admin">Call now</a>
       </div>
     </div>
   </div>
@@ -817,32 +774,7 @@
       <div class="eyebrow">Why choose us</div>
       <h2>Advantages of Sakura Podology Center</h2>
     </div>
-    <div class="grid-advantages">
-      <div class="adv-card">
-        <div class="adv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg></div>
-        <div><h3>Medical approach</h3><p>Our specialists train in podology at leading international schools and continually upgrade their skills.</p></div>
-      </div>
-      <div class="adv-card">
-        <div class="adv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg></div>
-        <div><h3>Sterility & safety</h3><p>Multi-stage instrument processing, an autoclave, and single-use consumables.</p></div>
-      </div>
-      <div class="adv-card">
-        <div class="adv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></div>
-        <div><h3>Individual approach</h3><p>A personal care plan for every patient based on their history and needs.</p></div>
-      </div>
-      <div class="adv-card">
-        <div class="adv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v12H4z"/><path d="M9 20h6M12 16v4"/></svg></div>
-        <div><h3>Modern equipment</h3><p>Professional devices for safe and effective procedures.</p></div>
-      </div>
-      <div class="adv-card">
-        <div class="adv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg></div>
-        <div><h3>Experience since 2014</h3><p>From a beauty salon to a specialized medical podology center.</p></div>
-      </div>
-      <div class="adv-card">
-        <div class="adv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-5-7-11a7 7 0 0114 0c0 6-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
-        <div><h3>Convenient location</h3><p>The center is located at 19/2 Gagarina St, Saburtalo, Tbilisi.</p></div>
-      </div>
-    </div>
+    <div class="grid-advantages" data-render-host="advantages"></div>
   </section>
 
   <section class="prices" id="en-prices">
@@ -865,7 +797,7 @@
           <h3>Call for a free consultation ☎</h3>
           <p>We'll confirm the exact price and book you at a convenient time.</p>
         </div>
-        <a class="btn btn-primary" href="tel:+995555900108">Call now</a>
+        <a class="btn btn-primary" href="tel:+995555900108" data-site-href="tel-admin">Call now</a>
       </div>
     </div>
   </div>
@@ -898,23 +830,23 @@
         <div class="contact-card">
           <div class="contact-row">
             <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-5-7-11a7 7 0 0114 0c0 6-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
-            <div><h4>Address</h4><p>19/2 Gagarina St, Saburtalo, Tbilisi</p></div>
+            <div><h4>Address</h4><p data-site-text="address">19/2 Gagarina St, Saburtalo, Tbilisi</p></div>
           </div>
           <div class="contact-row">
             <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
-            <div><h4>Working hours</h4><p>Daily, 11:00–19:00</p></div>
+            <div><h4>Working hours</h4><p data-site-text="hours">Daily, 11:00–19:00</p></div>
           </div>
           <div class="contact-row">
             <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.7a2 2 0 01-.5 2.1L8 9.7a16 16 0 006 6l1.2-1.2a2 2 0 012.1-.5c.9.3 1.8.5 2.7.6A2 2 0 0122 16.9z"/></svg></div>
-            <div><h4>Administrator (bookings)</h4><p>+995 555 900 108</p></div>
+            <div><h4>Administrator (bookings)</h4><p data-site-text="phoneAdmin">+995 555 900 108</p></div>
           </div>
           <div class="contact-row">
             <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.7a2 2 0 01-.5 2.1L8 9.7a16 16 0 006 6l1.2-1.2a2 2 0 012.1-.5c.9.3 1.8.5 2.7.6A2 2 0 0122 16.9z"/></svg></div>
-            <div><h4>Director</h4><p>+995 593 402 402</p></div>
+            <div><h4>Director</h4><p data-site-text="phoneDirector">+995 593 402 402</p></div>
           </div>
           <div class="contact-actions">
-            <a class="btn btn-primary" href="tel:+995555900108">Call now</a>
-            <a class="btn btn-ghost" href="https://wa.me/995555900108">WhatsApp</a>
+            <a class="btn btn-primary" href="tel:+995555900108" data-site-href="tel-admin">Call now</a>
+            <a class="btn btn-ghost" href="https://wa.me/995555900108" data-site-href="wa-admin">WhatsApp</a>
             <a class="btn btn-ghost" href="https://instagram.com/kristin_sakura" target="_blank" rel="noopener">Instagram</a>
             <a class="btn btn-ghost" href="https://www.facebook.com/sakura.podology" target="_blank" rel="noopener">Facebook</a>
           </div>
@@ -950,9 +882,9 @@
       <div>
         <h5>Contacts</h5>
         <ul>
-          <li>19/2 Gagarina St, Saburtalo, Tbilisi</li>
-          <li><a href="tel:+995555900108">+995 555 900 108</a></li>
-          <li>Daily 11:00–19:00</li>
+          <li data-site-text="address">19/2 Gagarina St, Saburtalo, Tbilisi</li>
+          <li><a href="tel:+995555900108" data-site-href="tel-admin" data-site-text="phoneAdmin">+995 555 900 108</a></li>
+          <li data-site-text="hours">Daily, 11:00–19:00</li>
           <li><a href="https://www.facebook.com/sakura.podology" target="_blank" rel="noopener">Facebook</a></li>
         </ul>
       </div>
@@ -970,9 +902,9 @@
   <header class="top">
     <div class="utility-bar">
       <div class="container">
-        <div class="u-item">📍 თბილისი, საბურთალო, გაგარინის ქუჩა 19/2</div>
-        <div class="u-item">🕙 ყოველდღე 11:00–19:00</div>
-        <div class="u-item">📞 <a href="tel:+995555900108">+995 555 900 108</a></div>
+        <div class="u-item">📍 <span data-site-text="address">თბილისი, საბურთალო, გაგარინის ქუჩა 19/2</span></div>
+        <div class="u-item">🕙 <span data-site-text="hours">ყოველდღე, 11:00–19:00</span></div>
+        <div class="u-item">📞 <a href="tel:+995555900108" data-site-href="tel-admin" data-site-text="phoneAdmin">+995 555 900 108</a></div>
       </div>
     </div>
     <nav class="main">
@@ -991,21 +923,21 @@
         <li><a href="#ka-contacts">კონტაქტი</a></li>
       </ul>
       <div class="nav-cta">
-        <a class="btn btn-primary" href="tel:+995555900108"><span class="only-desktop">ჩაწერა</span><span class="mobile-only">📞</span></a>
+        <a class="btn btn-primary" href="tel:+995555900108" data-site-href="tel-admin"><span class="only-desktop">ჩაწერა</span><span class="mobile-only">📞</span></a>
         <button class="burger" aria-label="მენიუ" onclick="document.getElementById('navlinks-ka').classList.toggle('open')"><span></span><span></span><span></span></button>
       </div>
     </nav>
   </header>
 
   <section class="hero" id="ka-home">
-    <div class="hero-bg"><img src="images/hero-bg.jpg" alt="სამედიცინო პედიკურის პროცედურა Sakura Podology Center-ში"></div>
+    <div class="hero-bg"><img src="images/hero-bg.jpg" alt="სამედიცინო პედიკურის პროცედურა Sakura Podology Center-ში" data-site-src="heroImage"></div>
     <div class="container">
       <div>
         <div class="eyebrow">პოდოლოგიის ცენტრი თბილისში</div>
         <h1>Sakura Podology Center</h1>
         <p class="lead">ტერფის ჯანმრთელობაზე პროფესიული ზრუნვა: სამედიცინო მიდგომა, სრული სისუფთავე და ყურადღება თითოეული პაციენტისადმი.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="tel:+995555900108">ჩაწერა მიღებაზე</a>
+          <a class="btn btn-primary" href="tel:+995555900108" data-site-href="tel-admin">ჩაწერა მიღებაზე</a>
           <a class="btn btn-ghost" href="#ka-services">ჩვენი სერვისები</a>
         </div>
       </div>
@@ -1043,7 +975,7 @@
           <h3>დარეკეთ უფასო კონსულტაციისთვის ☎</h3>
           <p>ჩვენი სპეციალისტები უპასუხებენ ყველა კითხვას და შეარჩევენ მოსახერხებელ დროს.</p>
         </div>
-        <a class="btn btn-primary" href="tel:+995555900108">დარეკვა</a>
+        <a class="btn btn-primary" href="tel:+995555900108" data-site-href="tel-admin">დარეკვა</a>
       </div>
     </div>
   </div>
@@ -1053,27 +985,18 @@
       <div class="about-visual">
         <div class="founder-card">
           <div class="founder-photo">
-            <img src="images/kristina-mishina.jpg" alt="ქრისტინა მიშინა — Sakura Podology Center-ის დამფუძნებელი" loading="lazy">
+            <img src="images/kristina-mishina.jpg" alt="ქრისტინა მიშინა — Sakura Podology Center-ის დამფუძნებელი" loading="lazy" data-about-host="photo">
           </div>
           <div class="founder-meta">
-            <h4>ქრისტინა მიშინა</h4>
-            <span>Sakura Podology Center-ის დამფუძნებელი</span>
+            <h4 data-about-host="founderName">ქრისტინა მიშინა</h4>
+            <span data-about-host="founderTitle">Sakura Podology Center-ის დამფუძნებელი</span>
           </div>
         </div>
       </div>
       <div class="about-copy">
-        <div class="eyebrow">ცენტრის ისტორია</div>
-        <h2>Sakura Podology Center-ის დაარსების ისტორია</h2>
-        <p>ყოველი დიდი გზა იწყება ადამიანების დახმარების გულწრფელი სურვილით.</p>
-        <p>2014 წელს გავხსენი პატარა ესთეტიკური სალონი Sakura. მაშინ ჩემი საქმიანობა სილამაზეს ეთმობოდა — ვმუშაობდი მანიკურისა და პედიკურის ოსტატად, ვეხმარებოდი კლიენტებს, ეგრძნოთ თავი უფრო თავდაჯერებულად, კომფორტულად და ბედნიერად.</p>
-        <p>თუმცა დროთა განმავლობაში სულ უფრო ხშირად ვხედავდი, რომ გარეგნული ესთეტიკური ხარვეზების მიღმა ნამდვილი სამედიცინო პრობლემები იმალებოდა. ჩემთან მოდიოდნენ ადამიანები ტკივილით, ჩაზრდილი და დეფორმირებული ფრჩხილებით, სოკოვანი დაავადებებით, გახეთქვილობით, ანთებით და ტერფის სხვა პათოლოგიებით.</p>
-        <p>მივხვდი, რომ ჩვეულებრივი კოსმეტიკური პროცედურები საკმარისი არ იყო. მინდოდა არა პრობლემის დაფარვა, არამედ მისი მიზეზის პოვნა და ადამიანებისთვის ჯანმრთელობის დაბრუნებაში ნამდვილი დახმარება.</p>
-        <p>სწორედ ამ სურვილმა მიმიყვანა 2017 წელს სანქტ-პეტერბურგში, სადაც გავიარე პროფესიული განათლება პოდოლოგიაში გერმანულ სკოლა <strong>MiradaMed</strong>-ში. ეს ჩემი ცხოვრების გარდამტეხი მომენტი გახდა.</p>
-        <p>სწავლის დროს მივხვდი, რომ პოდოლოგია არ არის უბრალოდ ცალკე მიმართულება — ეს არის მედიცინა, მეცნიერება და პასუხისმგებლობა ადამიანის ჯანმრთელობაზე. სწორედ მაშინ საბოლოოდ გადავწყვიტე, ამ პროფესიისთვის მომეძღვნა თავი.</p>
-        <p>საქართველოში დაბრუნების შემდეგ მივიღეთ მნიშვნელოვანი გადაწყვეტილება — მთლიანად შეგვეცვალა ჩვენი მუშაობის კონცეფცია. ასე ესთეტიკური სალონი Sakura გადაიქცა <strong>Sakura Podology Center</strong>-ად — ტერფის ჯანმრთელობის სპეციალიზებულ ცენტრად, სადაც მთავარ პრიორიტეტად იქცა უსაფრთხოება, სამედიცინო მიდგომა, თანამედროვე ტექნოლოგიები და ინდივიდუალური მიდგომა თითოეული პაციენტისადმი.</p>
-        <p>მას შემდეგ ჩემი პროფესიული განვითარება არცერთ დღეს არ შეჩერებულა. რეგულარულად ვსწავლობ, ვიმაღლებ კვალიფიკაციას, ვსწავლობ მსოფლიოს მოწინავე მეთოდებს და ჩემს ცოდნას ვუზიარებ სხვა სპეციალისტებს, რითაც ვეხმარები პროფესიული პოდოლოგიის კულტურის განვითარებას საქართველოში.</p>
-        <p>დღეს Sakura Podology Center არის მრავალწლიანი შრომის, მუდმივი სწავლისა და საქმის გულწრფელი სიყვარულის შედეგი. ჩვენი მუშაობის წლების განმავლობაში ათასობით პაციენტმა გვანდო ყველაზე ძვირფასი — თავისი ჯანმრთელობა. მათგან ბევრს დავეხმარეთ ტკივილისგან თავის დაღწევაში, ქირურგიული ჩარევის თავიდან აცილებასა და სრულფასოვან აქტიურ ცხოვრებაში დაბრუნებაში.</p>
-        <p><strong>ჩემთვის პოდოლოგია გაცილებით მეტია, ვიდრე პროფესია. ეს არის ჩემი მთელი ცხოვრების საქმე, რომელსაც ყოველდღე ვუძღვნი თავს.</strong></p>
+        <div class="eyebrow" data-about-host="eyebrow">ცენტრის ისტორია</div>
+        <h2 data-about-host="heading">Sakura Podology Center-ის დაარსების ისტორია</h2>
+        <div data-about-host="body"></div>
       </div>
     </div>
   </section>
@@ -1096,7 +1019,7 @@
           <h3>დარეკეთ უფასო კონსულტაციისთვის ☎</h3>
           <p>გიამბობთ პროცედურებზე და დაგეხმარებით სპეციალისტის შერჩევაში.</p>
         </div>
-        <a class="btn btn-primary" href="tel:+995555900108">დარეკვა</a>
+        <a class="btn btn-primary" href="tel:+995555900108" data-site-href="tel-admin">დარეკვა</a>
       </div>
     </div>
   </div>
@@ -1106,32 +1029,7 @@
       <div class="eyebrow">რატომ ჩვენ</div>
       <h2>Sakura Podology Center-ის უპირატესობები</h2>
     </div>
-    <div class="grid-advantages">
-      <div class="adv-card">
-        <div class="adv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg></div>
-        <div><h3>სამედიცინო მიდგომა</h3><p>ცენტრის სპეციალისტები პოდოლოგიას სწავლობენ თანამედროვე უცხოურ სკოლებში და მუდმივად იმაღლებენ კვალიფიკაციას.</p></div>
-      </div>
-      <div class="adv-card">
-        <div class="adv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg></div>
-        <div><h3>სისუფთავე და უსაფრთხოება</h3><p>ინსტრუმენტების მრავალსაფეხურიანი დამუშავება, ავტოკლავი და ერთჯერადი მასალები.</p></div>
-      </div>
-      <div class="adv-card">
-        <div class="adv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></div>
-        <div><h3>ინდივიდუალური მიდგომა</h3><p>პერსონალური მოვლის გეგმა თითოეული პაციენტისთვის, მისი ისტორიის გათვალისწინებით.</p></div>
-      </div>
-      <div class="adv-card">
-        <div class="adv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v12H4z"/><path d="M9 20h6M12 16v4"/></svg></div>
-        <div><h3>თანამედროვე აპარატურა</h3><p>პროფესიული აპარატები უსაფრთხო და ეფექტური პროცედურებისთვის.</p></div>
-      </div>
-      <div class="adv-card">
-        <div class="adv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg></div>
-        <div><h3>გამოცდილება 2014 წლიდან</h3><p>ესთეტიკური სალონიდან სპეციალიზებულ სამედიცინო პოდოლოგიის ცენტრამდე.</p></div>
-      </div>
-      <div class="adv-card">
-        <div class="adv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-5-7-11a7 7 0 0114 0c0 6-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
-        <div><h3>მოსახერხებელი მდებარეობა</h3><p>ცენტრი მდებარეობს თბილისში, საბურთალოში, გაგარინის ქუჩა 19/2.</p></div>
-      </div>
-    </div>
+    <div class="grid-advantages" data-render-host="advantages"></div>
   </section>
 
   <section class="prices" id="ka-prices">
@@ -1154,7 +1052,7 @@
           <h3>დარეკეთ უფასო კონსულტაციისთვის ☎</h3>
           <p>დავაზუსტებთ ზუსტ ღირებულებას და ჩაგწერთ მოსახერხებელ დროს.</p>
         </div>
-        <a class="btn btn-primary" href="tel:+995555900108">დარეკვა</a>
+        <a class="btn btn-primary" href="tel:+995555900108" data-site-href="tel-admin">დარეკვა</a>
       </div>
     </div>
   </div>
@@ -1187,23 +1085,23 @@
         <div class="contact-card">
           <div class="contact-row">
             <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-5-7-11a7 7 0 0114 0c0 6-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
-            <div><h4>მისამართი</h4><p>თბილისი, საბურთალო, გაგარინის ქუჩა 19/2</p></div>
+            <div><h4>მისამართი</h4><p data-site-text="address">თბილისი, საბურთალო, გაგარინის ქუჩა 19/2</p></div>
           </div>
           <div class="contact-row">
             <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
-            <div><h4>სამუშაო საათები</h4><p>ყოველდღე, 11:00–19:00</p></div>
+            <div><h4>სამუშაო საათები</h4><p data-site-text="hours">ყოველდღე, 11:00–19:00</p></div>
           </div>
           <div class="contact-row">
             <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.7a2 2 0 01-.5 2.1L8 9.7a16 16 0 006 6l1.2-1.2a2 2 0 012.1-.5c.9.3 1.8.5 2.7.6A2 2 0 0122 16.9z"/></svg></div>
-            <div><h4>ადმინისტრატორი (ჩაწერა)</h4><p>+995 555 900 108</p></div>
+            <div><h4>ადმინისტრატორი (ჩაწერა)</h4><p data-site-text="phoneAdmin">+995 555 900 108</p></div>
           </div>
           <div class="contact-row">
             <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.7a2 2 0 01-.5 2.1L8 9.7a16 16 0 006 6l1.2-1.2a2 2 0 012.1-.5c.9.3 1.8.5 2.7.6A2 2 0 0122 16.9z"/></svg></div>
-            <div><h4>დირექტორი</h4><p>+995 593 402 402</p></div>
+            <div><h4>დირექტორი</h4><p data-site-text="phoneDirector">+995 593 402 402</p></div>
           </div>
           <div class="contact-actions">
-            <a class="btn btn-primary" href="tel:+995555900108">დარეკვა</a>
-            <a class="btn btn-ghost" href="https://wa.me/995555900108">WhatsApp</a>
+            <a class="btn btn-primary" href="tel:+995555900108" data-site-href="tel-admin">დარეკვა</a>
+            <a class="btn btn-ghost" href="https://wa.me/995555900108" data-site-href="wa-admin">WhatsApp</a>
             <a class="btn btn-ghost" href="https://instagram.com/kristin_sakura" target="_blank" rel="noopener">Instagram</a>
             <a class="btn btn-ghost" href="https://www.facebook.com/sakura.podology" target="_blank" rel="noopener">Facebook</a>
           </div>
@@ -1239,9 +1137,9 @@
       <div>
         <h5>კონტაქტი</h5>
         <ul>
-          <li>გაგარინის ქუჩა 19/2, საბურთალო, თბილისი</li>
-          <li><a href="tel:+995555900108">+995 555 900 108</a></li>
-          <li>ყოველდღე 11:00–19:00</li>
+          <li data-site-text="address">თბილისი, საბურთალო, გაგარინის ქუჩა 19/2</li>
+          <li><a href="tel:+995555900108" data-site-href="tel-admin" data-site-text="phoneAdmin">+995 555 900 108</a></li>
+          <li data-site-text="hours">ყოველდღე, 11:00–19:00</li>
           <li><a href="https://www.facebook.com/sakura.podology" target="_blank" rel="noopener">Facebook</a></li>
         </ul>
       </div>
@@ -1478,6 +1376,63 @@
     grid.innerHTML = services.map(function(s){ return serviceCardHtml(lang, s); }).join('');
   }
 
+  function advantageCardHtml(lang, a){
+    var t = a[lang];
+    return '<div class="adv-card">' +
+      '<div class="adv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">' + a.icon + '</svg></div>' +
+      '<div><h3>' + escapeHtml(t.title) + '</h3><p>' + escapeHtml(t.text) + '</p></div>' +
+    '</div>';
+  }
+  function renderAdvantages(lang, advantages){
+    var site = document.getElementById('site-' + lang);
+    if(!site) return;
+    var grid = site.querySelector('[data-render-host="advantages"]');
+    if(!grid) return;
+    grid.innerHTML = advantages.map(function(a){ return advantageCardHtml(lang, a); }).join('');
+  }
+
+  function renderAbout(lang, about){
+    var site = document.getElementById('site-' + lang);
+    if(!site || !about) return;
+    var t = about[lang];
+    if(!t) return;
+    var photoEl = site.querySelector('[data-about-host="photo"]');
+    if(photoEl){ photoEl.src = about.photo; photoEl.alt = t.alt; }
+    var nameEl = site.querySelector('[data-about-host="founderName"]');
+    if(nameEl) nameEl.textContent = t.founderName;
+    var titleEl = site.querySelector('[data-about-host="founderTitle"]');
+    if(titleEl) titleEl.textContent = t.founderTitle;
+    var eyebrowEl = site.querySelector('[data-about-host="eyebrow"]');
+    if(eyebrowEl) eyebrowEl.textContent = t.eyebrow;
+    var headingEl = site.querySelector('[data-about-host="heading"]');
+    if(headingEl) headingEl.textContent = t.heading;
+    var bodyEl = site.querySelector('[data-about-host="body"]');
+    if(bodyEl) bodyEl.innerHTML = t.body;
+  }
+
+  // Site-wide settings: address/hours/phones/hero image. Unlike the other
+  // render*() functions this touches ALL 3 language sites from a single
+  // call (not one call per lang in the forEach loop below) - the phone
+  // numbers and hero image aren't translated, and grouping the DOM writes
+  // this way keeps the tel:/wa.me href computation in one place instead
+  // of repeating it 3x.
+  function telHref(phone){ return 'tel:' + String(phone || '').replace(/[^\d+]/g, ''); }
+  function waHref(phone){ return 'https://wa.me/' + String(phone || '').replace(/[^\d]/g, ''); }
+  function renderSite(site){
+    if(!site) return;
+    document.querySelectorAll('[data-site-src="heroImage"]').forEach(function(el){ el.src = site.heroImage; });
+    document.querySelectorAll('[data-site-href="tel-admin"]').forEach(function(el){ el.href = telHref(site.phoneAdmin); });
+    document.querySelectorAll('[data-site-href="wa-admin"]').forEach(function(el){ el.href = waHref(site.phoneAdmin); });
+    document.querySelectorAll('[data-site-text="phoneAdmin"]').forEach(function(el){ el.textContent = site.phoneAdmin; });
+    document.querySelectorAll('[data-site-text="phoneDirector"]').forEach(function(el){ el.textContent = site.phoneDirector; });
+    ['ru','en','ka'].forEach(function(lang){
+      var host = document.getElementById('site-' + lang);
+      if(!host) return;
+      host.querySelectorAll('[data-site-text="address"]').forEach(function(el){ el.textContent = site.address[lang]; });
+      host.querySelectorAll('[data-site-text="hours"]').forEach(function(el){ el.textContent = site.hours[lang]; });
+    });
+  }
+
   function priceCardHtml(lang, cat){
     var t = cat[lang];
     var cls = 'price-card' + (cat.fullWidth ? ' price-card-full' : '');
@@ -1540,16 +1495,22 @@
     fetch('content/blog.json').then(function(r){ return r.json(); }),
     fetch('content/prices.json').then(function(r){ return r.json(); }),
     fetch('content/reviews.json').then(function(r){ return r.json(); }),
-    fetch('content/services.json').then(function(r){ return r.json(); })
+    fetch('content/services.json').then(function(r){ return r.json(); }),
+    fetch('content/advantages.json').then(function(r){ return r.json(); }),
+    fetch('content/about.json').then(function(r){ return r.json(); }),
+    fetch('content/site.json').then(function(r){ return r.json(); })
   ]).then(function(results){
-    var team = results[0], blog = results[1], prices = results[2], reviews = results[3], services = results[4];
+    var team = results[0], blog = results[1], prices = results[2], reviews = results[3], services = results[4], advantages = results[5], about = results[6], site = results[7];
     ['ru','en','ka'].forEach(function(lang){
       renderTeam(lang, team);
       renderBlog(lang, blog);
       renderPrices(lang, prices);
       renderReviews(lang, reviews);
       renderServices(lang, services);
+      renderAdvantages(lang, advantages);
+      renderAbout(lang, about);
     });
+    renderSite(site);
   }).catch(function(err){
     console.error('Sakura: failed to load dynamic content', err);
   });

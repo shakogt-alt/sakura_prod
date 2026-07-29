@@ -1,0 +1,98 @@
+[
+  {
+    "id": "adv-bce53efd",
+    "icon": "<path d=\"M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z\"/>",
+    "ru": {
+      "title": "Медицинский подход",
+      "text": "Специалисты центра обучаются подологии в современных зарубежных школах и регулярно повышают свою квалификацию."
+    },
+    "en": {
+      "title": "Medical approach",
+      "text": "Our specialists train in podology at leading international schools and continually upgrade their skills."
+    },
+    "ka": {
+      "title": "სამედიცინო მიდგომა",
+      "text": "ცენტრის სპეციალისტები პოდოლოგიას სწავლობენ თანამედროვე უცხოურ სკოლებში და მუდმივად იმაღლებენ კვალიფიკაციას."
+    }
+  },
+  {
+    "id": "adv-1055bee8",
+    "icon": "<rect x=\"4\" y=\"10\" width=\"16\" height=\"10\" rx=\"2\"/><path d=\"M8 10V7a4 4 0 018 0v3\"/>",
+    "ru": {
+      "title": "Стерильность и безопасность",
+      "text": "Многоэтапная обработка инструментов, автоклав и одноразовые расходные материалы."
+    },
+    "en": {
+      "title": "Sterility & safety",
+      "text": "Multi-stage instrument processing, an autoclave, and single-use consumables."
+    },
+    "ka": {
+      "title": "სისუფთავე და უსაფრთხოება",
+      "text": "ინსტრუმენტების მრავალსაფეხურიანი დამუშავება, ავტოკლავი და ერთჯერადი მასალები."
+    }
+  },
+  {
+    "id": "adv-a57f841a",
+    "icon": "<circle cx=\"12\" cy=\"8\" r=\"4\"/><path d=\"M4 20c0-4 4-6 8-6s8 2 8 6\"/>",
+    "ru": {
+      "title": "Индивидуальный подход",
+      "text": "Персональный план ухода для каждого пациента с учётом истории и особенностей стопы."
+    },
+    "en": {
+      "title": "Individual approach",
+      "text": "A personal care plan for every patient based on their history and needs."
+    },
+    "ka": {
+      "title": "ინდივიდუალური მიდგომა",
+      "text": "პერსონალური მოვლის გეგმა თითოეული პაციენტისთვის, მისი ისტორიის გათვალისწინებით."
+    }
+  },
+  {
+    "id": "adv-78cac793",
+    "icon": "<path d=\"M4 4h16v12H4z\"/><path d=\"M9 20h6M12 16v4\"/>",
+    "ru": {
+      "title": "Современное оборудование",
+      "text": "Профессиональные аппараты для безопасных и эффективных процедур."
+    },
+    "en": {
+      "title": "Modern equipment",
+      "text": "Professional devices for safe and effective procedures."
+    },
+    "ka": {
+      "title": "თანამედროვე აპარატურა",
+      "text": "პროფესიული აპარატები უსაფრთხო და ეფექტური პროცედურებისთვის."
+    }
+  },
+  {
+    "id": "adv-1492572b",
+    "icon": "<path d=\"M3 12h4l2-7 4 14 2-7h6\"/>",
+    "ru": {
+      "title": "Опыт с 2014 года",
+      "text": "От эстетического салона до специализированного медицинского центра подологии."
+    },
+    "en": {
+      "title": "Experience since 2014",
+      "text": "From a beauty salon to a specialized medical podology center."
+    },
+    "ka": {
+      "title": "გამოცდილება 2014 წლიდან",
+      "text": "ესთეტიკური სალონიდან სპეციალიზებულ სამედიცინო პოდოლოგიის ცენტრამდე."
+    }
+  },
+  {
+    "id": "adv-7f73de20",
+    "icon": "<path d=\"M12 21s-7-5-7-11a7 7 0 0114 0c0 6-7 11-7 11z\"/><circle cx=\"12\" cy=\"10\" r=\"2.5\"/>",
+    "ru": {
+      "title": "Удобное расположение",
+      "text": "Центр находится в Тбилиси, район Сабуртало, ул. Гагарина, 19/2."
+    },
+    "en": {
+      "title": "Convenient location",
+      "text": "The center is located at 19/2 Gagarina St, Saburtalo, Tbilisi."
+    },
+    "ka": {
+      "title": "მოსახერხებელი მდებარეობა",
+      "text": "ცენტრი მდებარეობს თბილისში, საბურთალოში, გაგარინის ქუჩა 19/2."
+    }
+  }
+]

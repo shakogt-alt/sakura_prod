@@ -106,7 +106,8 @@
   .modal-actions{display:flex;justify-content:space-between;align-items:center;margin-top:22px;padding-top:18px;border-top:1px solid var(--line);gap:10px;flex-wrap:wrap;}
   .modal-actions .right{display:flex;gap:10px;}
 
-  #quill-wrap-ru .ql-editor,#quill-wrap-en .ql-editor,#quill-wrap-ka .ql-editor{min-height:180px;font-size:14.5px;}
+  #quill-wrap-ru .ql-editor,#quill-wrap-en .ql-editor,#quill-wrap-ka .ql-editor,
+  #quill-wrap-about-ru .ql-editor,#quill-wrap-about-en .ql-editor,#quill-wrap-about-ka .ql-editor{min-height:180px;font-size:14.5px;}
 
   .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--text);color:#fff;padding:12px 20px;border-radius:12px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:200;box-shadow:var(--shadow);max-width:90vw;}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
@@ -150,6 +151,9 @@
       <button class="tab-btn" data-tab="prices">Цены</button>
       <button class="tab-btn" data-tab="reviews">Отзывы</button>
       <button class="tab-btn" data-tab="services">Услуги</button>
+      <button class="tab-btn" data-tab="advantages">Преимущества</button>
+      <button class="tab-btn" data-tab="about">О нас</button>
+      <button class="tab-btn" data-tab="site">Контакты и фото</button>
     </div>
 
     <div class="tab-panel active" id="panel-team">
@@ -208,6 +212,129 @@
         <button class="btn btn-primary btn-sm" id="services-add-btn">+ Добавить услугу</button>
       </div>
       <div id="services-list"></div>
+    </div>
+
+    <div class="tab-panel" id="panel-advantages">
+      <div class="list-head">
+        <div>
+          <h2>Преимущества</h2>
+          <p class="hint">Карточки в разделе «Почему выбирают нас». Изменения появляются на сайте через 15–30 секунд после сохранения.</p>
+        </div>
+        <button class="btn btn-primary btn-sm" id="advantages-add-btn">+ Добавить преимущество</button>
+      </div>
+      <div id="advantages-list"></div>
+    </div>
+
+    <div class="tab-panel" id="panel-about">
+      <div class="list-head">
+        <div>
+          <h2>О нас</h2>
+          <p class="hint">Раздел «История центра» с фото и историей основателя. Один раздел на весь сайт — не список. Изменения появляются на сайте через 15–30 секунд после сохранения.</p>
+        </div>
+      </div>
+      <div class="error-msg" id="about-error"></div>
+
+      <div class="photo-upload">
+        <img id="about-photo-preview" class="round" alt="">
+        <div>
+          <input type="file" id="about-photo-input" accept="image/jpeg,image/png,image/webp">
+          <div class="status" id="about-photo-status"></div>
+        </div>
+      </div>
+
+      <div class="lang-tabs" data-lang-tabs="about">
+        <button class="lang-tab-btn active" data-lang="ru">RU</button>
+        <button class="lang-tab-btn" data-lang="en">EN</button>
+        <button class="lang-tab-btn" data-lang="ka">KA</button>
+      </div>
+
+      <div id="about-lang-ru" class="lang-panel active">
+        <div class="field"><label>Имя основателя</label><input type="text" id="about-ru-founderName"></div>
+        <div class="field"><label>Подпись под именем</label><input type="text" id="about-ru-founderTitle"></div>
+        <div class="field"><label>Alt-текст фото</label><input type="text" id="about-ru-alt"></div>
+        <div class="field"><label>Рубрика (eyebrow)</label><input type="text" id="about-ru-eyebrow"></div>
+        <div class="field"><label>Заголовок раздела</label><input type="text" id="about-ru-heading"></div>
+        <div class="field"><label>История</label><div id="quill-wrap-about-ru"><div id="about-ru-body-editor"></div></div></div>
+      </div>
+      <div id="about-lang-en" class="lang-panel">
+        <div class="field"><label>Founder name</label><input type="text" id="about-en-founderName"></div>
+        <div class="field"><label>Caption under name</label><input type="text" id="about-en-founderTitle"></div>
+        <div class="field"><label>Photo alt text</label><input type="text" id="about-en-alt"></div>
+        <div class="field"><label>Eyebrow</label><input type="text" id="about-en-eyebrow"></div>
+        <div class="field"><label>Section heading</label><input type="text" id="about-en-heading"></div>
+        <div class="field"><label>Story</label><div id="quill-wrap-about-en"><div id="about-en-body-editor"></div></div></div>
+      </div>
+      <div id="about-lang-ka" class="lang-panel">
+        <div class="field"><label>დამფუძნებლის სახელი</label><input type="text" id="about-ka-founderName"></div>
+        <div class="field"><label>წარწერა სახელის ქვეშ</label><input type="text" id="about-ka-founderTitle"></div>
+        <div class="field"><label>ფოტოს alt-ტექსტი</label><input type="text" id="about-ka-alt"></div>
+        <div class="field"><label>რუბრიკა</label><input type="text" id="about-ka-eyebrow"></div>
+        <div class="field"><label>განყოფილების სათაური</label><input type="text" id="about-ka-heading"></div>
+        <div class="field"><label>ისტორია</label><div id="quill-wrap-about-ka"><div id="about-ka-body-editor"></div></div></div>
+      </div>
+
+      <div class="modal-actions">
+        <div class="right">
+          <button class="btn btn-primary" id="about-save-btn">Сохранить</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="panel-site">
+      <div class="list-head">
+        <div>
+          <h2>Контакты и фото</h2>
+          <p class="hint">Адрес, часы, телефоны и фон в шапке сайта. Телефон администратора и фон используются сразу во многих местах сайта (шапка, кнопки звонка, подвал) — одно изменение здесь обновляет их все. Изменения появляются на сайте через 15–30 секунд после сохранения.</p>
+        </div>
+      </div>
+      <div class="error-msg" id="site-error"></div>
+
+      <div class="field">
+        <label>Фоновое фото в шапке сайта</label>
+        <div class="photo-upload">
+          <img id="site-hero-preview" alt="" style="width:96px;height:64px;border-radius:12px;object-fit:cover;">
+          <div>
+            <input type="file" id="site-hero-input" accept="image/jpeg,image/png,image/webp">
+            <div class="status" id="site-hero-status"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Телефон администратора (запись на приём)</label>
+        <input type="text" id="site-phoneAdmin" placeholder="+995 555 900 108">
+        <p class="field-hint">Используется в кнопках звонка и WhatsApp по всему сайту, в шапке и в подвале.</p>
+      </div>
+      <div class="field">
+        <label>Телефон директора</label>
+        <input type="text" id="site-phoneDirector" placeholder="+995 593 402 402">
+        <p class="field-hint">Показывается только в разделе «Контакты».</p>
+      </div>
+
+      <div class="lang-tabs" data-lang-tabs="site">
+        <button class="lang-tab-btn active" data-lang="ru">RU</button>
+        <button class="lang-tab-btn" data-lang="en">EN</button>
+        <button class="lang-tab-btn" data-lang="ka">KA</button>
+      </div>
+
+      <div id="site-lang-ru" class="lang-panel active">
+        <div class="field"><label>Адрес</label><input type="text" id="site-ru-address"></div>
+        <div class="field"><label>Часы работы</label><input type="text" id="site-ru-hours"></div>
+      </div>
+      <div id="site-lang-en" class="lang-panel">
+        <div class="field"><label>Address</label><input type="text" id="site-en-address"></div>
+        <div class="field"><label>Working hours</label><input type="text" id="site-en-hours"></div>
+      </div>
+      <div id="site-lang-ka" class="lang-panel">
+        <div class="field"><label>მისამართი</label><input type="text" id="site-ka-address"></div>
+        <div class="field"><label>სამუშაო საათები</label><input type="text" id="site-ka-hours"></div>
+      </div>
+
+      <div class="modal-actions">
+        <div class="right">
+          <button class="btn btn-primary" id="site-save-btn">Сохранить</button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -494,6 +621,47 @@
     </div>
   </div>
 
+  <!-- ================= ADVANTAGES MODAL ================= -->
+  <div class="modal-backdrop" id="advantages-modal-backdrop">
+    <div class="modal">
+      <h2 id="advantages-modal-title">Добавить преимущество</h2>
+      <div class="error-msg" id="advantages-error"></div>
+
+      <div class="field">
+        <label>Иконка (SVG-код)</label>
+        <textarea id="advantages-icon" style="min-height:50px;font-family:monospace;font-size:12.5px;" placeholder="&lt;path d=&quot;...&quot;/&gt;"></textarea>
+        <p class="field-hint">Технический код иконки. Если не уверены — оставьте как есть при редактировании или скопируйте у похожей карточки.</p>
+      </div>
+
+      <div class="lang-tabs" data-lang-tabs="advantages">
+        <button class="lang-tab-btn active" data-lang="ru">RU</button>
+        <button class="lang-tab-btn" data-lang="en">EN</button>
+        <button class="lang-tab-btn" data-lang="ka">KA</button>
+      </div>
+
+      <div id="advantages-lang-ru" class="lang-panel active">
+        <div class="field"><label>Название</label><input type="text" id="advantages-ru-title"></div>
+        <div class="field"><label>Описание</label><textarea id="advantages-ru-text"></textarea></div>
+      </div>
+      <div id="advantages-lang-en" class="lang-panel">
+        <div class="field"><label>Title</label><input type="text" id="advantages-en-title"></div>
+        <div class="field"><label>Description</label><textarea id="advantages-en-text"></textarea></div>
+      </div>
+      <div id="advantages-lang-ka" class="lang-panel">
+        <div class="field"><label>სახელი</label><input type="text" id="advantages-ka-title"></div>
+        <div class="field"><label>აღწერა</label><textarea id="advantages-ka-text"></textarea></div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-danger btn-sm" id="advantages-delete-btn" style="display:none;">Удалить</button>
+        <div class="right">
+          <button class="btn btn-ghost" id="advantages-cancel-btn">Отмена</button>
+          <button class="btn btn-primary" id="advantages-save-btn">Сохранить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="toast" id="toast"></div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.min.js"></script>
@@ -682,7 +850,7 @@
   });
 
   // ---------------- content state ----------------
-  var state = { team: [], blog: [], prices: [], reviews: [], services: [], editing: { type:null, id:null } };
+  var state = { team: [], blog: [], prices: [], reviews: [], services: [], advantages: [], about: null, site: null, editing: { type:null, id:null } };
   var teamPhotoState = { path: '' };
   var blogImageState = { path: '' };
 
@@ -693,10 +861,13 @@
         fetch('/content/blog.json').then(function(r){ return r.json(); }),
         fetch('/content/prices.json').then(function(r){ return r.json(); }),
         fetch('/content/reviews.json').then(function(r){ return r.json(); }),
-        fetch('/content/services.json').then(function(r){ return r.json(); })
+        fetch('/content/services.json').then(function(r){ return r.json(); }),
+        fetch('/content/advantages.json').then(function(r){ return r.json(); }),
+        fetch('/content/about.json').then(function(r){ return r.json(); }),
+        fetch('/content/site.json').then(function(r){ return r.json(); })
       ]);
-      state.team = results[0]; state.blog = results[1]; state.prices = results[2]; state.reviews = results[3]; state.services = results[4];
-      renderTeamList(); renderBlogList(); renderPricesList(); renderReviewsList(); renderServicesList();
+      state.team = results[0]; state.blog = results[1]; state.prices = results[2]; state.reviews = results[3]; state.services = results[4]; state.advantages = results[5]; state.about = results[6]; state.site = results[7];
+      renderTeamList(); renderBlogList(); renderPricesList(); renderReviewsList(); renderServicesList(); renderAdvantagesList(); renderAboutForm(); renderSiteForm();
     }catch(e){ console.error('Failed to load content', e); }
   }
 
@@ -1274,8 +1445,266 @@
     }catch(e){ alert('Ошибка сети. Попробуйте ещё раз.'); }
   }
 
+  // ================= ADVANTAGES =================
+  function renderAdvantagesList(){
+    var el = document.getElementById('advantages-list');
+    if (!state.advantages.length){ el.innerHTML = '<p class="empty-hint">Пока нет карточек преимуществ.</p>'; return; }
+    el.innerHTML = state.advantages.map(function(a){
+      return '<div class="item-card">' +
+        '<div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">' + a.icon + '</svg></div>' +
+        '<div class="meta"><h3>' + escapeHtml(a.ru.title) + '</h3><p>' + escapeHtml(a.ru.text) + '</p></div>' +
+        '<div class="actions">' +
+          '<button class="btn btn-ghost btn-sm" data-edit="' + escapeAttr(a.id) + '">Изменить</button>' +
+          '<button class="btn btn-danger btn-sm" data-del="' + escapeAttr(a.id) + '">Удалить</button>' +
+        '</div></div>';
+    }).join('');
+    el.querySelectorAll('[data-edit]').forEach(function(b){ b.addEventListener('click', function(){ openAdvantagesModal(b.getAttribute('data-edit')); }); });
+    el.querySelectorAll('[data-del]').forEach(function(b){ b.addEventListener('click', function(){ deleteAdvantage(b.getAttribute('data-del')); }); });
+  }
+
+  function openAdvantagesModal(id){
+    state.editing = { type:'advantages', id: id || null };
+    var a = id ? state.advantages.find(function(x){ return x.id === id; }) : null;
+    document.getElementById('advantages-modal-title').textContent = a ? 'Изменить преимущество' : 'Добавить преимущество';
+    document.getElementById('advantages-delete-btn').style.display = a ? 'inline-flex' : 'none';
+
+    document.getElementById('advantages-icon').value = (a && a.icon) || '<path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/>';
+
+    ['ru','en','ka'].forEach(function(lang){
+      var d = (a && a[lang]) || {};
+      document.getElementById('advantages-' + lang + '-title').value = d.title || '';
+      document.getElementById('advantages-' + lang + '-text').value = d.text || '';
+    });
+
+    switchLangTab('advantages', 'ru');
+    document.getElementById('advantages-error').classList.remove('show');
+    document.getElementById('advantages-modal-backdrop').classList.add('open');
+  }
+  function closeAdvantagesModal(){ document.getElementById('advantages-modal-backdrop').classList.remove('open'); }
+  document.getElementById('advantages-cancel-btn').addEventListener('click', closeAdvantagesModal);
+  document.getElementById('advantages-add-btn').addEventListener('click', function(){ openAdvantagesModal(null); });
+
+  function collectAdvantagesPayload(){
+    var payload = { icon: document.getElementById('advantages-icon').value.trim() };
+    ['ru','en','ka'].forEach(function(lang){
+      payload[lang] = {
+        title: document.getElementById('advantages-' + lang + '-title').value.trim(),
+        text: document.getElementById('advantages-' + lang + '-text').value.trim()
+      };
+    });
+    return payload;
+  }
+
+  document.getElementById('advantages-save-btn').addEventListener('click', async function(){
+    var payload = collectAdvantagesPayload();
+    var errEl = document.getElementById('advantages-error');
+    errEl.classList.remove('show');
+    var btn = this; btn.disabled = true; btn.textContent = 'Сохраняем...';
+    try{
+      var isEdit = !!state.editing.id;
+      if (isEdit) payload.id = state.editing.id;
+      var res = await apiFetch('/api/admin/advantages', { method: isEdit ? 'PUT' : 'POST', body: JSON.stringify(payload) });
+      var data = await res.json();
+      if (!res.ok){
+        errEl.textContent = (data.problems && data.problems.length) ? data.problems.join('; ') : (data.error || 'Не удалось сохранить');
+        errEl.classList.add('show');
+        return;
+      }
+      if (isEdit){
+        var idx = state.advantages.findIndex(function(a){ return a.id === state.editing.id; });
+        state.advantages[idx] = Object.assign({ id: state.editing.id }, payload);
+      } else {
+        state.advantages.push(Object.assign({ id: data.id }, payload));
+      }
+      renderAdvantagesList(); closeAdvantagesModal();
+      showToast('Сохранено! Изменения появятся на сайте через 15–30 секунд.');
+    }catch(e){ errEl.textContent = 'Ошибка сети. Попробуйте ещё раз.'; errEl.classList.add('show'); }
+    finally{ btn.disabled = false; btn.textContent = 'Сохранить'; }
+  });
+
+  document.getElementById('advantages-delete-btn').addEventListener('click', function(){ deleteAdvantage(state.editing.id, true); });
+
+  async function deleteAdvantage(id, fromModal){
+    if (!confirm('Удалить эту карточку? Действие необратимо.')) return;
+    try{
+      var res = await apiFetch('/api/admin/advantages', { method:'DELETE', body: JSON.stringify({ id:id }) });
+      var data = await res.json();
+      if (!res.ok){ alert(data.error || 'Не удалось удалить'); return; }
+      state.advantages = state.advantages.filter(function(a){ return a.id !== id; });
+      renderAdvantagesList();
+      if (fromModal) closeAdvantagesModal();
+      showToast('Удалено. Изменения появятся на сайте через 15–30 секунд.');
+    }catch(e){ alert('Ошибка сети. Попробуйте ещё раз.'); }
+  }
+
+  // ================= ABOUT =================
+  var aboutQuillEditors = {};
+  function initAboutQuillEditors(){
+    ['ru','en','ka'].forEach(function(lang){
+      aboutQuillEditors[lang] = new Quill('#about-' + lang + '-body-editor', {
+        theme:'snow',
+        modules:{ toolbar: [[{ header:[4,5,false] }], ['bold'], [{ list:'bullet' }]] }
+      });
+    });
+  }
+
+  var aboutPhotoState = { path: '' };
+
+  function renderAboutForm(){
+    var about = state.about;
+    if (!about) return;
+    aboutPhotoState.path = about.photo || '';
+    var preview = document.getElementById('about-photo-preview');
+    if (aboutPhotoState.path){ preview.src = '/' + aboutPhotoState.path; preview.style.display = ''; }
+    document.getElementById('about-photo-status').textContent = '';
+    document.getElementById('about-photo-input').value = '';
+
+    ['ru','en','ka'].forEach(function(lang){
+      var d = about[lang] || {};
+      document.getElementById('about-' + lang + '-founderName').value = d.founderName || '';
+      document.getElementById('about-' + lang + '-founderTitle').value = d.founderTitle || '';
+      document.getElementById('about-' + lang + '-alt').value = d.alt || '';
+      document.getElementById('about-' + lang + '-eyebrow').value = d.eyebrow || '';
+      document.getElementById('about-' + lang + '-heading').value = d.heading || '';
+      aboutQuillEditors[lang].setText('');
+      aboutQuillEditors[lang].clipboard.dangerouslyPasteHTML(d.body || '');
+    });
+  }
+
+  document.getElementById('about-photo-input').addEventListener('change', function(e){
+    var file = e.target.files[0];
+    if (!file) return;
+    var statusEl = document.getElementById('about-photo-status');
+    var reader = new FileReader();
+    reader.onload = async function(){
+      var base64 = String(reader.result).split(',')[1];
+      var preview = document.getElementById('about-photo-preview');
+      preview.src = reader.result; preview.style.display = '';
+      statusEl.textContent = 'Загружаем...';
+      try{
+        var res = await apiFetch('/api/admin/upload-image', { method:'POST', body: JSON.stringify({ filename:file.name, dataBase64:base64 }) });
+        var data = await res.json();
+        if (!res.ok){ statusEl.textContent = 'Ошибка: ' + (data.error || 'не удалось загрузить'); return; }
+        aboutPhotoState.path = data.path;
+        statusEl.textContent = 'Фото загружено ✓';
+      }catch(err){ statusEl.textContent = 'Ошибка сети при загрузке фото'; }
+    };
+    reader.readAsDataURL(file);
+  });
+
+  function collectAboutPayload(){
+    var payload = { photo: aboutPhotoState.path };
+    ['ru','en','ka'].forEach(function(lang){
+      var bodyText = aboutQuillEditors[lang].getText().trim();
+      payload[lang] = {
+        founderName: document.getElementById('about-' + lang + '-founderName').value.trim(),
+        founderTitle: document.getElementById('about-' + lang + '-founderTitle').value.trim(),
+        alt: document.getElementById('about-' + lang + '-alt').value.trim(),
+        eyebrow: document.getElementById('about-' + lang + '-eyebrow').value.trim(),
+        heading: document.getElementById('about-' + lang + '-heading').value.trim(),
+        body: bodyText ? aboutQuillEditors[lang].root.innerHTML : ''
+      };
+    });
+    return payload;
+  }
+
+  document.getElementById('about-save-btn').addEventListener('click', async function(){
+    var payload = collectAboutPayload();
+    var errEl = document.getElementById('about-error');
+    errEl.classList.remove('show');
+    var btn = this; btn.disabled = true; btn.textContent = 'Сохраняем...';
+    try{
+      var res = await apiFetch('/api/admin/about', { method:'PUT', body: JSON.stringify(payload) });
+      var data = await res.json();
+      if (!res.ok){
+        errEl.textContent = (data.problems && data.problems.length) ? data.problems.join('; ') : (data.error || 'Не удалось сохранить');
+        errEl.classList.add('show');
+        return;
+      }
+      state.about = payload;
+      showToast('Сохранено! Изменения появятся на сайте через 15–30 секунд.');
+    }catch(e){ errEl.textContent = 'Ошибка сети. Попробуйте ещё раз.'; errEl.classList.add('show'); }
+    finally{ btn.disabled = false; btn.textContent = 'Сохранить'; }
+  });
+
+  // ================= SITE SETTINGS =================
+  var siteHeroState = { path: '' };
+
+  function renderSiteForm(){
+    var site = state.site;
+    if (!site) return;
+    siteHeroState.path = site.heroImage || '';
+    var preview = document.getElementById('site-hero-preview');
+    if (siteHeroState.path){ preview.src = '/' + siteHeroState.path; preview.style.display = ''; }
+    document.getElementById('site-hero-status').textContent = '';
+    document.getElementById('site-hero-input').value = '';
+
+    document.getElementById('site-phoneAdmin').value = site.phoneAdmin || '';
+    document.getElementById('site-phoneDirector').value = site.phoneDirector || '';
+    ['ru','en','ka'].forEach(function(lang){
+      document.getElementById('site-' + lang + '-address').value = (site.address && site.address[lang]) || '';
+      document.getElementById('site-' + lang + '-hours').value = (site.hours && site.hours[lang]) || '';
+    });
+  }
+
+  document.getElementById('site-hero-input').addEventListener('change', function(e){
+    var file = e.target.files[0];
+    if (!file) return;
+    var statusEl = document.getElementById('site-hero-status');
+    var reader = new FileReader();
+    reader.onload = async function(){
+      var base64 = String(reader.result).split(',')[1];
+      var preview = document.getElementById('site-hero-preview');
+      preview.src = reader.result; preview.style.display = '';
+      statusEl.textContent = 'Загружаем...';
+      try{
+        var res = await apiFetch('/api/admin/upload-image', { method:'POST', body: JSON.stringify({ filename:file.name, dataBase64:base64 }) });
+        var data = await res.json();
+        if (!res.ok){ statusEl.textContent = 'Ошибка: ' + (data.error || 'не удалось загрузить'); return; }
+        siteHeroState.path = data.path;
+        statusEl.textContent = 'Фото загружено ✓';
+      }catch(err){ statusEl.textContent = 'Ошибка сети при загрузке фото'; }
+    };
+    reader.readAsDataURL(file);
+  });
+
+  function collectSitePayload(){
+    var payload = {
+      heroImage: siteHeroState.path,
+      phoneAdmin: document.getElementById('site-phoneAdmin').value.trim(),
+      phoneDirector: document.getElementById('site-phoneDirector').value.trim(),
+      address: {},
+      hours: {}
+    };
+    ['ru','en','ka'].forEach(function(lang){
+      payload.address[lang] = document.getElementById('site-' + lang + '-address').value.trim();
+      payload.hours[lang] = document.getElementById('site-' + lang + '-hours').value.trim();
+    });
+    return payload;
+  }
+
+  document.getElementById('site-save-btn').addEventListener('click', async function(){
+    var payload = collectSitePayload();
+    var errEl = document.getElementById('site-error');
+    errEl.classList.remove('show');
+    var btn = this; btn.disabled = true; btn.textContent = 'Сохраняем...';
+    try{
+      var res = await apiFetch('/api/admin/site', { method:'PUT', body: JSON.stringify(payload) });
+      var data = await res.json();
+      if (!res.ok){
+        errEl.textContent = (data.problems && data.problems.length) ? data.problems.join('; ') : (data.error || 'Не удалось сохранить');
+        errEl.classList.add('show');
+        return;
+      }
+      state.site = payload;
+      showToast('Сохранено! Изменения появятся на сайте через 15–30 секунд.');
+    }catch(e){ errEl.textContent = 'Ошибка сети. Попробуйте ещё раз.'; errEl.classList.add('show'); }
+    finally{ btn.disabled = false; btn.textContent = 'Сохранить'; }
+  });
+
   // ---------------- boot ----------------
   initQuillEditors();
+  initAboutQuillEditors();
   checkSession();
   </script>
 </body>

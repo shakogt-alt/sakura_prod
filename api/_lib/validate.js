@@ -132,7 +132,7 @@ function validatePriceCategory(payload) {
   return problems;
 }
 
-function validateServiceLang(lang, obj, problems) {
+function validateTitleTextLang(lang, obj, problems) {
   var prefix = lang + '.';
   if (!obj || typeof obj !== 'object') {
     problems.push(prefix + ' is required');
@@ -152,8 +152,82 @@ function validateServiceCard(payload) {
     problems.push('icon contains disallowed markup (script/style/event handlers are not permitted)');
   }
   ['ru', 'en', 'ka'].forEach(function (lang) {
-    validateServiceLang(lang, payload[lang], problems);
+    validateTitleTextLang(lang, payload[lang], problems);
   });
+  return problems;
+}
+
+// Advantage cards ("Почему выбирают нас") are the exact same icon+
+// trilingual{title,text} shape as a service card.
+function validateAdvantageCard(payload) {
+  var problems = [];
+  if (!isString(payload.icon) || payload.icon.trim().length === 0) {
+    problems.push('icon is required (raw SVG <path>/<circle>/... markup string)');
+  } else if (DANGEROUS_MARKUP_PATTERN.test(payload.icon)) {
+    problems.push('icon contains disallowed markup (script/style/event handlers are not permitted)');
+  }
+  ['ru', 'en', 'ka'].forEach(function (lang) {
+    validateTitleTextLang(lang, payload[lang], problems);
+  });
+  return problems;
+}
+
+function validateAboutLang(lang, obj, problems) {
+  var prefix = lang + '.';
+  if (!obj || typeof obj !== 'object') {
+    problems.push(prefix + ' is required');
+    return;
+  }
+  if (!isNonEmptyString(obj.alt)) problems.push(prefix + 'alt is required');
+  if (!isNonEmptyString(obj.founderName)) problems.push(prefix + 'founderName is required');
+  if (!isNonEmptyString(obj.founderTitle)) problems.push(prefix + 'founderTitle is required');
+  if (!isNonEmptyString(obj.eyebrow)) problems.push(prefix + 'eyebrow is required');
+  if (!isNonEmptyString(obj.heading)) problems.push(prefix + 'heading is required');
+  if (!isNonEmptyString(obj.body)) {
+    problems.push(prefix + 'body is required');
+  } else if (DANGEROUS_MARKUP_PATTERN.test(obj.body)) {
+    problems.push(prefix + 'body contains disallowed markup (script/style/event handlers are not permitted)');
+  }
+}
+
+// "О нас" (About/founder story) is a singleton, not a list - one record
+// covers the whole section. body is rendered unescaped (rich text from
+// Quill, same as a blog post body), everything else is plain text.
+function validateAbout(payload) {
+  var problems = [];
+  if (!isNonEmptyString(payload.photo)) problems.push('photo is required (e.g. images/xxx.jpg)');
+  ['ru', 'en', 'ka'].forEach(function (lang) {
+    validateAboutLang(lang, payload[lang], problems);
+  });
+  return problems;
+}
+
+// Site-wide settings (address/hours/phones/hero image) - a singleton like
+// About. address and hours are shown in many places across all 3
+// language sites (utility bar, footer, contacts section, and the
+// "Convenient location" advantage card keeps its own independently-
+// editable wording); phoneAdmin additionally drives every tel:/WhatsApp
+// link on the page (hero CTA, cta-banner buttons, nav, contact actions),
+// so a bad value here has wide blast radius - kept strictly required.
+function validateSite(payload) {
+  var problems = [];
+  if (!payload.address || typeof payload.address !== 'object') {
+    problems.push('address is required ({ ru, en, ka })');
+  } else {
+    ['ru', 'en', 'ka'].forEach(function (lang) {
+      if (!isNonEmptyString(payload.address[lang])) problems.push('address.' + lang + ' is required');
+    });
+  }
+  if (!payload.hours || typeof payload.hours !== 'object') {
+    problems.push('hours is required ({ ru, en, ka })');
+  } else {
+    ['ru', 'en', 'ka'].forEach(function (lang) {
+      if (!isNonEmptyString(payload.hours[lang])) problems.push('hours.' + lang + ' is required');
+    });
+  }
+  if (!isNonEmptyString(payload.phoneAdmin)) problems.push('phoneAdmin is required');
+  if (!isNonEmptyString(payload.phoneDirector)) problems.push('phoneDirector is required');
+  if (!isNonEmptyString(payload.heroImage)) problems.push('heroImage is required (e.g. images/xxx.jpg)');
   return problems;
 }
 
@@ -187,4 +261,4 @@ function validateReview(payload) {
   return problems;
 }
 
-module.exports = { validateTeamMember, validateBlogPost, validatePriceCategory, validateReview, validateServiceCard };
+module.exports = { validateTeamMember, validateBlogPost, validatePriceCategory, validateReview, validateServiceCard, validateAdvantageCard, validateAbout, validateSite };
