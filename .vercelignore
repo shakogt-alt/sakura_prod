@@ -1,0 +1,7 @@
+# Not part of the public site - contains the admin-only visit counter
+# and its excluded-IP list (see api/visits.js). Keeping it in git (it's
+# still readable/writable via the GitHub Contents API, same as every
+# other content/*.json file) but out of Vercel's static deployment
+# output means it is never served at a public URL like content/*.json
+# intentionally is.
+data/

@@ -1514,6 +1514,21 @@
   }).catch(function(err){
     console.error('Sakura: failed to load dynamic content', err);
   });
+
+  // ---------------- visit counter beacon ----------------
+  // Fires at most once per calendar day per browser (localStorage date
+  // stamp), so refreshing or browsing between pages doesn't inflate the
+  // count. Fails silently - a missed visit from a network hiccup or a
+  // browser blocking the request is an acceptable trade-off for a purely
+  // informational, admin-only counter (see api/visits.js).
+  (function trackVisit(){
+    try {
+      var today = new Date().toISOString().slice(0, 10);
+      if (localStorage.getItem('sakura_visit_date') === today) return;
+      localStorage.setItem('sakura_visit_date', today);
+      fetch('/api/visits', { method: 'POST' }).catch(function(){});
+    } catch (e) { /* localStorage unavailable (private mode, etc.) - skip */ }
+  })();
 </script>
 
 </body>

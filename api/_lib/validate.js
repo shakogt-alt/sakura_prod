@@ -261,4 +261,25 @@ function validateReview(payload) {
   return problems;
 }
 
-module.exports = { validateTeamMember, validateBlogPost, validatePriceCategory, validateReview, validateServiceCard, validateAdvantageCard, validateAbout, validateSite };
+// Loose IPv4/IPv6 shape check for the visit-counter's excluded-IP list
+// (api/visits.js). This list is admin-entered (Kristina/Shako typing in
+// their own office/staff IPs), not attacker-controlled, so this only
+// needs to catch obvious typos/empty input - not be a fully spec-correct
+// IP parser.
+var IP_LIKE_PATTERN = /^[0-9a-fA-F:.]{2,45}$/;
+
+function validateExcludedIps(payload) {
+  var problems = [];
+  if (!Array.isArray(payload.excludedIps)) {
+    problems.push('excludedIps must be an array of strings');
+    return problems;
+  }
+  payload.excludedIps.forEach(function (ip, i) {
+    if (typeof ip !== 'string' || !IP_LIKE_PATTERN.test(ip.trim())) {
+      problems.push('excludedIps[' + i + '] is not a valid IP address');
+    }
+  });
+  return problems;
+}
+
+module.exports = { validateTeamMember, validateBlogPost, validatePriceCategory, validateReview, validateServiceCard, validateAdvantageCard, validateAbout, validateSite, validateExcludedIps };

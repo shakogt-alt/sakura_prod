@@ -154,6 +154,7 @@
       <button class="tab-btn" data-tab="advantages">Преимущества</button>
       <button class="tab-btn" data-tab="about">О нас</button>
       <button class="tab-btn" data-tab="site">Контакты и фото</button>
+      <button class="tab-btn" data-tab="visits">Посещения</button>
     </div>
 
     <div class="tab-panel active" id="panel-team">
@@ -333,6 +334,33 @@
       <div class="modal-actions">
         <div class="right">
           <button class="btn btn-primary" id="site-save-btn">Сохранить</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="panel-visits">
+      <div class="list-head">
+        <div>
+          <h2>Посещения</h2>
+          <p class="hint">Счётчик посещений сайта — не более одного за день с одного браузера. IP-адреса из списка ниже (например, ваши собственные или сотрудников) не учитываются.</p>
+        </div>
+      </div>
+      <div class="error-msg" id="visits-error"></div>
+
+      <div class="field">
+        <label>Всего посещений</label>
+        <div id="visits-count" style="font-size:32px;font-weight:800;color:var(--text);">—</div>
+      </div>
+
+      <div class="field">
+        <label>Исключённые IP-адреса</label>
+        <div class="array-field" id="visits-excluded-ips"></div>
+        <button type="button" class="btn btn-ghost btn-sm array-field-add" data-add-array="visits-excluded-ips" data-placeholder="Например: 178.134.1.1">+ Добавить IP</button>
+      </div>
+
+      <div class="modal-actions">
+        <div class="right">
+          <button class="btn btn-primary" id="visits-save-btn">Сохранить</button>
         </div>
       </div>
     </div>
@@ -818,7 +846,7 @@
     try{
       var res = await apiFetch('/api/session');
       var data = await res.json();
-      if (data.authenticated){ showApp(); loadAllContent(); }
+      if (data.authenticated){ showApp(); loadAllContent(); loadVisits(); }
       else showLogin();
     }catch(e){ showLogin(); }
   }
@@ -834,7 +862,7 @@
     try{
       var res = await apiFetch('/api/login', { method:'POST', body: JSON.stringify({ email:email, password:password }) });
       var data = await res.json();
-      if (res.ok && data.ok){ showApp(); loadAllContent(); }
+      if (res.ok && data.ok){ showApp(); loadAllContent(); loadVisits(); }
       else { errEl.textContent = data.error || 'Не удалось войти'; errEl.classList.add('show'); }
     }catch(err){
       errEl.textContent = 'Ошибка сети. Попробуйте ещё раз.';
@@ -850,7 +878,7 @@
   });
 
   // ---------------- content state ----------------
-  var state = { team: [], blog: [], prices: [], reviews: [], services: [], advantages: [], about: null, site: null, editing: { type:null, id:null } };
+  var state = { team: [], blog: [], prices: [], reviews: [], services: [], advantages: [], about: null, site: null, visits: null, editing: { type:null, id:null } };
   var teamPhotoState = { path: '' };
   var blogImageState = { path: '' };
 
@@ -1698,6 +1726,51 @@
       }
       state.site = payload;
       showToast('Сохранено! Изменения появятся на сайте через 15–30 секунд.');
+    }catch(e){ errEl.textContent = 'Ошибка сети. Попробуйте ещё раз.'; errEl.classList.add('show'); }
+    finally{ btn.disabled = false; btn.textContent = 'Сохранить'; }
+  });
+
+  // ================= VISITS =================
+  // Unlike team/blog/prices/etc., this data is NOT in content/*.json and
+  // is not publicly fetchable (see .vercelignore) - it must be loaded
+  // through the auth-gated GET /api/visits, not a plain static fetch.
+  async function loadVisits(){
+    try{
+      var res = await apiFetch('/api/visits');
+      var data = await res.json();
+      if (!res.ok){ console.error('Failed to load visits', data); return; }
+      state.visits = { count: data.count, excludedIps: data.excludedIps || [] };
+      renderVisitsForm();
+    }catch(e){ console.error('Failed to load visits', e); }
+  }
+
+  function renderVisitsForm(){
+    var v = state.visits;
+    if (!v) return;
+    document.getElementById('visits-count').textContent = String(v.count);
+    renderArrayField(document.getElementById('visits-excluded-ips'), v.excludedIps || [], 'IP адрес, например 178.134.1.1');
+  }
+
+  function collectVisitsPayload(){
+    return { excludedIps: collectArrayField(document.getElementById('visits-excluded-ips')) };
+  }
+
+  document.getElementById('visits-save-btn').addEventListener('click', async function(){
+    var payload = collectVisitsPayload();
+    var errEl = document.getElementById('visits-error');
+    errEl.classList.remove('show');
+    var btn = this; btn.disabled = true; btn.textContent = 'Сохраняем...';
+    try{
+      var res = await apiFetch('/api/visits', { method:'PUT', body: JSON.stringify(payload) });
+      var data = await res.json();
+      if (!res.ok){
+        errEl.textContent = (data.problems && data.problems.length) ? data.problems.join('; ') : (data.error || 'Не удалось сохранить');
+        errEl.classList.add('show');
+        return;
+      }
+      state.visits.excludedIps = data.excludedIps;
+      renderVisitsForm();
+      showToast('Список сохранён.');
     }catch(e){ errEl.textContent = 'Ошибка сети. Попробуйте ещё раз.'; errEl.classList.add('show'); }
     finally{ btn.disabled = false; btn.textContent = 'Сохранить'; }
   });
