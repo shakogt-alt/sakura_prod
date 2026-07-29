@@ -1,4 +1,6 @@
 {
   "count": 1,
-  "excludedIps": []
+  "excludedIps": [
+    "91.151.136.157"
+  ]
 }
