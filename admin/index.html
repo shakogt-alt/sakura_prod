@@ -70,6 +70,8 @@
   .item-card{border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;gap:14px;align-items:center;margin-bottom:10px;}
   .item-card img{width:52px;height:52px;border-radius:12px;object-fit:cover;flex:none;background:var(--surface-2);}
   .item-card img.round{border-radius:50%;}
+  .item-card .icon-wrap{width:52px;height:52px;border-radius:12px;background:var(--surface-2);display:flex;align-items:center;justify-content:center;flex:none;color:var(--pink-600);}
+  .item-card .icon-wrap svg{width:26px;height:26px;}
   .item-card .meta{flex:1;min-width:0;}
   .item-card .meta h3{margin:0 0 3px;font-size:15px;}
   .item-card .meta p{margin:0;font-size:12.5px;color:var(--text-soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
@@ -147,6 +149,7 @@
       <button class="tab-btn" data-tab="blog">Блог</button>
       <button class="tab-btn" data-tab="prices">Цены</button>
       <button class="tab-btn" data-tab="reviews">Отзывы</button>
+      <button class="tab-btn" data-tab="services">Услуги</button>
     </div>
 
     <div class="tab-panel active" id="panel-team">
@@ -194,6 +197,17 @@
         </div>
       </div>
       <div id="reviews-list"></div>
+    </div>
+
+    <div class="tab-panel" id="panel-services">
+      <div class="list-head">
+        <div>
+          <h2>Услуги</h2>
+          <p class="hint">Карточки в разделе «Услуги» на главной странице сайта. Изменения появляются на сайте через 15–30 секунд после сохранения.</p>
+        </div>
+        <button class="btn btn-primary btn-sm" id="services-add-btn">+ Добавить услугу</button>
+      </div>
+      <div id="services-list"></div>
     </div>
   </div>
 
@@ -439,6 +453,47 @@
     </div>
   </div>
 
+  <!-- ================= SERVICES MODAL ================= -->
+  <div class="modal-backdrop" id="services-modal-backdrop">
+    <div class="modal">
+      <h2 id="services-modal-title">Добавить услугу</h2>
+      <div class="error-msg" id="services-error"></div>
+
+      <div class="field">
+        <label>Иконка (SVG-код)</label>
+        <textarea id="services-icon" style="min-height:50px;font-family:monospace;font-size:12.5px;" placeholder="&lt;path d=&quot;...&quot;/&gt;"></textarea>
+        <p class="field-hint">Технический код иконки. Если не уверены — оставьте как есть при редактировании или скопируйте у похожей карточки.</p>
+      </div>
+
+      <div class="lang-tabs" data-lang-tabs="services">
+        <button class="lang-tab-btn active" data-lang="ru">RU</button>
+        <button class="lang-tab-btn" data-lang="en">EN</button>
+        <button class="lang-tab-btn" data-lang="ka">KA</button>
+      </div>
+
+      <div id="services-lang-ru" class="lang-panel active">
+        <div class="field"><label>Название услуги</label><input type="text" id="services-ru-title"></div>
+        <div class="field"><label>Описание</label><textarea id="services-ru-text"></textarea></div>
+      </div>
+      <div id="services-lang-en" class="lang-panel">
+        <div class="field"><label>Service title</label><input type="text" id="services-en-title"></div>
+        <div class="field"><label>Description</label><textarea id="services-en-text"></textarea></div>
+      </div>
+      <div id="services-lang-ka" class="lang-panel">
+        <div class="field"><label>სერვისის სახელი</label><input type="text" id="services-ka-title"></div>
+        <div class="field"><label>აღწერა</label><textarea id="services-ka-text"></textarea></div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-danger btn-sm" id="services-delete-btn" style="display:none;">Удалить</button>
+        <div class="right">
+          <button class="btn btn-ghost" id="services-cancel-btn">Отмена</button>
+          <button class="btn btn-primary" id="services-save-btn">Сохранить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="toast" id="toast"></div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.min.js"></script>
@@ -627,7 +682,7 @@
   });
 
   // ---------------- content state ----------------
-  var state = { team: [], blog: [], prices: [], reviews: [], editing: { type:null, id:null } };
+  var state = { team: [], blog: [], prices: [], reviews: [], services: [], editing: { type:null, id:null } };
   var teamPhotoState = { path: '' };
   var blogImageState = { path: '' };
 
@@ -637,10 +692,11 @@
         fetch('/content/team.json').then(function(r){ return r.json(); }),
         fetch('/content/blog.json').then(function(r){ return r.json(); }),
         fetch('/content/prices.json').then(function(r){ return r.json(); }),
-        fetch('/content/reviews.json').then(function(r){ return r.json(); })
+        fetch('/content/reviews.json').then(function(r){ return r.json(); }),
+        fetch('/content/services.json').then(function(r){ return r.json(); })
       ]);
-      state.team = results[0]; state.blog = results[1]; state.prices = results[2]; state.reviews = results[3];
-      renderTeamList(); renderBlogList(); renderPricesList(); renderReviewsList();
+      state.team = results[0]; state.blog = results[1]; state.prices = results[2]; state.reviews = results[3]; state.services = results[4];
+      renderTeamList(); renderBlogList(); renderPricesList(); renderReviewsList(); renderServicesList();
     }catch(e){ console.error('Failed to load content', e); }
   }
 
@@ -1125,6 +1181,98 @@
     }catch(e){ alert('Ошибка сети. Попробуйте ещё раз.'); }
     finally{ btn.disabled = false; btn.textContent = original; }
   });
+
+  // ================= SERVICES =================
+  function renderServicesList(){
+    var el = document.getElementById('services-list');
+    if (!state.services.length){ el.innerHTML = '<p class="empty-hint">Пока нет карточек услуг.</p>'; return; }
+    el.innerHTML = state.services.map(function(s){
+      return '<div class="item-card">' +
+        '<div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">' + s.icon + '</svg></div>' +
+        '<div class="meta"><h3>' + escapeHtml(s.ru.title) + '</h3><p>' + escapeHtml(s.ru.text) + '</p></div>' +
+        '<div class="actions">' +
+          '<button class="btn btn-ghost btn-sm" data-edit="' + escapeAttr(s.id) + '">Изменить</button>' +
+          '<button class="btn btn-danger btn-sm" data-del="' + escapeAttr(s.id) + '">Удалить</button>' +
+        '</div></div>';
+    }).join('');
+    el.querySelectorAll('[data-edit]').forEach(function(b){ b.addEventListener('click', function(){ openServicesModal(b.getAttribute('data-edit')); }); });
+    el.querySelectorAll('[data-del]').forEach(function(b){ b.addEventListener('click', function(){ deleteService(b.getAttribute('data-del')); }); });
+  }
+
+  function openServicesModal(id){
+    state.editing = { type:'services', id: id || null };
+    var s = id ? state.services.find(function(x){ return x.id === id; }) : null;
+    document.getElementById('services-modal-title').textContent = s ? 'Изменить услугу' : 'Добавить услугу';
+    document.getElementById('services-delete-btn').style.display = s ? 'inline-flex' : 'none';
+
+    document.getElementById('services-icon').value = (s && s.icon) || '<path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/>';
+
+    ['ru','en','ka'].forEach(function(lang){
+      var d = (s && s[lang]) || {};
+      document.getElementById('services-' + lang + '-title').value = d.title || '';
+      document.getElementById('services-' + lang + '-text').value = d.text || '';
+    });
+
+    switchLangTab('services', 'ru');
+    document.getElementById('services-error').classList.remove('show');
+    document.getElementById('services-modal-backdrop').classList.add('open');
+  }
+  function closeServicesModal(){ document.getElementById('services-modal-backdrop').classList.remove('open'); }
+  document.getElementById('services-cancel-btn').addEventListener('click', closeServicesModal);
+  document.getElementById('services-add-btn').addEventListener('click', function(){ openServicesModal(null); });
+
+  function collectServicesPayload(){
+    var payload = { icon: document.getElementById('services-icon').value.trim() };
+    ['ru','en','ka'].forEach(function(lang){
+      payload[lang] = {
+        title: document.getElementById('services-' + lang + '-title').value.trim(),
+        text: document.getElementById('services-' + lang + '-text').value.trim()
+      };
+    });
+    return payload;
+  }
+
+  document.getElementById('services-save-btn').addEventListener('click', async function(){
+    var payload = collectServicesPayload();
+    var errEl = document.getElementById('services-error');
+    errEl.classList.remove('show');
+    var btn = this; btn.disabled = true; btn.textContent = 'Сохраняем...';
+    try{
+      var isEdit = !!state.editing.id;
+      if (isEdit) payload.id = state.editing.id;
+      var res = await apiFetch('/api/admin/services', { method: isEdit ? 'PUT' : 'POST', body: JSON.stringify(payload) });
+      var data = await res.json();
+      if (!res.ok){
+        errEl.textContent = (data.problems && data.problems.length) ? data.problems.join('; ') : (data.error || 'Не удалось сохранить');
+        errEl.classList.add('show');
+        return;
+      }
+      if (isEdit){
+        var idx = state.services.findIndex(function(s){ return s.id === state.editing.id; });
+        state.services[idx] = Object.assign({ id: state.editing.id }, payload);
+      } else {
+        state.services.push(Object.assign({ id: data.id }, payload));
+      }
+      renderServicesList(); closeServicesModal();
+      showToast('Сохранено! Изменения появятся на сайте через 15–30 секунд.');
+    }catch(e){ errEl.textContent = 'Ошибка сети. Попробуйте ещё раз.'; errEl.classList.add('show'); }
+    finally{ btn.disabled = false; btn.textContent = 'Сохранить'; }
+  });
+
+  document.getElementById('services-delete-btn').addEventListener('click', function(){ deleteService(state.editing.id, true); });
+
+  async function deleteService(id, fromModal){
+    if (!confirm('Удалить эту услугу? Действие необратимо.')) return;
+    try{
+      var res = await apiFetch('/api/admin/services', { method:'DELETE', body: JSON.stringify({ id:id }) });
+      var data = await res.json();
+      if (!res.ok){ alert(data.error || 'Не удалось удалить'); return; }
+      state.services = state.services.filter(function(s){ return s.id !== id; });
+      renderServicesList();
+      if (fromModal) closeServicesModal();
+      showToast('Удалено. Изменения появятся на сайте через 15–30 секунд.');
+    }catch(e){ alert('Ошибка сети. Попробуйте ещё раз.'); }
+  }
 
   // ---------------- boot ----------------
   initQuillEditors();

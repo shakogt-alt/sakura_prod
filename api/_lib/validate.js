@@ -132,6 +132,31 @@ function validatePriceCategory(payload) {
   return problems;
 }
 
+function validateServiceLang(lang, obj, problems) {
+  var prefix = lang + '.';
+  if (!obj || typeof obj !== 'object') {
+    problems.push(prefix + ' is required');
+    return;
+  }
+  if (!isNonEmptyString(obj.title)) problems.push(prefix + 'title is required');
+  if (!isNonEmptyString(obj.text)) problems.push(prefix + 'text is required');
+}
+
+// Service cards (the "Услуги" grid) are the same icon+trilingual shape as
+// a price category, minus the items/includes arrays.
+function validateServiceCard(payload) {
+  var problems = [];
+  if (!isString(payload.icon) || payload.icon.trim().length === 0) {
+    problems.push('icon is required (raw SVG <path>/<circle>/... markup string)');
+  } else if (DANGEROUS_MARKUP_PATTERN.test(payload.icon)) {
+    problems.push('icon contains disallowed markup (script/style/event handlers are not permitted)');
+  }
+  ['ru', 'en', 'ka'].forEach(function (lang) {
+    validateServiceLang(lang, payload[lang], problems);
+  });
+  return problems;
+}
+
 // Reviews are single-language (shown in whatever language the patient
 // actually wrote them, not translated 3x) - text is rendered escaped as
 // plain text on the public site, so no markup denylist is needed here.
@@ -162,4 +187,4 @@ function validateReview(payload) {
   return problems;
 }
 
-module.exports = { validateTeamMember, validateBlogPost, validatePriceCategory, validateReview };
+module.exports = { validateTeamMember, validateBlogPost, validatePriceCategory, validateReview, validateServiceCard };
