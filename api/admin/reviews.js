@@ -10,6 +10,12 @@
 // DELETE body: { id }                                                 -> removes a review
 //
 // All three require a valid admin session cookie (see api/_lib/auth.js).
+//
+// Reviews pulled in via api/admin/sync-google-reviews.js also live in this
+// same content/reviews.json collection and carry an extra `googleReviewId`
+// field (Google's stable review resource name, used there for dedup on
+// re-sync). Editing/deleting a Google-sourced review works through this
+// file exactly the same as a manually-entered one - see buildRecord().
 
 const { requireAuth } = require('../_lib/auth');
 const { readJsonBody } = require('../_lib/http');
@@ -18,10 +24,16 @@ const { validateReview } = require('../_lib/validate');
 
 const CONTENT_PATH = 'content/reviews.json';
 
-function buildRecord(id, body) {
+function buildRecord(id, body, existing) {
   const record = { id: id, author: body.author, rating: body.rating, lang: body.lang, text: body.text };
   if (body.date) record.date = body.date;
   if (body.source) record.source = body.source;
+  // The admin edit form has no googleReviewId field, so a manual save
+  // never sends one - carry it through from the existing stored record
+  // (if any) so editing a Google-synced review doesn't strip its dedup
+  // key and cause it to be re-added as a "new" review on the next sync.
+  const gid = body.googleReviewId || (existing && existing.googleReviewId);
+  if (gid) record.googleReviewId = gid;
   return record;
 }
 
@@ -76,7 +88,7 @@ async function handleUpdate(req, res) {
   const index = collection.data.findIndex(function (r) { return r.id === body.id; });
   if (index === -1) return res.status(404).json({ error: 'No review with id "' + body.id + '"' });
 
-  collection.data[index] = buildRecord(body.id, body);
+  collection.data[index] = buildRecord(body.id, body, collection.data[index]);
 
   try {
     const result = await saveCollection(

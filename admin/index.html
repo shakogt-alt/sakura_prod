@@ -188,7 +188,10 @@
           <h2>Отзывы</h2>
           <p class="hint">Изменения появляются на сайте через 15–30 секунд после сохранения. Показываются на том языке, на котором написаны — переводить не нужно.</p>
         </div>
-        <button class="btn btn-primary btn-sm" id="reviews-add-btn">+ Добавить отзыв</button>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="btn btn-ghost btn-sm" id="reviews-sync-btn">Синхронизировать с Google</button>
+          <button class="btn btn-primary btn-sm" id="reviews-add-btn">+ Добавить отзыв</button>
+        </div>
       </div>
       <div id="reviews-list"></div>
     </div>
@@ -1102,6 +1105,26 @@
       showToast('Удалено. Изменения появятся на сайте через 15–30 секунд.');
     }catch(e){ alert('Ошибка сети. Попробуйте ещё раз.'); }
   }
+
+  document.getElementById('reviews-sync-btn').addEventListener('click', async function(){
+    var btn = this;
+    var original = btn.textContent;
+    btn.disabled = true; btn.textContent = 'Синхронизация...';
+    try{
+      var res = await apiFetch('/api/admin/sync-google-reviews', { method:'POST' });
+      var data = await res.json();
+      if (!res.ok){ alert(data.error || 'Не удалось синхронизировать с Google'); return; }
+      if (data.newReviews && data.newReviews.length){
+        data.newReviews.forEach(function(r){ state.reviews.push(r); });
+        renderReviewsList();
+      }
+      var msg = data.added > 0
+        ? 'Добавлено новых отзывов: ' + data.added + (data.skipped ? '. Уже было синхронизировано: ' + data.skipped : '') + '. Изменения появятся на сайте через 15–30 секунд.'
+        : 'Новых отзывов нет — уже всё синхронизировано.';
+      showToast(msg);
+    }catch(e){ alert('Ошибка сети. Попробуйте ещё раз.'); }
+    finally{ btn.disabled = false; btn.textContent = original; }
+  });
 
   // ---------------- boot ----------------
   initQuillEditors();

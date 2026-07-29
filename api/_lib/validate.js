@@ -135,18 +135,30 @@ function validatePriceCategory(payload) {
 // Reviews are single-language (shown in whatever language the patient
 // actually wrote them, not translated 3x) - text is rendered escaped as
 // plain text on the public site, so no markup denylist is needed here.
+//
+// lang is intentionally NOT restricted to ru/en/ka: manually-entered
+// reviews (via the admin form's dropdown) will only ever be one of those
+// 3, but reviews synced from Google can legitimately arrive in any
+// language a real patient wrote in (e.g. a Turkish-speaking tourist) -
+// the public renderer just prints the code as a badge, so any short
+// lowercase language code is fine to store.
+var LANG_CODE_PATTERN = /^[a-z]{2,3}$/;
+
 function validateReview(payload) {
   var problems = [];
   if (!isNonEmptyString(payload.author)) problems.push('author is required');
   if (!Number.isInteger(payload.rating) || payload.rating < 1 || payload.rating > 5) {
     problems.push('rating must be an integer from 1 to 5');
   }
-  if (['ru', 'en', 'ka'].indexOf(payload.lang) === -1) {
-    problems.push('lang must be one of: ru, en, ka');
+  if (!isString(payload.lang) || !LANG_CODE_PATTERN.test(payload.lang)) {
+    problems.push('lang must be a 2-3 letter language code (e.g. ru, en, ka)');
   }
   if (!isNonEmptyString(payload.text)) problems.push('text is required');
   if (payload.date !== undefined && !isString(payload.date)) problems.push('date must be a string when present');
   if (payload.source !== undefined && !isString(payload.source)) problems.push('source must be a string when present');
+  if (payload.googleReviewId !== undefined && !isNonEmptyString(payload.googleReviewId)) {
+    problems.push('googleReviewId must be a non-empty string when present');
+  }
   return problems;
 }
 
