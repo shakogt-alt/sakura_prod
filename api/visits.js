@@ -1,13 +1,24 @@
 // GET/POST/PUT /api/visits
 //
-// Visit counter, admin-only to view. Backed by data/visits.json in the
-// repo (same "GitHub commit is the database" model as everything else -
-// see api/_lib/github.js), but unlike content/*.json, this file is NOT
+// Visit counter, admin-only to view. Backed by data/visits.json (same
+// "GitHub commit is the database" model as everything else - see
+// api/_lib/github.js), but unlike content/*.json, this file is NOT
 // meant to be public: it's excluded from Vercel's static output via
 // .vercelignore (data/), so the only way to read it is through this
 // endpoint's auth-gated GET. Do not move this data under content/ or
 // any other path Vercel serves statically - that would publish the
 // visit count and the excluded-IP list to any visitor who guesses the URL.
+//
+// All reads/writes of data/visits.json target VISITS_BRANCH, a dedicated
+// branch never checked out or pushed to by a human - not GITHUB_BRANCH
+// (main). A commit per visitor, landing directly on main, meant every
+// real site visit could race a human `git push` and reject it with
+// "non-fast-forward". Keeping this branch isolated preserves exact
+// per-visit accuracy (no batching/sampling) while guaranteeing main
+// never receives another visit-counter commit. vercel.json's
+// git.deploymentEnabled turns off preview deployments for this branch,
+// since GitHub's Contents API commits fire the same push webhook a
+// human `git push` would.
 //
 // GET  (admin only): -> { count, excludedIps }
 // POST (public, no auth - called by the site's own visit beacon):
@@ -24,6 +35,7 @@ const { getFile, putFile } = require('./_lib/github');
 const { validateExcludedIps } = require('./_lib/validate');
 
 const CONTENT_PATH = 'data/visits.json';
+const VISITS_BRANCH = 'visits-data';
 
 function getClientIp(req) {
   const xff = req.headers && req.headers['x-forwarded-for'];
@@ -37,8 +49,8 @@ function getClientIp(req) {
 }
 
 async function loadVisits() {
-  const file = await getFile(CONTENT_PATH);
-  if (!file) throw new Error(CONTENT_PATH + ' does not exist in the repo');
+  const file = await getFile(CONTENT_PATH, VISITS_BRANCH);
+  if (!file) throw new Error(CONTENT_PATH + ' does not exist on the ' + VISITS_BRANCH + ' branch');
   let data;
   try {
     data = JSON.parse(file.content);
@@ -82,7 +94,7 @@ async function handleTrack(req, res) {
 
   const next = { count: loaded.data.count + 1, excludedIps: loaded.data.excludedIps };
   try {
-    await putFile(CONTENT_PATH, JSON.stringify(next, null, 2) + '\n', 'Increment visit counter (auto)', loaded.sha);
+    await putFile(CONTENT_PATH, JSON.stringify(next, null, 2) + '\n', 'Increment visit counter (auto)', loaded.sha, VISITS_BRANCH);
     return res.status(200).json({ ok: true, counted: true });
   } catch (e) {
     // Most likely a sha conflict from a near-simultaneous visit racing
@@ -122,7 +134,7 @@ async function handlePut(req, res) {
 
   const next = { count: loaded.data.count, excludedIps: cleaned };
   try {
-    const result = await putFile(CONTENT_PATH, JSON.stringify(next, null, 2) + '\n', 'Update excluded IPs list (admin panel)', loaded.sha);
+    const result = await putFile(CONTENT_PATH, JSON.stringify(next, null, 2) + '\n', 'Update excluded IPs list (admin panel)', loaded.sha, VISITS_BRANCH);
     return res.status(200).json({ ok: true, excludedIps: cleaned, commitUrl: result.commitUrl });
   } catch (e) {
     console.error(e);

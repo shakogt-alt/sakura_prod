@@ -47,11 +47,15 @@ async function readErrorBody(res) {
 }
 
 // Returns { content: string (utf8), sha: string } for a text file,
-// or null if the file does not exist.
-async function getFile(filePath) {
+// or null if the file does not exist. Pass branchOverride to read from a
+// branch other than GITHUB_BRANCH (e.g. api/visits.js's dedicated
+// visits-data branch, kept separate from main so its frequent auto-
+// commits never collide with a human's `git push`).
+async function getFile(filePath, branchOverride) {
   const { repo, branch } = getConfig();
+  const useBranch = branchOverride || branch;
   const res = await githubRequest(
-    '/repos/' + repo + '/contents/' + filePath + '?ref=' + encodeURIComponent(branch),
+    '/repos/' + repo + '/contents/' + filePath + '?ref=' + encodeURIComponent(useBranch),
     { method: 'GET' }
   );
   if (res.status === 404) return null;
@@ -68,13 +72,14 @@ async function getFile(filePath) {
 
 // Creates or updates a text file. `sha` is required when updating an
 // existing file (obtained from getFile) and must be omitted when creating
-// a brand-new file.
-async function putFile(filePath, contentStr, message, sha) {
+// a brand-new file. Pass branchOverride to write to a branch other than
+// GITHUB_BRANCH (see getFile above).
+async function putFile(filePath, contentStr, message, sha, branchOverride) {
   const { repo, branch } = getConfig();
   const body = {
     message: message,
     content: Buffer.from(contentStr, 'utf8').toString('base64'),
-    branch: branch
+    branch: branchOverride || branch
   };
   if (sha) body.sha = sha;
   const res = await githubRequest('/repos/' + repo + '/contents/' + filePath, {
