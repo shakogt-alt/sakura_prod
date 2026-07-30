@@ -1185,6 +1185,14 @@
     }
   }, true);
 
+  // Mobile menu: tapping anywhere outside the open menu (and not on the
+  // burger button, which already toggles it) closes it. Without this,
+  // the menu could only be dismissed by picking a link.
+  document.addEventListener('click', function(e){
+    if(e.target.closest('.navlinks') || e.target.closest('.burger')) return;
+    document.querySelectorAll('.navlinks.open').forEach(function(nav){ nav.classList.remove('open'); });
+  });
+
   var scrollLockY = 0, isBodyLocked = false;
   function lockBodyScroll(){
     if(isBodyLocked) return;
