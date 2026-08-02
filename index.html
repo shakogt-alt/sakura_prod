@@ -130,6 +130,11 @@
   .hero .container{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;}
   .hero h1{font-size:clamp(34px,5vw,58px);line-height:1.05;color:var(--pink-700);margin-bottom:18px;}
   .hero p.lead{font-size:18px;max-width:520px;}
+  .hero-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;max-width:540px;}
+  .hero-chips span{
+    background:rgba(255,255,255,.78);border:1px solid var(--pink-200);color:var(--pink-700);
+    font-size:13px;font-weight:600;padding:6px 14px;border-radius:100px;white-space:nowrap;
+  }
   .hero-actions{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap;}
   .hero-art{position:relative;min-height:320px;}
   .hero-badge{
@@ -143,7 +148,7 @@
   /* stats strip */
   .stats{background:var(--pink-700);color:#fff;padding:34px 0;}
   .stats .container{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center;}
-  .stats .stat b{display:block;font-family:var(--serif);font-size:26px;margin-bottom:4px;}
+  .stats .stat b{display:block;font-family:var(--serif);font-size:19px;line-height:1.25;margin-bottom:5px;}
   .stats .stat span{font-size:12.5px;opacity:.85;letter-spacing:.02em;}
 
   section{padding:88px 0;}
@@ -188,6 +193,15 @@
   .about-copy h2{margin-bottom:22px;}
   .about-copy p{font-size:15.5px;color:var(--text-soft);}
   .about-copy p strong{color:var(--text);}
+  /* The founder story is long; clamp it so the first screen of the
+     section stays light, with a per-language expand button below. */
+  .about-body-wrap{position:relative;max-height:310px;overflow:hidden;}
+  .about-body-wrap.expanded{max-height:none;}
+  .about-fade{position:absolute;bottom:0;left:0;right:0;height:96px;
+    background:linear-gradient(180deg,rgba(255,241,242,0),var(--surface-2));pointer-events:none;}
+  .about-body-wrap.expanded .about-fade{display:none;}
+  .about-toggle{margin-top:6px;}
+  .reviews-google-cta{text-align:center;margin-top:34px;}
 
   /* team */
   .grid-team{display:grid;grid-template-columns:repeat(5,1fr);gap:22px;}
@@ -482,9 +496,16 @@
       <div>
         <div class="eyebrow">Sakura Podology Center</div>
         <h1>Центр подологии в&nbsp;Тбилиси</h1>
-        <p class="lead">Профессиональная забота о здоровье стоп: медицинский подход, безупречная стерильность и внимательное отношение к каждому пациенту.</p>
+        <p class="lead">Лечение и профессиональный уход при проблемах стоп и ногтей — медицинский подход и внимание к каждому пациенту.</p>
+        <div class="hero-chips" aria-label="С чем мы работаем">
+          <span>Вросший ноготь</span>
+          <span>Грибковые поражения</span>
+          <span>Мозоли и трещины</span>
+          <span>Медицинский педикюр</span>
+          <span>Диабетическая стопа</span>
+        </div>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="tel:+995555900108" data-site-href="tel-admin">Записаться на приём</a>
+          <a class="btn btn-primary" href="tel:+995555900108" data-site-href="tel-admin">Записаться к подологу</a>
           <a class="btn btn-ghost" href="#ru-services">Наши услуги</a>
         </div>
       </div>
@@ -499,10 +520,10 @@
 
   <div class="stats">
     <div class="container">
-      <div class="stat"><b>с 2014</b><span>работаем в Тбилиси</span></div>
-      <div class="stat"><b>MiradaMed</b><span>обучение по германским методам</span></div>
-      <div class="stat"><b>100%</b><span>стерильность инструментов</span></div>
-      <div class="stat"><b>Индивидуальный подход</b><span>к каждому пациенту</span></div>
+      <div class="stat"><b>12+ лет опыта</b><span>работаем в Тбилиси с 2014 года</span></div>
+      <div class="stat"><b>Международное обучение</b><span>подология по немецким методикам (MiradaMed)</span></div>
+      <div class="stat"><b>Медицинская стерилизация</b><span>автоклав и одноразовые материалы</span></div>
+      <div class="stat"><b>Индивидуальный подход</b><span>персональный план для каждого пациента</span></div>
     </div>
   </div>
 
@@ -543,7 +564,8 @@
       <div class="about-copy">
         <div class="eyebrow" data-about-host="eyebrow">История центра</div>
         <h2 data-about-host="heading">История основания Sakura Podology Center</h2>
-        <div data-about-host="body"></div>
+        <div class="about-body-wrap"><div data-about-host="body"></div><div class="about-fade"></div></div>
+        <button type="button" class="btn btn-ghost about-toggle" onclick="this.previousElementSibling.classList.add('expanded'); this.style.display='none';">Читать историю полностью →</button>
       </div>
     </div>
   </section>
@@ -611,6 +633,9 @@
       <p>Реальные отзывы тех, кто уже прошёл лечение в Sakura Podology Center.</p>
     </div>
     <div class="grid-reviews" data-render-host="reviews"></div>
+    <div class="reviews-google-cta">
+      <a class="btn btn-ghost" href="https://maps.app.goo.gl/5Q9fgs2PtHC8GuB77" target="_blank" rel="noopener">★ Наши отзывы в Google</a>
+    </div>
   </section>
 
   <section id="ru-blog">
@@ -735,7 +760,14 @@
       <div>
         <div class="eyebrow">Sakura Podology Center</div>
         <h1>Podology Center in&nbsp;Tbilisi</h1>
-        <p class="lead">Professional foot health care: a medical approach, strict sterility, and personal attention to every patient.</p>
+        <p class="lead">Treatment and professional care for foot and nail problems — a medical approach and personal attention to every patient.</p>
+        <div class="hero-chips" aria-label="What we treat">
+          <span>Ingrown toenail</span>
+          <span>Fungal infections</span>
+          <span>Corns &amp; cracked heels</span>
+          <span>Medical pedicure</span>
+          <span>Diabetic foot</span>
+        </div>
         <div class="hero-actions">
           <a class="btn btn-primary" href="tel:+995555900108" data-site-href="tel-admin">Book an appointment</a>
           <a class="btn btn-ghost" href="#en-services">Our services</a>
@@ -752,10 +784,10 @@
 
   <div class="stats">
     <div class="container">
-      <div class="stat"><b>since 2014</b><span>working in Tbilisi</span></div>
-      <div class="stat"><b>MiradaMed</b><span>trained in German methods</span></div>
-      <div class="stat"><b>100%</b><span>instrument sterility</span></div>
-      <div class="stat"><b>Personal approach</b><span>to every patient</span></div>
+      <div class="stat"><b>12+ years of experience</b><span>working in Tbilisi since 2014</span></div>
+      <div class="stat"><b>International training</b><span>German podology methods (MiradaMed)</span></div>
+      <div class="stat"><b>Medical-grade sterilization</b><span>autoclave and single-use materials</span></div>
+      <div class="stat"><b>Personal approach</b><span>an individual care plan for every patient</span></div>
     </div>
   </div>
 
@@ -796,7 +828,8 @@
       <div class="about-copy">
         <div class="eyebrow" data-about-host="eyebrow">Our story</div>
         <h2 data-about-host="heading">The story behind Sakura Podology Center</h2>
-        <div data-about-host="body"></div>
+        <div class="about-body-wrap"><div data-about-host="body"></div><div class="about-fade"></div></div>
+        <button type="button" class="btn btn-ghost about-toggle" onclick="this.previousElementSibling.classList.add('expanded'); this.style.display='none';">Read the full story →</button>
       </div>
     </div>
   </section>
@@ -864,6 +897,9 @@
       <p>Real reviews from people who've been treated at Sakura Podology Center.</p>
     </div>
     <div class="grid-reviews" data-render-host="reviews"></div>
+    <div class="reviews-google-cta">
+      <a class="btn btn-ghost" href="https://maps.app.goo.gl/5Q9fgs2PtHC8GuB77" target="_blank" rel="noopener">★ Our reviews on Google</a>
+    </div>
   </section>
 
   <section id="en-blog">
@@ -988,9 +1024,16 @@
       <div>
         <div class="eyebrow">Sakura Podology Center</div>
         <h1>პოდოლოგიის ცენტრი თბილისში</h1>
-        <p class="lead">ტერფის ჯანმრთელობაზე პროფესიული ზრუნვა: სამედიცინო მიდგომა, სრული სისუფთავე და ყურადღება თითოეული პაციენტისადმი.</p>
+        <p class="lead">ტერფისა და ფრჩხილის პრობლემების მკურნალობა და პროფესიული მოვლა — სამედიცინო მიდგომა და ყურადღება თითოეული პაციენტისადმი.</p>
+        <div class="hero-chips" aria-label="რას ვმკურნალობთ">
+          <span>ჩაზრდილი ფრჩხილი</span>
+          <span>სოკოვანი დაზიანებები</span>
+          <span>კოჟრები და ნახეთქები</span>
+          <span>სამედიცინო პედიკური</span>
+          <span>დიაბეტური ტერფი</span>
+        </div>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="tel:+995555900108" data-site-href="tel-admin">ჩაწერა მიღებაზე</a>
+          <a class="btn btn-primary" href="tel:+995555900108" data-site-href="tel-admin">პოდოლოგთან ჩაწერა</a>
           <a class="btn btn-ghost" href="#ka-services">ჩვენი სერვისები</a>
         </div>
       </div>
@@ -1005,10 +1048,10 @@
 
   <div class="stats">
     <div class="container">
-      <div class="stat"><b>2014 წ.</b><span>ვმუშაობთ თბილისში</span></div>
-      <div class="stat"><b>MiradaMed</b><span>განათლება გერმანული მეთოდებით</span></div>
-      <div class="stat"><b>100%</b><span>ინსტრუმენტების სისუფთავე</span></div>
-      <div class="stat"><b>ინდივიდუალური მიდგომა</b><span>თითოეული პაციენტისადმი</span></div>
+      <div class="stat"><b>12+ წლის გამოცდილება</b><span>თბილისში ვმუშაობთ 2014 წლიდან</span></div>
+      <div class="stat"><b>საერთაშორისო განათლება</b><span>გერმანული პოდოლოგიის მეთოდები (MiradaMed)</span></div>
+      <div class="stat"><b>სამედიცინო სტერილიზაცია</b><span>ავტოკლავი და ერთჯერადი მასალები</span></div>
+      <div class="stat"><b>ინდივიდუალური მიდგომა</b><span>პერსონალური გეგმა თითოეული პაციენტისთვის</span></div>
     </div>
   </div>
 
@@ -1049,7 +1092,8 @@
       <div class="about-copy">
         <div class="eyebrow" data-about-host="eyebrow">ცენტრის ისტორია</div>
         <h2 data-about-host="heading">Sakura Podology Center-ის დაარსების ისტორია</h2>
-        <div data-about-host="body"></div>
+        <div class="about-body-wrap"><div data-about-host="body"></div><div class="about-fade"></div></div>
+        <button type="button" class="btn btn-ghost about-toggle" onclick="this.previousElementSibling.classList.add('expanded'); this.style.display='none';">სრული ისტორიის წაკითხვა →</button>
       </div>
     </div>
   </section>
@@ -1117,6 +1161,9 @@
       <p>რეალური შეფასებები მათგან, ვინც უკვე გაიარა მკურნალობა Sakura Podology Center-ში.</p>
     </div>
     <div class="grid-reviews" data-render-host="reviews"></div>
+    <div class="reviews-google-cta">
+      <a class="btn btn-ghost" href="https://maps.app.goo.gl/5Q9fgs2PtHC8GuB77" target="_blank" rel="noopener">★ ჩვენი შეფასებები Google-ზე</a>
+    </div>
   </section>
 
   <section id="ka-blog">
