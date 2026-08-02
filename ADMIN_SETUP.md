@@ -34,7 +34,7 @@ GitHub → **Settings → Developer settings → Personal access tokens → Fine
 
 ## 4. Проверка
 
-Открыть `https://sakurapro.vercel.app/admin/`, войти с `ADMIN_EMAIL`/`ADMIN_PASSWORD`. Дальше — Кристине можно отдавать только эти email+пароль, в Vercel/GitHub ей заходить не нужно.
+Открыть `https://www.sakurapodology.ge/admin/`, войти с `ADMIN_EMAIL`/`ADMIN_PASSWORD`. Дальше — Кристине можно отдавать только эти email+пароль, в Vercel/GitHub ей заходить не нужно.
 
 ## 5. Google-отзывы (необязательно)
 
