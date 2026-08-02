@@ -3,8 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sakura Podology Center — подологический центр в Тбилиси</title>
-<meta name="description" content="Sakura Podology Center — подологический центр в Тбилиси. Медицинский подход к здоровью стоп: лечение вросшего ногтя, медицинский педикюр, уход при диабетической стопе.">
+<!-- Static head defaults are Georgian (the site's default language).
+     setLang() swaps title/description/canonical per language at runtime -
+     see PAGE_META in the script below. -->
+<title>პოდოლოგიის ცენტრი თბილისში — Sakura Podology Center</title>
+<meta name="description" content="პოდოლოგიის ცენტრი თბილისში (საბურთალო): ჩაზრდილი ფრჩხილის მკურნალობა ოპერაციის გარეშე, სამედიცინო პედიკური, სოკოვანი დაზიანებების და დიაბეტური ტერფის მოვლა. 2014 წლიდან.">
+<meta name="theme-color" content="#b04c6b">
+<link rel="canonical" href="https://sakurapro.vercel.app/">
+<link rel="alternate" hreflang="ka" href="https://sakurapro.vercel.app/">
+<link rel="alternate" hreflang="ru" href="https://sakurapro.vercel.app/?lang=ru">
+<link rel="alternate" hreflang="en" href="https://sakurapro.vercel.app/?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://sakurapro.vercel.app/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sakura Podology Center">
+<meta property="og:title" content="Sakura Podology Center — подология в Тбилиси · პოდოლოგია თბილისში">
+<meta property="og:description" content="Лечение вросшего ногтя, медицинский педикюр, уход при диабетической стопе · ჩაზრდილი ფრჩხილი, სამედიცინო პედიკური, დიაბეტური ტერფის მოვლა.">
+<meta property="og:url" content="https://sakurapro.vercel.app/">
+<meta property="og:image" content="https://sakurapro.vercel.app/images/logo-full.jpg">
+<meta property="og:locale" content="ka_GE">
+<meta property="og:locale:alternate" content="ru_RU">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌸%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -377,6 +396,43 @@
     .team-modal-photo{width:84px;height:84px;margin:0 auto 14px;}
   }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalClinic",
+  "name": "Sakura Podology Center",
+  "alternateName": "Центр подологии Сакура",
+  "description": "Podology and foot health center in Tbilisi: non-surgical ingrown toenail treatment, medical pedicure, fungal nail care, diabetic foot care.",
+  "url": "https://sakurapro.vercel.app/",
+  "image": "https://sakurapro.vercel.app/images/logo-full.jpg",
+  "telephone": "+995555900108",
+  "priceRange": "₾₾",
+  "foundingDate": "2014",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "19/2 Gagarina St, Saburtalo",
+    "addressLocality": "Tbilisi",
+    "addressCountry": "GE"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 41.7342565,
+    "longitude": 44.7697507
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "opens": "11:00",
+    "closes": "19:00"
+  },
+  "medicalSpecialty": "Podiatric",
+  "sameAs": [
+    "https://instagram.com/kristin_sakura",
+    "https://www.facebook.com/sakura.podology",
+    "https://maps.app.goo.gl/5Q9fgs2PtHC8GuB77"
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -424,8 +480,8 @@
     <div class="hero-bg"><img src="images/hero-bg.jpg" alt="Процедура медицинского педикюра в Sakura Podology Center" data-site-src="heroImage"></div>
     <div class="container">
       <div>
-        <div class="eyebrow">Подологический центр в Тбилиси</div>
-        <h1>Sakura Podology Center</h1>
+        <div class="eyebrow">Sakura Podology Center</div>
+        <h1>Центр подологии в&nbsp;Тбилиси</h1>
         <p class="lead">Профессиональная забота о здоровье стоп: медицинский подход, безупречная стерильность и внимательное отношение к каждому пациенту.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="tel:+995555900108" data-site-href="tel-admin">Записаться на приём</a>
@@ -454,7 +510,7 @@
     <div class="section-head">
       <div class="eyebrow">Услуги</div>
       <h2>Комплексный уход за здоровьем стоп</h2>
-      <p>От эстетического педикюра до решения медицинских проблем стопы — всё в одном центре.</p>
+      <p>Лечение вросшего ногтя, медицинский педикюр, обработка при грибковых поражениях и уход за диабетической стопой — всё в одном центре.</p>
     </div>
     <div class="grid-services" data-render-host="services"></div>
   </section>
@@ -526,7 +582,7 @@
   <section class="prices" id="ru-prices">
     <div class="section-head">
       <div class="eyebrow">Цены</div>
-      <h2>Прайс-лист услуг</h2>
+      <h2>Цены на услуги подолога</h2>
       <p>Указаны базовые цены. Точную стоимость уточняйте по телефону — она зависит от сложности случая.</p>
     </div>
     <div class="price-offer">
@@ -677,8 +733,8 @@
     <div class="hero-bg"><img src="images/hero-bg.jpg" alt="Medical pedicure procedure at Sakura Podology Center" data-site-src="heroImage"></div>
     <div class="container">
       <div>
-        <div class="eyebrow">Podology Center in Tbilisi</div>
-        <h1>Sakura Podology Center</h1>
+        <div class="eyebrow">Sakura Podology Center</div>
+        <h1>Podology Center in&nbsp;Tbilisi</h1>
         <p class="lead">Professional foot health care: a medical approach, strict sterility, and personal attention to every patient.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="tel:+995555900108" data-site-href="tel-admin">Book an appointment</a>
@@ -707,7 +763,7 @@
     <div class="section-head">
       <div class="eyebrow">Services</div>
       <h2>Complete foot health care</h2>
-      <p>From aesthetic pedicures to medical foot problems — all in one center.</p>
+      <p>Ingrown toenail treatment, medical pedicure, fungal nail care and diabetic foot care — all in one center.</p>
     </div>
     <div class="grid-services" data-render-host="services"></div>
   </section>
@@ -779,7 +835,7 @@
   <section class="prices" id="en-prices">
     <div class="section-head">
       <div class="eyebrow">Prices</div>
-      <h2>Service price list</h2>
+      <h2>Podology service prices</h2>
       <p>Base prices are shown. Please confirm the exact cost by phone — it depends on the complexity of each case.</p>
     </div>
     <div class="price-offer">
@@ -930,8 +986,8 @@
     <div class="hero-bg"><img src="images/hero-bg.jpg" alt="სამედიცინო პედიკურის პროცედურა Sakura Podology Center-ში" data-site-src="heroImage"></div>
     <div class="container">
       <div>
-        <div class="eyebrow">პოდოლოგიის ცენტრი თბილისში</div>
-        <h1>Sakura Podology Center</h1>
+        <div class="eyebrow">Sakura Podology Center</div>
+        <h1>პოდოლოგიის ცენტრი თბილისში</h1>
         <p class="lead">ტერფის ჯანმრთელობაზე პროფესიული ზრუნვა: სამედიცინო მიდგომა, სრული სისუფთავე და ყურადღება თითოეული პაციენტისადმი.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="tel:+995555900108" data-site-href="tel-admin">ჩაწერა მიღებაზე</a>
@@ -960,7 +1016,7 @@
     <div class="section-head">
       <div class="eyebrow">სერვისები</div>
       <h2>ტერფის ჯანმრთელობაზე სრული ზრუნვა</h2>
-      <p>ესთეტიკური პედიკურიდან ტერფის სამედიცინო პრობლემების მოგვარებამდე — ერთ ცენტრში.</p>
+      <p>ჩაზრდილი ფრჩხილის მკურნალობა, სამედიცინო პედიკური, სოკოვანი დაზიანებების და დიაბეტური ტერფის მოვლა — ერთ ცენტრში.</p>
     </div>
     <div class="grid-services" data-render-host="services"></div>
   </section>
@@ -1032,7 +1088,7 @@
   <section class="prices" id="ka-prices">
     <div class="section-head">
       <div class="eyebrow">ფასები</div>
-      <h2>სერვისების ფასების ჩამონათვალი</h2>
+      <h2>პოდოლოგის მომსახურების ფასები</h2>
       <p>მითითებულია საბაზისო ფასები. ზუსტი ღირებულება დაზუსტდეს ტელეფონით — დამოკიდებულია შემთხვევის სირთულეზე.</p>
     </div>
     <div class="price-offer">
@@ -1146,6 +1202,35 @@
 </div>
 
 <script>
+  // Per-language <title>/description, swapped by setLang() so each ?lang=
+  // URL (see hreflang links in <head>) presents itself to search engines
+  // in its own language. 'ka' is the default and lives at the bare URL.
+  var PAGE_META = {
+    ru: {
+      title: 'Центр подологии в Тбилиси — Sakura Podology Center',
+      description: 'Подологический центр в Тбилиси (Сабуртало): лечение вросшего ногтя без операции, медицинский педикюр, обработка при грибке, уход при диабетической стопе. С 2014 года.'
+    },
+    en: {
+      title: 'Podology Center in Tbilisi — Sakura Podology Center',
+      description: 'Podology center in Tbilisi (Saburtalo): non-surgical ingrown toenail treatment, medical pedicure, fungal nail care, diabetic foot care. Working since 2014.'
+    },
+    ka: {
+      title: 'პოდოლოგიის ცენტრი თბილისში — Sakura Podology Center',
+      description: 'პოდოლოგიის ცენტრი თბილისში (საბურთალო): ჩაზრდილი ფრჩხილის მკურნალობა ოპერაციის გარეშე, სამედიცინო პედიკური, სოკოვანი დაზიანებების და დიაბეტური ტერფის მოვლა. 2014 წლიდან.'
+    }
+  };
+  function langUrl(lang){
+    return location.pathname + (lang === 'ka' ? '' : '?lang=' + lang) + location.hash;
+  }
+  function applyMeta(lang){
+    var meta = PAGE_META[lang];
+    if(!meta) return;
+    document.title = meta.title;
+    var desc = document.querySelector('meta[name="description"]');
+    if(desc) desc.setAttribute('content', meta.description);
+    var canonical = document.querySelector('link[rel="canonical"]');
+    if(canonical) canonical.setAttribute('href', location.origin + location.pathname + (lang === 'ka' ? '' : '?lang=' + lang));
+  }
   function setLang(lang){
     document.querySelectorAll('.site').forEach(function(el){
       el.classList.toggle('active', el.id === 'site-' + lang);
@@ -1154,15 +1239,23 @@
       btn.classList.toggle('active', btn.dataset.lang === lang);
     });
     document.documentElement.setAttribute('lang', lang);
+    applyMeta(lang);
+    try{ history.replaceState(null, '', langUrl(lang)); }catch(e){}
     try{ localStorage.setItem('sakura-lang', lang); }catch(e){}
   }
   document.querySelectorAll('.lang-switch button').forEach(function(btn){
     btn.addEventListener('click', function(){ setLang(btn.dataset.lang); window.scrollTo(0,0); });
   });
   (function(){
+    // Priority: explicit ?lang= in the URL (how search engines and shared
+    // links land on a specific language) > saved preference > Georgian.
+    var fromUrl;
+    try{ fromUrl = new URLSearchParams(location.search).get('lang'); }catch(e){}
     var saved;
     try{ saved = localStorage.getItem('sakura-lang'); }catch(e){}
-    if(saved && ['ru','en','ka'].indexOf(saved) !== -1){ setLang(saved); } else { setLang('ka'); }
+    if(fromUrl && ['ru','en','ka'].indexOf(fromUrl) !== -1){ setLang(fromUrl); }
+    else if(saved && ['ru','en','ka'].indexOf(saved) !== -1){ setLang(saved); }
+    else { setLang('ka'); }
   })();
 
   document.addEventListener('click', function(e){

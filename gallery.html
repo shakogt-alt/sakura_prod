@@ -3,8 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Галерея — Sakura Podology Center</title>
-<meta name="description" content="Галерея Sakura Podology Center: сертификаты и результаты до и после лечения.">
+<!-- Static head defaults are Georgian (the site's default language).
+     setLang() swaps title/description/canonical per language at runtime -
+     see PAGE_META in the script below. -->
+<title>გალერეა — Sakura Podology Center, თბილისი</title>
+<meta name="description" content="Sakura Podology Center-ის გალერეა: სპეციალისტების სერტიფიკატები და შედეგები მკურნალობამდე და მკურნალობის შემდეგ. პოდოლოგიის ცენტრი თბილისში.">
+<meta name="theme-color" content="#b04c6b">
+<link rel="canonical" href="https://sakurapro.vercel.app/gallery.html">
+<link rel="alternate" hreflang="ka" href="https://sakurapro.vercel.app/gallery.html">
+<link rel="alternate" hreflang="ru" href="https://sakurapro.vercel.app/gallery.html?lang=ru">
+<link rel="alternate" hreflang="en" href="https://sakurapro.vercel.app/gallery.html?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://sakurapro.vercel.app/gallery.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sakura Podology Center">
+<meta property="og:title" content="Галерея Sakura Podology Center · გალერეა">
+<meta property="og:description" content="Сертификаты специалистов и результаты лечения до и после · სერტიფიკატები და მკურნალობის შედეგები.">
+<meta property="og:url" content="https://sakurapro.vercel.app/gallery.html">
+<meta property="og:image" content="https://sakurapro.vercel.app/images/logo-full.jpg">
+<meta property="og:locale" content="ka_GE">
+<meta property="og:locale:alternate" content="ru_RU">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌸%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -205,7 +224,7 @@
     <div class="container">
       <div class="eyebrow">Sakura Podology Center</div>
       <h1>Галерея</h1>
-      <p>Сертификаты и результаты нашей работы.</p>
+      <p>Сертификаты наших подологов и результаты лечения до и после — работы центра подологии Sakura в Тбилиси.</p>
     </div>
   </section>
 
@@ -288,7 +307,7 @@
     <div class="container">
       <div class="eyebrow">Sakura Podology Center</div>
       <h1>Gallery</h1>
-      <p>Certificates and results of our work.</p>
+      <p>Our podologists' certificates and before-and-after treatment results — the work of Sakura Podology Center in Tbilisi.</p>
     </div>
   </section>
 
@@ -371,7 +390,7 @@
     <div class="container">
       <div class="eyebrow">Sakura Podology Center</div>
       <h1>გალერეა</h1>
-      <p>ჩვენი მუშაობის სერტიფიკატები და შედეგები.</p>
+      <p>ჩვენი პოდოლოგების სერტიფიკატები და შედეგები მკურნალობამდე და მკურნალობის შემდეგ — Sakura-ს პოდოლოგიის ცენტრის ნამუშევრები თბილისში.</p>
     </div>
   </section>
 
@@ -492,7 +511,7 @@
     return '<div class="post-modal" id="' + id + '">' +
       '<div class="post-modal-card">' +
         '<button class="post-modal-close" onclick="document.getElementById(\'' + id + '\').classList.remove(\'open\')">✕</button>' +
-        '<div class="gallery-modal-photo"><img src="' + escapeHtml(photo.image) + '" alt=""></div>' +
+        '<div class="gallery-modal-photo"><img src="' + escapeHtml(photo.image) + '" alt="' + escapeHtml(d.description || '') + '"></div>' +
         '<p class="gallery-modal-desc">' + escapeHtml(d.description || '') + '</p>' +
       '</div>' +
     '</div>';
@@ -526,6 +545,35 @@
     initModals(modalsHost);
   }
 
+  // Per-language <title>/description, swapped by setLang() so each ?lang=
+  // URL (see hreflang links in <head>) presents itself to search engines
+  // in its own language. 'ka' is the default and lives at the bare URL.
+  var PAGE_META = {
+    ru: {
+      title: 'Галерея — Sakura Podology Center, Тбилиси',
+      description: 'Галерея Sakura Podology Center: сертификаты специалистов и результаты лечения до и после. Подологический центр в Тбилиси.'
+    },
+    en: {
+      title: 'Gallery — Sakura Podology Center, Tbilisi',
+      description: 'Sakura Podology Center gallery: specialist certificates and before-and-after treatment results. Podology center in Tbilisi.'
+    },
+    ka: {
+      title: 'გალერეა — Sakura Podology Center, თბილისი',
+      description: 'Sakura Podology Center-ის გალერეა: სპეციალისტების სერტიფიკატები და შედეგები მკურნალობამდე და მკურნალობის შემდეგ. პოდოლოგიის ცენტრი თბილისში.'
+    }
+  };
+  function langUrl(lang){
+    return location.pathname + (lang === 'ka' ? '' : '?lang=' + lang) + location.hash;
+  }
+  function applyMeta(lang){
+    var meta = PAGE_META[lang];
+    if(!meta) return;
+    document.title = meta.title;
+    var desc = document.querySelector('meta[name="description"]');
+    if(desc) desc.setAttribute('content', meta.description);
+    var canonical = document.querySelector('link[rel="canonical"]');
+    if(canonical) canonical.setAttribute('href', location.origin + location.pathname + (lang === 'ka' ? '' : '?lang=' + lang));
+  }
   function setLang(lang){
     document.querySelectorAll('.site').forEach(function(el){
       el.classList.toggle('active', el.id === 'site-' + lang);
@@ -534,15 +582,23 @@
       btn.classList.toggle('active', btn.dataset.lang === lang);
     });
     document.documentElement.setAttribute('lang', lang);
+    applyMeta(lang);
+    try{ history.replaceState(null, '', langUrl(lang)); }catch(e){}
     try{ localStorage.setItem('sakura-lang', lang); }catch(e){}
   }
   document.querySelectorAll('.lang-switch button').forEach(function(btn){
     btn.addEventListener('click', function(){ setLang(btn.dataset.lang); window.scrollTo(0,0); });
   });
   (function(){
+    // Priority: explicit ?lang= in the URL (how search engines and shared
+    // links land on a specific language) > saved preference > Georgian.
+    var fromUrl;
+    try{ fromUrl = new URLSearchParams(location.search).get('lang'); }catch(e){}
     var saved;
     try{ saved = localStorage.getItem('sakura-lang'); }catch(e){}
-    if(saved && ['ru','en','ka'].indexOf(saved) !== -1){ setLang(saved); } else { setLang('ka'); }
+    if(fromUrl && ['ru','en','ka'].indexOf(fromUrl) !== -1){ setLang(fromUrl); }
+    else if(saved && ['ru','en','ka'].indexOf(saved) !== -1){ setLang(saved); }
+    else { setLang('ka'); }
   })();
 
   document.addEventListener('click', function(e){
