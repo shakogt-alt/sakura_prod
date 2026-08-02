@@ -465,7 +465,6 @@
     document.querySelectorAll('[data-site-href="tel-admin"]').forEach(function(el){ el.href = telHref(site.phoneAdmin); });
     document.querySelectorAll('[data-site-href="wa-admin"]').forEach(function(el){ el.href = waHref(site.phoneAdmin); });
     document.querySelectorAll('[data-site-text="phoneAdmin"]').forEach(function(el){ el.textContent = site.phoneAdmin; });
-    document.querySelectorAll('[data-site-text="phoneDirector"]').forEach(function(el){ el.textContent = site.phoneDirector; });
     ['ru','en','ka'].forEach(function(lang){
       var host = document.getElementById('site-' + lang);
       if(!host) return;
